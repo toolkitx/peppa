@@ -1,0 +1,31 @@
+{
+	"name": "Main_JoinTeamByUserCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"teamId": {
+				"type": "string"
+			},
+			"memberType": {
+				"type": "string",
+				"enum": [
+					"Owner",
+					"Member"
+				],
+				"title": "Member Type"
+			},
+			"reason": {
+				"type": "string",
+				"title": "Reason"
+			}
+		},
+		"required": [
+			"memberType",
+			"reason"
+		]
+	},
+	"outputSchema": null
+}

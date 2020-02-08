@@ -1,0 +1,10 @@
+{
+	"type": "Command",
+	"version": "0",
+	"module": {
+		"name": "Main"
+	},
+	"studio": {
+		"version": "0"
+	}
+}

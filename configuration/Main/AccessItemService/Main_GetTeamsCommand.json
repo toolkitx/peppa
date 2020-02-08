@@ -1,0 +1,64 @@
+{
+	"name": "Main_GetTeamsCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"filter": {
+				"type": "string"
+			},
+			"skip": {
+				"type": "integer"
+			},
+			"take": {
+				"type": "integer"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"displayName": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"visibility": {
+							"type": "string",
+							"enum": [
+								"Public",
+								"Private"
+							]
+						},
+						"people": {
+							"type": "integer"
+						},
+						"categoryId": {
+							"type": "string"
+						},
+						"categoryName": {
+							"type": "string"
+						},
+						"lastAttestationDate": {
+							"type": "integer"
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

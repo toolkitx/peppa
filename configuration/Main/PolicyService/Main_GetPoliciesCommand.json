@@ -1,0 +1,84 @@
+{
+	"name": "Main_GetPoliciesCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"filter": {
+				"type": "string"
+			},
+			"skip": {
+				"type": "integer"
+			},
+			"take": {
+				"type": "integer"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"coverage": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"code": {
+							"type": "string"
+						},
+						"isAutoCorrect": {
+							"type": "string"
+						},
+						"targetAttributeType": {
+							"type": "string"
+						},
+						"targetAttributeDefaultValue": {
+							"type": "string"
+						},
+						"targetAttributeOption": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"codeName": {
+							"type": "string"
+						},
+						"targetAttribute": {
+							"type": "string"
+						},
+						"checkTypes": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

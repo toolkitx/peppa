@@ -1,0 +1,15 @@
+{
+	"name": "Main_DeleteCategoryByIdCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": null
+}

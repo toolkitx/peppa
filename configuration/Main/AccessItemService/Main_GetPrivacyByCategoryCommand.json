@@ -1,0 +1,36 @@
+{
+	"name": "Main_GetPrivacyByCategoryCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"categoryId": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"total": {
+				"type": "integer"
+			},
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"label": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}

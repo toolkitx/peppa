@@ -1,0 +1,52 @@
+{
+	"name": "Main_GetViolationItemByIdCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string"
+			},
+			"teamId": {
+				"type": "string"
+			},
+			"teamDisplayName": {
+				"type": "string"
+			},
+			"categoryId": {
+				"type": "string"
+			},
+			"categoryName": {
+				"type": "string"
+			},
+			"policyName": {
+				"type": "string"
+			},
+			"policyValue": {
+				"type": "string"
+			},
+			"state": {
+				"type": "string"
+			},
+			"createdTime": {
+				"type": "string"
+			},
+			"updatedTime": {
+				"type": "string"
+			},
+			"operatorName": {
+				"type": "string"
+			}
+		}
+	}
+}

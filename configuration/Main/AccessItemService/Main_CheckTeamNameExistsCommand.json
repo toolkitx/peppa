@@ -1,0 +1,23 @@
+{
+	"name": "Main_CheckTeamNameExistsCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"result": {
+				"type": "boolean",
+				"description": "exist is true, else false"
+			}
+		}
+	}
+}

@@ -1,0 +1,55 @@
+{
+	"name": "Main_GetSelfServicesCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": null,
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"approvalSteps": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"stepName": {
+										"type": "string"
+									},
+									"approvalId": {
+										"type": "string"
+									},
+									"approverId": {
+										"type": "string"
+									},
+									"approverName": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"needEscalation": {
+							"type": "boolean"
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

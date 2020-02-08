@@ -1,0 +1,24 @@
+{
+	"name": "Main_AttestAllCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"requestCode": {
+				"type": "string",
+				"title": "Question"
+			},
+			"reason": {
+				"type": "string",
+				"title": "Reason"
+			}
+		},
+		"required": [
+			"reason",
+			"requestCode"
+		]
+	},
+	"outputSchema": null
+}

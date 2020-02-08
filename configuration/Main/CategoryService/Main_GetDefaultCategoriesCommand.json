@@ -1,0 +1,114 @@
+{
+	"name": "Main_GetDefaultCategoriesCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"filter": {
+				"type": "string"
+			},
+			"skip": {
+				"type": "integer"
+			},
+			"take": {
+				"type": "integer"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"id": {
+							"type": "string"
+						},
+						"createdTime": {
+							"type": "string"
+						},
+						"updatedTime": {
+							"type": "string"
+						},
+						"policies": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"coverage": {
+										"type": "string"
+									},
+									"value": {
+										"type": "string"
+									},
+									"id": {
+										"type": "string"
+									},
+									"code": {
+										"type": "string"
+									},
+									"isAutoCorrect": {
+										"type": "string"
+									},
+									"targetAttributeType": {
+										"type": "string"
+									},
+									"targetAttributeDefaultValue": {
+										"type": "string"
+									},
+									"targetAttributeOption": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"codeName": {
+										"type": "string"
+									},
+									"checkingTypes": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"automaticAttestations": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {}
+							}
+						},
+						"securityGrade": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

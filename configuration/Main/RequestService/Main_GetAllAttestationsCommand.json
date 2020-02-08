@@ -1,0 +1,66 @@
+{
+	"name": "Main_GetAllAttestationsCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"skip": {
+				"type": "integer"
+			},
+			"take": {
+				"type": "integer"
+			},
+			"filter": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"total": {
+				"type": "integer"
+			},
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"requestName": {
+							"type": "string"
+						},
+						"teamDisplayName": {
+							"type": "string"
+						},
+						"requester": {
+							"type": "string"
+						},
+						"state": {
+							"type": "string"
+						},
+						"createdBy": {
+							"type": "string"
+						},
+						"createdTime": {
+							"type": "number"
+						},
+						"updatedBy": {
+							"type": "string"
+						},
+						"updatedTime": {
+							"type": "number"
+						},
+						"dueDate": {
+							"type": "number"
+						}
+					}
+				}
+			}
+		}
+	}
+}

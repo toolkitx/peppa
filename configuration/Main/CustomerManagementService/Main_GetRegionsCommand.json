@@ -1,0 +1,28 @@
+{
+	"name": "Main_GetRegionsCommand",
+	"type": "Public",
+	"securityRole": "Anonymous",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"aadToken": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"aadToken"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"region": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

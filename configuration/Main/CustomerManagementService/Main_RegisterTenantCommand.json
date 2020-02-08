@@ -1,0 +1,33 @@
+{
+	"name": "Main_RegisterTenantCommand",
+	"type": "Public",
+	"securityRole": "Anonymous",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"authorizationCode": {
+				"type": "string"
+			},
+			"region": {
+				"type": "string"
+			},
+			"redirectUrl": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"authorizationCode",
+			"region",
+			"redirectUrl"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"result": {
+				"type": "string"
+			}
+		}
+	}
+}

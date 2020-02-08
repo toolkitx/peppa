@@ -1,0 +1,26 @@
+{
+	"name": "Main_AttestByIdsCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"requestCode": {
+				"type": "string",
+				"title": "Question"
+			},
+			"reason": {
+				"type": "string",
+				"title": "Reason"
+			},
+			"idList": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"outputSchema": null
+}

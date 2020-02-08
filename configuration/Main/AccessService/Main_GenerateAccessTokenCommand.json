@@ -1,0 +1,28 @@
+{
+	"name": "Main_GenerateAccessTokenCommand",
+	"type": "Public",
+	"securityRole": "Anonymous",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"aadToken": {
+				"type": "string"
+			},
+			"region": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"accessToken": {
+				"type": "string"
+			},
+			"refreshToken": {
+				"type": "string"
+			}
+		}
+	}
+}

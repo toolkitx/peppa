@@ -1,0 +1,69 @@
+{
+	"name": "Main_GetViolationHistoryCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"filter": {
+				"type": "string"
+			},
+			"take": {
+				"type": "integer"
+			},
+			"skip": {
+				"type": "integer"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"teamId": {
+							"type": "string"
+						},
+						"teamDisplayName": {
+							"type": "string"
+						},
+						"categoryId": {
+							"type": "string"
+						},
+						"categoryName": {
+							"type": "string"
+						},
+						"policyName": {
+							"type": "string"
+						},
+						"policyValue": {
+							"type": "string"
+						},
+						"state": {
+							"type": "string"
+						},
+						"createdTime": {
+							"type": "string"
+						},
+						"updatedTime": {
+							"type": "string"
+						},
+						"operatorName": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

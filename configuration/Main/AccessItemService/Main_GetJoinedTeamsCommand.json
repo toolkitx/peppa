@@ -1,0 +1,60 @@
+{
+	"name": "Main_GetJoinedTeamsCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"filter": {
+				"type": "string"
+			},
+			"skip": {
+				"type": "integer"
+			},
+			"take": {
+				"type": "integer"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"displayName": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"privacy": {
+							"type": "string"
+						},
+						"people": {
+							"type": "integer"
+						},
+						"categoryId": {
+							"type": "string"
+						},
+						"categoryName": {
+							"type": "string"
+						},
+						"memberType": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

@@ -1,0 +1,47 @@
+{
+	"name": "Main_UpdateSelfServiceCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 255
+			},
+			"needEscalation": {
+				"type": "boolean",
+				"title": "Escalation"
+			},
+			"approvalSteps": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"stepName": {
+							"type": "string"
+						},
+						"approvalId": {
+							"type": "string"
+						},
+						"approverId": {
+							"type": "string"
+						},
+						"approverName": {
+							"type": "string"
+						}
+					}
+				},
+				"title": "Approval Steps"
+			}
+		},
+		"required": [
+			"id",
+			"needEscalation"
+		],
+		"title": "$context(name) Self-Sevice Settings"
+	},
+	"outputSchema": null
+}

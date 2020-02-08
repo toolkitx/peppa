@@ -1,0 +1,35 @@
+{
+	"name": "Main_GetApprovalDefinitionsCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": null,
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"approvedBy": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						},
+						"dataSource": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"total": {
+				"type": "integer"
+			}
+		}
+	}
+}

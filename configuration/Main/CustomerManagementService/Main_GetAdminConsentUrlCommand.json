@@ -1,0 +1,25 @@
+{
+	"name": "Main_GetAdminConsentUrlCommand",
+	"type": "Public",
+	"securityRole": "Anonymous",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"redirectUrl": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"redirectUrl"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"consentUrl": {
+				"type": "string"
+			}
+		}
+	}
+}

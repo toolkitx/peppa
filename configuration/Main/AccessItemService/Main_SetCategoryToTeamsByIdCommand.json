@@ -1,0 +1,33 @@
+{
+	"name": "Main_SetCategoryToTeamsByIdCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"categoryId": {
+				"type": "string",
+				"title": "Category"
+			},
+			"idList": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			}
+		},
+		"required": [
+			"categoryId",
+			"idList"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"result": {
+				"type": "string"
+			}
+		}
+	}
+}

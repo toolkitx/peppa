@@ -1,0 +1,47 @@
+{
+	"name": "Main_CreateTeamCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"categoryId": {
+				"type": "string",
+				"title": "Category"
+			},
+			"name": {
+				"type": "string",
+				"title": "Name"
+			},
+			"description": {
+				"type": "string",
+				"title": "Description"
+			},
+			"owner": {
+				"type": "string",
+				"title": "Owner"
+			},
+			"privacy": {
+				"type": "string",
+				"enum": [
+					"Public",
+					"Private"
+				],
+				"title": "Privacy"
+			},
+			"reason": {
+				"type": "string",
+				"title": "Reason"
+			}
+		},
+		"required": [
+			"name",
+			"owner",
+			"categoryId",
+			"privacy",
+			"description"
+		]
+	},
+	"outputSchema": null
+}

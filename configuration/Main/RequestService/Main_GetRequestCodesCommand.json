@@ -1,0 +1,29 @@
+{
+	"name": "Main_GetRequestCodesCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": null,
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"total": {
+				"type": "integer"
+			},
+			"results": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"code": {
+							"type": "string"
+						},
+						"question": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}

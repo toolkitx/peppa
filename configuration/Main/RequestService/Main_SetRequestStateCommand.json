@@ -1,0 +1,33 @@
+{
+	"name": "Main_SetRequestStateCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"requestId": {
+				"type": "string"
+			},
+			"state": {
+				"type": "string"
+			},
+			"reason": {
+				"type": "string",
+				"maxLength": 512,
+				"title": "Reason"
+			}
+		},
+		"required": [
+			"reason"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"result": {
+				"type": "string"
+			}
+		}
+	}
+}

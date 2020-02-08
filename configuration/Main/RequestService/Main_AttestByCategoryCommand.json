@@ -1,0 +1,29 @@
+{
+	"name": "Main_AttestByCategoryCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"requestCode": {
+				"type": "string",
+				"title": "Question"
+			},
+			"categoryId": {
+				"type": "string",
+				"title": "Category"
+			},
+			"reason": {
+				"type": "string",
+				"title": "Reason"
+			}
+		},
+		"required": [
+			"reason",
+			"requestCode",
+			"categoryId"
+		]
+	},
+	"outputSchema": null
+}

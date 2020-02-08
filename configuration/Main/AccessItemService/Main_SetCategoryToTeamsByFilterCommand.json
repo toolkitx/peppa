@@ -1,0 +1,30 @@
+{
+	"name": "Main_SetCategoryToTeamsByFilterCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"categoryId": {
+				"type": "string",
+				"title": "Category"
+			},
+			"filter": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"categoryId",
+			"filter"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"result": {
+				"type": "string"
+			}
+		}
+	}
+}

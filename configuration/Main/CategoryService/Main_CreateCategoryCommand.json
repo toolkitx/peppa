@@ -1,0 +1,60 @@
+{
+	"name": "Main_CreateCategoryCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string",
+				"title": "Name"
+			},
+			"securityGrade": {
+				"type": "string",
+				"title": "Security Grade",
+				"enum": [
+					"High",
+					"Medium",
+					"Low"
+				]
+			},
+			"automaticAttestations": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {}
+				},
+				"title": "Automatic Attestations",
+				"default": []
+			},
+			"policies": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				},
+				"title": "Policies"
+			},
+			"description": {
+				"type": "string",
+				"title": "Description"
+			}
+		},
+		"title": "Create Category",
+		"required": [
+			"securityGrade",
+			"name",
+			"policies",
+			"description"
+		]
+	},
+	"outputSchema": null
+}

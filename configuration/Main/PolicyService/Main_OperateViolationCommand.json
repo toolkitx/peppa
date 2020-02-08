@@ -1,0 +1,22 @@
+{
+	"name": "Main_OperateViolationCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"violationId": {
+				"type": "string"
+			},
+			"operationType": {
+				"type": "string",
+				"enum": [
+					"Archive",
+					"Acknowledge"
+				]
+			}
+		}
+	},
+	"outputSchema": null
+}

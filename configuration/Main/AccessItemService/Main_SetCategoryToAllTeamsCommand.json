@@ -1,0 +1,26 @@
+{
+	"name": "Main_SetCategoryToAllTeamsCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"categoryId": {
+				"type": "string",
+				"title": "Category"
+			}
+		},
+		"required": [
+			"categoryId"
+		]
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"result": {
+				"type": "string"
+			}
+		}
+	}
+}

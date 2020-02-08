@@ -1,0 +1,76 @@
+{
+	"name": "Main_GetSyncStatusCommand",
+	"type": "Public",
+	"securityRole": "GeneralUser",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string"
+			}
+		}
+	},
+	"outputSchema": {
+		"type": "object",
+		"properties": {
+			"syncId": {
+				"type": "string"
+			},
+			"syncType": {
+				"type": "integer"
+			},
+			"tenantId": {
+				"type": "string"
+			},
+			"numberOfSuccessfulCreates": {
+				"type": "integer"
+			},
+			"numberOfFailedCreates": {
+				"type": "integer"
+			},
+			"numberOfSuccessfulUpdates": {
+				"type": "integer"
+			},
+			"numberOfFailedUpdates": {
+				"type": "integer"
+			},
+			"numberOfSuccessfulDeletes": {
+				"type": "integer"
+			},
+			"numberOfFailedDeletes": {
+				"type": "integer"
+			},
+			"message": {
+				"type": "string"
+			},
+			"failureCause": {
+				"type": "string"
+			},
+			"validNumberOfReads": {
+				"type": "integer"
+			},
+			"totalNumberOfReads": {
+				"type": "integer"
+			},
+			"startTime": {
+				"type": "number"
+			},
+			"terminatedTime": {
+				"type": "number"
+			},
+			"finishedTime": {
+				"type": "number"
+			},
+			"status": {
+				"type": "string",
+				"enum": [
+					"Pending",
+					"Running",
+					"Finished",
+					"Failed"
+				]
+			}
+		}
+	}
+}

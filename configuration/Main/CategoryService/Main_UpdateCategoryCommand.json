@@ -1,0 +1,63 @@
+{
+	"name": "Main_UpdateCategoryCommand",
+	"type": "Public",
+	"securityRole": "Admin",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string",
+				"title": "Name"
+			},
+			"securityGrade": {
+				"type": "string",
+				"enum": [
+					"High",
+					"Medium",
+					"Low"
+				],
+				"title": "Security Grade"
+			},
+			"policies": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				},
+				"title": "Policies"
+			},
+			"automaticAttestations": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {}
+				},
+				"title": "Automatic Attestations",
+				"default": []
+			},
+			"id": {
+				"type": "string"
+			},
+			"description": {
+				"type": "string",
+				"title": "Description"
+			}
+		},
+		"title": "Update Category",
+		"required": [
+			"name",
+			"securityGrade",
+			"policies",
+			"description"
+		]
+	},
+	"outputSchema": null
+}
