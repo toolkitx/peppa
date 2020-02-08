@@ -1,0 +1,35 @@
+<div nz-row nzGutter="8" style="margin-bottom: 1rem;">
+    <div nz-col nzSpan="7">
+        Name
+    </div>
+    <div nz-col nzSpan="7">
+        Status
+    </div>
+    <div nz-col nzSpan="7">
+        Disp. Name
+    </div>
+    <div nz-col nzSpan="3">
+        #
+    </div>
+</div>
+<div nz-row nzGutter="8" style="margin-bottom: 1rem;" *ngFor="let item of form.controls; let i = index;" [formGroup]="item">
+    <div nz-col nzSpan="7">
+        <input nz-input placeholder="Name" formControlName="name"/>
+    </div>
+    <div nz-col nzSpan="7">
+        <nz-select formControlName="status">
+            <nz-option [nzLabel]="s" [nzValue]="s" *ngFor="let s of allNzStatus"></nz-option>
+        </nz-select>
+    </div>
+    <div nz-col nzSpan="7">
+        <input nz-input placeholder="Display Name" formControlName="text"/>
+    </div>
+    <div nz-col nzSpan="3">
+        <button nz-button (click)="removeItem(i)">
+            <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+        </button>
+    </div>
+</div>
+<button nz-button (click)="appendItem()">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</button>

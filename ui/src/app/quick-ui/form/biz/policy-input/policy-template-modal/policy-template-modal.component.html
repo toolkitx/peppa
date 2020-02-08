@@ -1,0 +1,61 @@
+
+<ng-template #itemTemplate let-raw let-ctrl="ctrl">
+    <div class="section-head" *ngIf="raw?.sectionTitle">
+        <div class="title">{{raw.sectionTitle}}</div>
+        <p class="desc">{{raw.sectionDescription}}</p>
+    </div>
+    <div class="policy-item-container" [formGroup]="ctrl">
+        <div class="policy-item" [attr.id]="raw?.name">
+            <div class="name">
+                <label nz-checkbox formControlName="enable" class="policy-item-enable-checkbox">
+                    {{raw?.name}}
+                </label>
+                <button nz-button nzType="link" *ngIf="raw?.description" nz-tooltip
+                        [nzTooltipTitle]="raw?.description">
+                    <i class="tooltip" nz-icon nzType="form-attention"></i>
+                </button>
+            </div>
+            <div class="value">
+                <input type="hidden" formControlName="name" name="name"/>
+                <ng-container *ngIf="raw.targetAttributeOption?.length">
+                    <nz-select formControlName="value" style="width: 100px;"
+                               name="value"
+                               [nzDisabled]="!ctrl.get('enable').value">
+                        <nz-option [nzValue]="v" [nzLabel]="v"
+                                   *ngFor="let v of raw.targetAttributeOption"></nz-option>
+                    </nz-select>
+                </ng-container>
+                <ng-container *ngIf="!raw.targetAttributeOption?.length" [ngSwitch]="raw.targetAttributeType">
+                    <div *ngSwitchCase="'TargetNamingRule'">
+                        <qui-naming-rule-preview class="policy-item-naming-rule-input" [data]="ctrl.get('value').value"
+                                                 [disabled]="!ctrl.get('enable').value || namingRuleInputVisible"
+                                                 [editable]="true"
+                                                 (toggle)="toggleNamingRuleInput($event)"></qui-naming-rule-preview>
+                    </div>
+                    <div *ngSwitchCase="'TargetBoolean'">
+                        <nz-switch class="policy-item-boolean-input" formControlName="value" name="value" [nzDisabled]="!ctrl.get('enable').value"></nz-switch>
+                    </div>
+                    <div *ngSwitchCase="'TargetInteger'">
+                        <nz-input-number class="policy-item-number-input"  formControlName="value" name="value"
+                                         [nzMin]="0" [nzStep]="1"
+                                         [nzDisabled]="!ctrl.get('enable').value"></nz-input-number>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <input type="text" class="policy-item-text-input" nz-input formControlName="value" name="value"
+                               [disabled]="!ctrl.get('enable').value"/>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div >
+            <qui-naming-rule-define-input *ngIf="raw.targetAttributeType === 'TargetNamingRule'"
+                                   id="naming-rule-input"
+                                   formControlName="value"
+                                   (visibleChange)="namingRuleInputVisible = $event"
+                                   #namingRule></qui-naming-rule-define-input>
+        </div>
+    </div>
+</ng-template>
+<ng-container *ngFor="let item of form?.controls;  let i = index;">
+    <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item.raw, ctrl: item}"></ng-container>
+</ng-container>

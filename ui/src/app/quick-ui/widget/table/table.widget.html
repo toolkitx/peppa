@@ -1,0 +1,110 @@
+<div class="table-operations" *ngIf="conf?.config.actions || filterEnabled">
+    <div class="primary-table-actions">
+        <ng-container *ngFor="let m of conf?.config.actions">
+            <button nz-button [quiAction]="m.action" nzType="link" *ngIf="m.type==='Link'" [attr.id]="m.id" [ngStyle]="m.styles"
+                    [context]="$context" (afterAction)="afterPopupAction($event)" [disabled]="m.disabled | condition:null:$context">
+                <i nz-icon [nzType]="m.icon" *ngIf="m.icon"></i> {{m.name}}
+            </button>
+            <ng-container *ngIf="m.type==='Group'">
+                <button class="no-border" nz-button [quiAction]="m.action" [context]="$context" [ngStyle]="m.styles"
+                        [attr.id]="m.id" (afterAction)="afterPopupAction($event)" [disabled]="m.disabled | condition:null:$context"
+                        nzType="link" nz-dropdown [nzDropdownMenu]="menu">
+                    <i nz-icon [nzType]="m.icon" *ngIf="m.icon"></i> {{m.name}} <i nz-icon nzType="down"></i>
+                </button>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <ng-container *ngFor="let act of m.children">
+                            <li nz-menu-item [quiAction]="act.action" *ngIf="act.type==='Link'" [context]="$context" [ngStyle]="m.styles"
+                                [nzDisabled]="act.disabled | condition:null:$context"
+                                [attr.id]="m.id" (afterAction)="afterPopupAction($event)">
+                                <i nz-icon [nzType]="act.icon" *ngIf="act.icon"></i> {{act.name}}
+                            </li>
+                        </ng-container>
+                    </ul>
+                </nz-dropdown-menu>
+            </ng-container>
+        </ng-container>
+        <button class="btn-table-refresh" class="no-border" nz-button nzType="link" (click)="loadData()"
+                *ngIf="conf?.config?.refresh">
+            <i nz-icon nzType="sync"></i> {{'Refresh' | translate}}
+        </button>
+    </div>
+    <div class="secondary-table-actions">
+        <nz-input-group *ngIf="filterEnabled"
+                        [nzPrefix]="prefixIconSearch"
+                        [nzSuffix]="subffixIconClear"
+                        [nzAddOnAfter]="filterIconSearch">
+            <input type="text" nz-input [(ngModel)]="defaultFieldKeyword"
+                   [placeholder]="'SearchByFieldName' | translate: defaultFieldFilterConf"
+                   class="table-primary-search-input"
+                   (keyup.enter)="defaultSearchKeywordChange($event.target.value)"/>
+        </nz-input-group>
+        <ng-template #prefixIconSearch>
+            <i nz-icon nzType="search"></i>
+        </ng-template>
+        <ng-template #subffixIconClear>
+            <i nz-icon *ngIf="defaultFieldKeyword" nzType="status-error" (click)="clearDefaultSearchKeyword()"
+               style="opacity: 0.5;"></i>
+        </ng-template>
+        <ng-template #filterIconSearch>
+            <nz-badge nzDot [nzShowDot]="hasUserFilter" (click)="toggleTableFilter()" style="user-select: none;">
+                <i nz-icon nzType="filter" [class.filter-highlight]="filterShown"></i>
+            </nz-badge>
+        </ng-template>
+    </div>
+</div>
+
+<qui-table-filter *ngIf="filterEnabled"
+                  [pql]="queryParams.filter"
+                  [filterConfs]="userFilters"
+                  [schema]="outputSchemaObject"
+                  [defaultKeywordIn$]="defaultKeywordChange$"
+                  [hidden]="!filterShown"
+                  [disabled]="runningCommand"
+                  (filterChange)="tableFilterChange($event)"
+                  (defaultKeywordOut)="defaultFieldKeyword = $event"></qui-table-filter>
+
+<nz-table class="table-instance" #basicTable [nzData]="dataSet"
+          [nzFrontPagination]="false"
+          [nzLoading]="runningCommand"
+          [nzTotal]="totalCount"
+          [nzShowQuickJumper]="false"
+          [nzShowSizeChanger]="true"
+          [nzBordered]="false"
+          [nzShowTotal]="totalTemplate"
+          [nzPageIndex]="queryParams.index"
+          [nzPageSize]="queryParams.size"
+          (nzPageIndexChange)="pageIndexChange($event)"
+          (nzPageSizeChange)="pageSizeChange($event)">
+    <thead>
+    <tr>
+        <th nzWidth="62px" *ngIf="conf?.isSelectable"
+            [nzChecked]="allChecked"
+            [nzIndeterminate]="indeterminate"
+            [nzShowCheckbox]="canCheckAll"
+            (nzCheckedChange)="checkAllChange($event)"></th>
+        <th *ngFor="let item of conf?.config.fields">
+            {{item.displayName || item.key}}
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data; let rowIndex = index;">
+        <td [nzShowCheckbox]="true" *ngIf="conf?.isSelectable"
+            (nzCheckedChange)="dataItemCheckChange($event, data)"
+            [nzChecked]="isItemChecked(data)"></td>
+        <td *ngFor="let item of conf?.config.fields; let columnIndex = index;" [attr.class]="'table-column-'+item.key">
+            <qui-table-cell [data]="data" [conf]="item" [rowIndex]="rowIndex" [columnIndex]="columnIndex"
+                            (afterAction)="afterPopupAction($event)"></qui-table-cell>
+        </td>
+    </tr>
+    </tbody>
+</nz-table>
+
+<ng-template #totalTemplate let-total>
+    <ng-container *ngIf="conf?.config.selectMode === 'Multiple' && selectedSet?.size > 0">
+        Selected: {{selectedSet?.size}}
+    </ng-container>
+    &nbsp;&nbsp;
+    Total: {{total}}
+</ng-template>

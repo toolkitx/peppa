@@ -1,0 +1,50 @@
+
+.widget-list {
+    padding: 1rem 0;
+}
+
+.widget-preview-item {
+    position: relative;
+    margin: 1rem 0;
+    border: 1px solid #FFF;
+    padding: 20px;
+    background: #FFF;
+    transition: all ease-in 0.1s;
+    text-align: center;
+    &:hover {
+        border: 1px solid #F1F1F1;
+    }
+    // height: 300px;
+
+    .actions {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 10px;
+        opacity: 0;
+    }
+
+    .meta {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.03);
+        padding: 5px 10px;
+        color: rgba(0, 0, 0, 0.65);
+        text-align: left;
+        z-index: 33;
+    }
+
+    &.active {
+        box-shadow: 0 0 5px 0 #016a9c5c;
+        border-color: #1d81a8;
+
+        .actions {
+            opacity: 1;
+        }
+    }
+}
+
+.widget-preview {
+    height: 100%;
+}

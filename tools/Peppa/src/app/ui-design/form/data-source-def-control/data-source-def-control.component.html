@@ -1,0 +1,16 @@
+<app-command-def-control name="commandDef" [(ngModel)]="instanceValue" (valueChange)="commandChange($event)"
+                         allowClear="true"></app-command-def-control>
+<div nz-row>
+    <div nz-col nzSpan="12">
+        <nz-select style="width: 100%" [ngModel]="label" (ngModelChange)="bindKeyChange('label', $event)"
+                   placeholder="Key" nz-tooltip nzTitle="Key">
+            <nz-option [nzLabel]="p" [nzValue]="p" *ngFor="let p of props"></nz-option>
+        </nz-select>
+    </div>
+    <div nz-col nzSpan="12">
+        <nz-select style="width: 100%" [ngModel]="value" (ngModelChange)="bindKeyChange('value', $event)"
+                   placeholder="Value" nz-tooltip nzTitle="Value">
+            <nz-option [nzLabel]="p" [nzValue]="p" *ngFor="let p of props"></nz-option>
+        </nz-select>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label>Authorize Command</nz-form-label>
+        <nz-form-control nzExtra="Command to get authorize url">
+            <app-command-def-control formControlName="authorize" (valueChange)="tokenCommandChange($event, true, 'redirectUrlPropName')"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Redirect Url Property</nz-form-label>
+        <nz-form-control nzExtra="The property name of response to be used to redirect to Office 365">
+            <nz-select formControlName="redirectUrlPropName" name="redirectUrlPropName">
+                <nz-option *ngFor="let t of authProperties" [nzLabel]="t" [nzValue]="t"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Get Regions Command</nz-form-label>
+        <nz-form-control nzExtra="Command to get regions">
+            <app-command-def-control formControlName="region"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Token Exchange Command</nz-form-label>
+        <nz-form-control nzExtra="Command to exchange token">
+            <app-command-def-control formControlName="token" (valueChange)="tokenCommandChange($event, true, 'tokenPropName')"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Token Property</nz-form-label>
+        <nz-form-control nzExtra="The property name of response to get the token">
+            <nz-select formControlName="tokenPropName" name="tokenPropName">
+                <nz-option *ngFor="let t of tokenProperties" [nzLabel]="t" [nzValue]="t"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+</form>

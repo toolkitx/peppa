@@ -1,0 +1,43 @@
+<div class="header">
+    <span>{{view?.name}}</span>
+    <!--<app-widget-selector (select)="addWidget($event)"></app-widget-selector>-->
+</div>
+<as-split unit="pixel" direction="horizontal" gutterSize="1" class="content">
+    <as-split-area size="*" style="background: #f8f8f8;">
+        <div style="padding: 1rem 2rem;">
+            <app-widget-preview-list [widgets]="view.widgets"
+                                     (valueChange)="view.widgets=$event"></app-widget-preview-list>
+        </div>
+    </as-split-area>
+    <as-split-area size="300" *ngIf="selectedWidget">
+        <nz-tabset>
+            <nz-tab [nzTitle]="selectedWidget.type" *ngIf="!devMode(selectedWidget.type)">
+                <div style="padding: 8px;">
+                    <nz-form-item>
+                        <nz-form-label nzRequired>Id</nz-form-label>
+                        <nz-form-control>
+                            <input nz-input [(ngModel)]="selectedWidget.id" name="id" required pattern="[a-z0-9_-]+"/>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item [hidden]="true">
+                        <nz-form-label>Wrapper</nz-form-label>
+                        <nz-form-control>
+                            <nz-select style="width: 100%;" [(ngModel)]="selectedWidget.wrapper" name="wrapper">
+                                <nz-option nzValue="None" nzLabel="None"></nz-option>
+                                <nz-option nzValue="Card" nzLabel="Card"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-divider nzText="Configuration"></nz-divider>
+                    <div appConfigSlot [data]="selectedWidget" (change)="confChange($event)"></div>
+                </div>
+            </nz-tab>
+            <nz-tab [nzTitle]="'Dev Mode'" *ngIf="devMode(selectedWidget.type)">
+                <div style="padding: 8px;">
+                    <app-val-input dataType="object" height="600px" [ngModel]="selectedWidget"
+                                   (ngModelChange)="devModeConfigChange($event)"></app-val-input>
+                </div>
+            </nz-tab>
+        </nz-tabset>
+    </as-split-area>
+</as-split>

@@ -1,0 +1,16 @@
+<nz-radio-group name="visibleType" [(ngModel)]="visibleType" (ngModelChange)="visibleTypeChange($event)">
+    <label nz-radio nzValue="disabled">Disable</label>
+    <label nz-radio nzValue="local">Local</label>
+    <label nz-radio nzValue="remote">Remote</label>
+    <label nz-radio nzValue="boolean">Hidden</label>
+</nz-radio-group>
+
+<div *ngIf="visibleType === 'local'">
+    <app-key-value-def-control name="localValidator" [(ngModel)]="instanceValue"
+                               (valueChange)="localValueChange($event)" valueType="json"></app-key-value-def-control>
+</div>
+
+<div *ngIf="visibleType === 'remote'">
+    <app-command-def-control name="asyncValidator" [ngModel]="instanceValue" allowClear="true"
+                             (valueChange)="remoteValueChange($event)"></app-command-def-control>
+</div>

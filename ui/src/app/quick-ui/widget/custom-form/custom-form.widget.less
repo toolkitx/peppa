@@ -1,0 +1,45 @@
+:host {
+    background: #FFF;
+    padding: 3rem 0 1rem 0;
+    display: block;
+
+    &.popped {
+        padding: 0;
+        header {
+            text-align: left;
+            h1 {
+                display: inline-block;
+                margin-bottom: 8px;
+                color: rgba(0, 0, 0, 0.85);
+                font-size: 16px;
+                line-height: 24px;
+            }
+        }
+
+        .action-row {
+            margin-bottom: 0;
+        }
+    }
+
+    &::ng-deep {
+        .ant-form-item-children {
+            display: block;
+        }
+    }
+}
+header {
+    text-align: center;
+}
+
+.form-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8px;
+}
+
+.form-actions {
+    text-align: right;
+    button {
+        margin-left: 8px;
+    }
+}

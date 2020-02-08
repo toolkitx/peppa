@@ -1,0 +1,50 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label>Title</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="title"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="description"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Ok button text</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="okText"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Cancel button text</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="cancelText"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Post action</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="postAction"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Success Message</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="successMessage"/>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Action</nz-form-label>
+        <nz-form-control>
+            <app-command-def-control formControlName="action" allowClear="true"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>

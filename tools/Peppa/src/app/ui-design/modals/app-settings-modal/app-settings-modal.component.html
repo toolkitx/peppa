@@ -1,0 +1,37 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label>App Name</nz-form-label>
+        <nz-form-control>
+            <nz-input-group [nzSuffix]="suffixTemplate">
+                <input nz-input formControlName="name" name="name"/>
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+                <i nz-icon
+                   nz-tooltip
+                   class="ant-input-clear-icon"
+                   nzTheme="fill"
+                   nzType="close-circle"
+                   *ngIf="form.get('name').value"
+                   (click)="form.get('name').setValue(null)"></i>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Enable Nav</nz-form-label>
+        <nz-form-control>
+            <nz-switch formControlName="enableNav" (ngModelChange)="enableNavChange()"></nz-switch>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item [hidden]="!form.get('enableNav').value">
+        <nz-form-label>Nav</nz-form-label>
+        <nz-form-control>
+            <app-menu-def-control formControlName="nav" [allowGroup]="false"></app-menu-def-control>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Widgets</nz-form-label>
+        <nz-form-control>
+            <app-widget-list-def-control formControlName="headWidgets"></app-widget-list-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>

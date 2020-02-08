@@ -1,0 +1,32 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label nzRequire="true">Title</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" formControlName="title">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" formControlName="description">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Extend Actions</nz-form-label>
+        <nz-form-control>
+            <app-menu-def-control formControlName="actions" allowGroup="false"></app-menu-def-control>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Back Icon</nz-form-label>
+        <nz-form-control>
+            <nz-switch formControlName="backIcon"></nz-switch>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Styles</nz-form-label>
+        <nz-form-control>
+            <app-key-value-def-control formControlName="styles"></app-key-value-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>

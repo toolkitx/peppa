@@ -1,0 +1,47 @@
+<div class="table-basic-filters" *ngIf="searchMode === 'basic'">
+    <div class="field-filter">
+        <qui-table-basic-filter style="margin-right: 8px;"
+                                *ngFor="let f of filterConfs"
+                                [filterConf]="f"
+                                [pqlFilter]="getFilterInstanceByKey(f.key)"
+                                [schema]="schema?.properties[f.key]"
+                                (valueChange)="fieldFilterValueChange($event)"></qui-table-basic-filter>
+    </div>
+
+    <button nz-button nzType="primary" (click)="triggerBasicSearch()" [disabled]="disabled"
+            class="table-basic-filter-search-button"> {{'Search' | translate}}
+    </button>
+
+    <button nz-button nzType="link" (click)="reset()"
+            class="table-switch-to-advanced-button"> {{'Reset' | translate}}
+    </button>
+
+    <!--<button nz-button nzType="link" (click)="toggleSearchMode()" [disabled]="disabled"-->
+            <!--class="table-switch-to-advanced-button"> {{'Advanced' | translate}}-->
+    <!--</button>-->
+</div>
+
+<div class="table-advanced-filters-wrapper" *ngIf="searchMode === 'advanced'">
+    <nz-form-item style="margin-bottom: 0;">
+        <nz-form-control [nzValidateStatus]="!searchQuery || pqlValid ? 'success': 'error'">
+            <div class="table-advanced-filters">
+                <nz-input-group nzAddOnBefore="PQL =" style="margin-right: 8px;" [nzSuffix]="pqlHelpTemplate">
+                    <input class="table-advanced-filter-input" nz-input placeholder="PQL" [(ngModel)]="searchQuery"
+                           (keyup)="searchPQLChange()" name="pql"/>
+                </nz-input-group>
+                <ng-template #pqlHelpTemplate>
+                    <i nz-icon nzType="form-hint"></i>
+                </ng-template>
+                <button nz-button nzType="primary"
+                        class="table-advanced-filter-search-button"
+                        [disabled]="disabled || !searchQuery || !pqlValid"
+                        (click)="triggerSearch()">
+                    <i nz-icon nzType="search"></i> {{'Search' | translate}}
+                </button>
+                <button nz-button nzType="link" (click)="toggleSearchMode()" [disabled]="disabled"
+                        class="table-switch-to-basic-button"> {{'Basic' | translate}}
+                </button>
+            </div>
+        </nz-form-control>
+    </nz-form-item>
+</div>

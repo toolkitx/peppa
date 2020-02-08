@@ -1,0 +1,16 @@
+<ng-container *ngIf="!renderError">
+    <ng-container *ngFor="let conf of widgets">
+        <div class="widget-wrapper">
+            <div quiSlot [data]="conf" [context]="context"></div>
+        </div>
+    </ng-container>
+</ng-container>
+
+<!--Fail to render view-->
+<div class="error" *ngIf="renderError">
+    <qui-empty [notFoundImage]="img" [notFoundContent]="renderError.message">
+        <ng-template #img>
+            <i class="error-sign" nz-icon nzType="status-error" nzTheme="outline"></i>
+        </ng-template>
+    </qui-empty>
+</div>

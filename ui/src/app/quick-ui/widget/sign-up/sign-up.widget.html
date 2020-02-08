@@ -1,0 +1,44 @@
+<div class="sign-up-widget widget">
+    <div class="content" *ngIf="!isSuccess">
+        <div *ngIf="!isCallback">
+            <img src="/assets/logo-placeholder.png">
+            <h2>Create your account</h2>
+            <p>
+                To create your account, Team Management must be granted admin consent. To grant admin consent,
+                click the Grant Consent button. You are redirected to the Azure login page.
+                You must log in as a Global Administrator for the tenant to grant admin consent.
+            </p>
+            <button id="grant-consent-button" nz-button nzType="primary" nzSize="large" (click)="grantConsent()" [nzLoading]="runningCommand">
+                <i nz-icon type="active-directory"></i> Grant admin consent
+            </button>
+            <nz-divider nzText="OR"></nz-divider>
+            <a id="login-link" routerLink="/login">Already connected?</a>
+        </div>
+
+        <div *ngIf="isCallback">
+            <img src="/assets/logo-placeholder.png">
+            <h2>Almost done!</h2>
+            <p>
+                Select region to host your tenant data:
+            </p>
+            <P>
+                <nz-select id="region-select" [(ngModel)]="targetRegion" style="width: 100%;" [nzDisabled]="runningCommand">
+                    <nz-option *ngFor="let r of regions" [nzLabel]="r.displayName" [nzValue]="r.name"></nz-option>
+                </nz-select>
+            </P>
+            <button id="register-button" nz-button nzType="primary" nzSize="large" (click)="register()" [nzLoading]="runningCommand">
+                Register now
+            </button>
+        </div>
+        <div *ngIf="runningCommand">
+            <qui-spinner id="spinner"></qui-spinner>
+        </div>
+    </div>
+    <div class="content" *ngIf="isSuccess">
+        <img src="/assets/quest-logo.svg">
+        <h2>Thank you for signing up!</h2>
+        <button id="login-button" nz-button nzType="primary" nzSize="large" (click)="redirectToLogin()">
+            Sign in now
+        </button>
+    </div>
+</div>

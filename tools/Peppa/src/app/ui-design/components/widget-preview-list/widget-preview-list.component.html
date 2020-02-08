@@ -1,0 +1,32 @@
+<div class="widget-list" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)"
+     (click)="$event.stopPropagation();">
+    <div class="widget-preview-item" [class.active]="w.id===selectedWidget?.id" cdkDrag
+         *ngFor="let w of widgets" (click)="selectWidget(w); $event.stopPropagation();">
+        <div class="meta">
+            #{{w.id}}
+        </div>
+        <div class="actions">
+            <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                <i nz-icon nzType="more" nzTheme="outline"></i>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item (click)="duplicateWidget(w)">Duplicate</li>
+                    <li nz-menu-item (click)="removeWidget(w)">Remove</li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+        <ng-template #defaultPreview>
+            <img class="widget-preview" [src]="getPreviewType(w.type) | screenshot"/>
+        </ng-template>
+        <ng-container *ngIf="hasPreviewSlotDefined(getPreviewType(w.type)); else defaultPreview">
+            <div style="margin-top: 30px; text-align: left;">
+                <div appPreviewSlot [data]="w"></div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<nz-empty *ngIf="showEmptyMessage && !widgets?.length" nzNotFoundContent="Please add your first widget"></nz-empty>
+<div style="text-align: center; width: 100%;" (click)="$event.stopPropagation();">
+    <app-widget-selector (select)="addWidget($event)"></app-widget-selector>
+</div>

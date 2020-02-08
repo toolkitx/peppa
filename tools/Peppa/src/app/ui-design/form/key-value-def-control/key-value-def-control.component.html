@@ -1,0 +1,11 @@
+<nz-input-group nz-row nzCompact nzGutter="0">
+    <div nz-col nzSpan="20" *ngIf="preview">
+        <input nz-input name="errors" [ngModel]="instanceValue | json" readonly>
+    </div>
+    <div nz-col [nzSpan]="preview ? 4 : 24">
+        <button nz-button style="width: 100%;" (click)="toggleVisible()">
+            <i nz-icon nzType="setting" nzTheme="outline"></i>
+        </button>
+    </div>
+</nz-input-group>
+

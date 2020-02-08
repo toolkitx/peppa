@@ -1,0 +1,68 @@
+
+<nz-page-header nzTitle="Action menu" nzSubtitle="Define actions">
+    <nz-page-header-extra>
+        <button nz-button (click)="appendItem()">
+            <i nz-icon nzType="plus" nzTheme="outline"></i>
+        </button>
+    </nz-page-header-extra>
+</nz-page-header>
+
+<nz-empty *ngIf="!form?.controls?.length"></nz-empty>
+
+<div nz-row nzGutter="16" style="margin: 1rem 0;" *ngIf="form?.controls?.length">
+    <div nz-col nzSpan="1"></div>
+    <div nz-col nzSpan="3">Id</div>
+    <div nz-col nzSpan="4">Name</div>
+    <div nz-col nzSpan="2">Icon</div>
+    <div nz-col nzSpan="2">Type</div>
+    <div nz-col nzSpan="3">Action</div>
+    <div nz-col nzSpan="1">Styles</div>
+    <div nz-col nzSpan="3">Disabled</div>
+    <div nz-col nzSpan="3" [hidden]="true">Permissions</div>
+    <div nz-col nzSpan="2">Children</div>
+    <div nz-col nzSpan="1"></div>
+</div>
+
+<div cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+    <div cdkDrag nz-row nzGutter="16" style="margin-bottom: 1rem; background: #FFF;"
+         *ngFor="let item of form.controls; let i = index;" [formGroup]="item">
+        <div nz-col nzSpan="1">
+            <i cdkDragHandle nz-icon nzType="more" nzTheme="outline" style="cursor: move;"></i>
+        </div>
+        <div nz-col nzSpan="3"><input nz-input formControlName="id" style="width: 100%;"></div>
+        <div nz-col nzSpan="4"><input nz-input formControlName="name" style="width: 100%;"></div>
+        <div nz-col nzSpan="2">
+            <nz-select formControlName="icon" style="width: 100%;" nzShowSearch [nzAllowClear]="true">
+                <nz-option [nzLabel]="t" [nzValue]="t" *ngFor="let t of icons"></nz-option>
+            </nz-select>
+        </div>
+        <div nz-col nzSpan="2">
+            <nz-select formControlName="type" style="width: 100%;" (ngModelChange)="menuTypeChange(item)">
+                <ng-container *ngFor="let t of ['Link', 'Group']">
+                    <nz-option [nzLabel]="t" [nzValue]="t" *ngIf="t!=='Group' || allowGroup"></nz-option>
+                </ng-container>
+            </nz-select>
+        </div>
+        <div nz-col nzSpan="3">
+            <app-action-def-control formControlName="action"></app-action-def-control>
+        </div>
+        <div nz-col nzSpan="1">
+            <app-key-value-def-control formControlName="styles" [preview]="false"></app-key-value-def-control>
+        </div>
+        <div nz-col nzSpan="3">
+            <input nz-input formControlName="disabled" style="width: 100%;" placeholder="PCL, fieldX IS EMPTY">
+        </div>
+        <div nz-col nzSpan="3" [hidden]="true">
+            <nz-select disabled formControlName="permissions" style="width: 100%;" nzMode="multiple" name="permissions">
+                <nz-option [nzValue]="role" [nzLabel]="role" *ngFor="let role of viewSecurityRoles"></nz-option>
+            </nz-select>
+        </div>
+        <div nz-col nzSpan="3">
+            <app-menu-def-control [hidden]="item.get('type').value!=='Group'" formControlName="children"
+                                  [preview]="false" [allowGroup]="false"></app-menu-def-control>
+        </div>
+        <div nz-col nzSpan="1">
+            <i nz-icon nzType="close-circle" nzTheme="outline" (click)="removeItem(i)"></i>
+        </div>
+    </div>
+</div>

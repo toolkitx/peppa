@@ -1,0 +1,68 @@
+<div class="welcome" style="background-image: url('assets/bgs/bg1.png')">
+    <div class="content">
+        <div class="logo">
+            <img src="assets/logo/peppa.svg" alt="" class="shake">
+        </div>
+        <h1>Peppa Studio</h1>
+        <div class="actions">
+            <button nz-button nzBlock nz-dropdown nzType="primary" (click)="openCommandProjectDialog()">
+                <i nz-icon nzType="menu-unfold"></i> Open Command
+            </button>
+            <button nz-button nzBlock nz-dropdown nzType="primary" (click)="openUIProjectDialog()">
+                <i nz-icon nzType="pic-left"></i> Open UI Project
+            </button>
+            <button nz-button nzBlock nz-dropdown nzType="primary" [nzDropdownMenu]="projectTypeMenu">
+                <i nz-icon nzType="plus" nzTheme="outline"></i> New Project
+                <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <nz-dropdown-menu #projectTypeMenu="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item>
+                <a (click)="showDialog('New Command Project', newProjectTpl, newProjectFooterTpl)">Command Project</a>
+            </li>
+            <li nz-menu-item>
+                <a (click)="showDialog('New Module UI', newModuleUiTpl, null)">Module UI</a>
+            </li>
+        </ul>
+    </nz-dropdown-menu>
+</div>
+
+
+<ng-template #newProjectTpl>
+    <form nz-form #form="ngForm" nzLayout="vertical">
+        <nz-form-item>
+            <nz-form-label>Module Name</nz-form-label>
+            <nz-form-control>
+                <input nz-input name="newModuleName" [(ngModel)]="newModuleName" pattern="^[A-Z][a-z0-9]+$" required
+                       (keyup)="checkFirstChar()"/>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>
+
+<ng-template #newProjectFooterTpl>
+    <button style="margin-right: 8px;" nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+    <button nz-button nzType="primary" [disabled]="!isModuleNameValid(newModuleName)" (click)="newProject('Command')">
+        Create
+    </button>
+</ng-template>
+
+<ng-template #newModuleUiTpl>
+    <form nz-form #uiForm="ngForm" nzLayout="vertical">
+        <nz-form-item>
+            <nz-form-label>The UI must belong to a module, please select a module to start design.</nz-form-label>
+            <nz-form-control>
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                    <input type="text" nz-input placeholder="Click Choose button to select module" readonly/>
+                </nz-input-group>
+                <ng-template #suffixButton>
+                    <button nz-button nzType="primary" (click)="selectModuleForUI()">Choose</button>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>

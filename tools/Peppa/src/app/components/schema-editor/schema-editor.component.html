@@ -1,0 +1,191 @@
+<div class="schema-editor" nz-row>
+    <div class="col" nz-col nzXs="8">
+        <div [class.qui-hide]="!schemaTreeOptions">
+            <nz-tree #tree [nzData]="schemaTreeOptions" [nzMultiple]="false"
+                     (nzClick)="activeNode($event)">
+                <nz-dropdown-menu #contextTpl="nzDropdownMenu">
+                    <ul nz-menu nzInDropDown *ngIf="contextTargetNode">
+                        <li nz-menu-item *ngIf="contextTargetNode?.origin?.raw.type === 'object'"
+                            (click)="createNewPropertyDef(); showDialog('Add property', addTpl);$event.stopPropagation();">
+                            <i nz-icon nzType="plus" nzTheme="outline"></i> Create property
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetNode?.title!=='items' && contextTargetNode?.level > 0"
+                            (click)="showDialog('Duplicate', duplicateTpl);$event.stopPropagation();">
+                            <i nz-icon nzType="copy" nzTheme="outline"></i> Duplicate
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetNode?.title!=='items' && contextTargetNode?.level > 0"
+                            (click)="showDialog('Rename', renameTpl);$event.stopPropagation();">
+                            <i nz-icon nzType="edit" nzTheme="outline"></i> Rename
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetNode?.title!=='items' && contextTargetNode?.level > 0"
+                            (click)="removeNode('Remove', renameTpl);$event.stopPropagation();">
+                            <i nz-icon nzType="delete" nzTheme="outline"></i> Delete
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetNode?.level > 0"
+                            (click)="copyNode();$event.stopPropagation();">
+                            <i nz-icon nzType="snippets" nzTheme="outline"></i> Copy
+                        </li>
+                        <li nz-menu-item *ngIf="clipboardData"
+                            (click)="pasteNode();$event.stopPropagation();">
+                            <i nz-icon nzType="block" nzTheme="outline"></i> Paste
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetNode?.level === 0"
+                            (click)="deleteSchema();$event.stopPropagation();">
+                            <i nz-icon nzType="warning" nzTheme="outline"></i> Delete schema
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+                <ng-template #nzTreeTemplate let-node>
+                <span class="custom-node" [class.active]="activedNode?.key === node.key">
+                  <span *ngIf="!node.isLeaf"
+                        (contextmenu)="contextMenu(node, $event, contextTpl)">
+                    <span class="folder-name">{{ node.title }}</span>
+                    <span class="folder-desc">{{node.origin?.raw?.type}}</span>
+                  </span>
+                  <span *ngIf="node.isLeaf"
+                        (contextmenu)="contextMenu(node, $event, contextTpl)">
+                    <span class="file-name">{{ node.title }}</span>
+                    <span class="file-desc">{{node.origin?.raw?.type}}</span>
+                  </span>
+                </span>
+                </ng-template>
+            </nz-tree>
+        </div>
+        <div [class.qui-hide]="schemaTreeOptions"
+             style="height: 100%; display: flex; align-items: center; justify-content: center">
+            <button nz-button nzType="default"
+                    (click)="initType = 'string'; initItemType=null;showDialog('Initialize', initTpl);$event.stopPropagation();">
+                Initialize schema
+            </button>
+        </div>
+    </div>
+    <div class="col" nz-col nzXs="8">
+        <app-custom-form [data]="activeRaw" (apply)="itemChanged($event)"></app-custom-form>
+    </div>
+    <div class="col" nz-col nzXs="8">
+        <app-json-editor [data]="rawValue"></app-json-editor>
+    </div>
+</div>
+
+<ng-template #renameTpl>
+    <p>
+        Origin name: <strong>{{contextTargetNode?.title}}</strong>
+    </p>
+    <p>
+        <input nz-input placeholder="New name" [(ngModel)]="newName"/>
+    </p>
+    <div class="ant-modal-footer">
+        <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+        <button nz-button nzType="primary" [disabled]="!isNewPropertyValid(newName)"
+                (click)="rename(newName); newName=null; destroyTplDialog();">Rename
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #duplicateTpl>
+    <p>
+        You are duplicating property <strong>{{contextTargetNode?.title}}</strong>, please enter a new name for it.
+    </p>
+    <p>
+        <input nz-input placeholder="Property name" [(ngModel)]="duplicateName"
+               (keyup.enter)="isNewPropertyValid(duplicateName) && duplicate(duplicateName);$event.stopPropagation();"/>
+    </p>
+    <div class="ant-modal-footer">
+        <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+        <button nz-button nzType="primary" [disabled]="!isNewPropertyValid(duplicateName)"
+                (click)="duplicate(duplicateName);$event.stopPropagation();">
+            Duplicate
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #addTpl>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6">
+            Data type:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <nz-select style="width: 100%" [(ngModel)]="newPropertyDef.type">
+                <nz-option [nzValue]="t" [nzLabel]="t" *ngFor="let t of types"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6">
+            Property Name:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <input nz-input placeholder="Name" [(ngModel)]="newPropertyDef.name"
+                   (keyup.enter)="isNewPropertyValid(newPropertyDef.name) && addNewProp(newPropertyDef, addAnother);$event.stopPropagation();"/>
+            <nz-form-explain>
+                <p>The name should be start with lower case character.</p>
+            </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="newPropertyDef.type==='array'">
+        <nz-form-label [nzSm]="6">
+            Item data type:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <nz-select style="width: 100%" [(ngModel)]="newPropertyDef.itemType">
+                <ng-container *ngFor="let t of types">
+                    <nz-option [nzValue]="t" [nzLabel]="t" *ngIf="t!=='array'"></nz-option>
+                </ng-container>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <div class="ant-modal-footer">
+        <label nz-checkbox [(ngModel)]="addAnother">Create another</label>
+        <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+        <button nz-button nzType="primary"
+                [disabled]="!isNewPropertyValid(newPropertyDef.name)"
+                (click)="addNewProp(newPropertyDef, addAnother);$event.stopPropagation();">
+            Create
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #initTpl>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6">
+            Template:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <nz-select style="width: 100%" [(ngModel)]="initTemplate">
+                <nz-option [nzValue]="sc.name" [nzLabel]="sc.name" *ngFor="let sc of schemaTemplates"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <ng-container *ngIf="initTemplate==='Custom'">
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Data type:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="initType">
+                    <nz-option [nzValue]="t" [nzLabel]="t" *ngFor="let t of types"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="initType==='array'">
+            <nz-form-label [nzSm]="6">
+                Item data type:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="initItemType">
+                    <ng-container *ngFor="let t of types">
+                        <nz-option [nzValue]="t" [nzLabel]="t" *ngIf="t!=='array'"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+    </ng-container>
+    <div class="ant-modal-footer">
+        <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+        <button nz-button nzType="primary"
+                [disabled]="!initType || (initType==='array' && !initItemType)"
+                (click)="initSchema({initType: initType, initItemType: initItemType});$event.stopPropagation();">
+            Init
+        </button>
+    </div>
+</ng-template>

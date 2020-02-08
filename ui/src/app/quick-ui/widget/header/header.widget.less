@@ -1,0 +1,107 @@
+@import "../../../../styles";
+
+:host {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+
+    & ::ng-deep {
+        .ant-badge-count {
+            box-shadow: none;
+        }
+
+        .ant-menu-item {
+            outline: none;
+        }
+    }
+}
+
+.qui-header {
+    height: 72px;
+    background: @layout-header-background;
+    color: #FFF;
+    border-bottom: 2px solid @brand-color;
+    box-sizing: border-box;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.primary-actions {
+    display: flex;
+}
+
+.extend-actions {
+    display: flex;
+    align-items: center;
+
+    a, a:visited {
+        color: #FFF;
+        font-size: 1.5rem;
+        margin-left: 16px;
+
+        &:hover {
+            color: @primary-color;
+        }
+    }
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+
+.product-logo {
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.product-name {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-left: 8px;
+    cursor: default;
+}
+
+.split {
+    width: 2px;
+    background-color: #444;
+    margin: 0 0 0 20px;
+    height: 48px;
+}
+
+.navigation {
+    font-weight: 600;
+}
+
+.session-info-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.session-info {
+    font-size: 12px;
+    line-height: 14px;
+    margin-left: 8px;
+
+    .session-name {
+        font-weight: bold;
+    }
+
+    .session-email {
+        font-size: 10px;
+    }
+}
+
+.head-widget {
+    max-width: 30px;
+    height: 30px;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

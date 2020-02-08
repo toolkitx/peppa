@@ -1,0 +1,65 @@
+<form *ngIf="form">
+    <div nz-row nzGutter="16" style="margin-bottom: 1rem;">
+        <div nz-col nzSpan="1"></div>
+        <div nz-col nzSpan="7">Key</div>
+        <div nz-col nzSpan="8">Type</div>
+        <div nz-col nzSpan="6"></div>
+        <div nz-col nzSpan="2"></div>
+    </div>
+    <div nz-row nzGutter="16" style="margin-bottom: 1rem">
+        <div nz-col nzSpan="1"></div>
+        <div nz-col nzSpan="7">
+            <nz-select name="prop" [(ngModel)]="prop" style="width: 100%;">
+                <nz-option [nzLabel]="k" [nzValue]="k" *ngFor="let k of props"></nz-option>
+            </nz-select>
+        </div>
+        <div nz-col nzSpan="8">
+            <nz-select name="propType" [(ngModel)]="propType" style="width: 100%;">
+                <nz-option [nzLabel]="t" [nzValue]="t" *ngFor="let t of dataTypes"></nz-option>
+            </nz-select>
+        </div>
+        <div nz-col nzSpan="8">
+            <button nz-button (click)="appendItem(prop, propType)" [disabled]="!prop || !propType">
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+            </button>
+            <button nz-button style="margin-left: 1rem;" (click)="appendMenuItem()" *ngIf="allowMenu">
+                <i nz-icon nzType="menu" nzTheme="outline"></i> Add Menu column
+            </button>
+        </div>
+    </div>
+    <nz-divider nzText="Columns" *ngIf="form?.controls?.length"></nz-divider>
+    <div cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)">
+        <div cdkDrag nz-row nzGutter="16" style="margin-bottom: 1rem;"
+             *ngFor="let item of form.controls; let i = index;"
+             [formGroup]="item">
+            <div nz-col nzSpan="1">
+                <i cdkDragHandle nz-icon nzType="more" nzTheme="outline" style="cursor: move;"></i>
+            </div>
+            <div nz-col nzSpan="6">
+                <input nz-input readonly formControlName="key" style="width: 100%;">
+            </div>
+            <div nz-col nzSpan="6">
+                <input nz-input placeholder="Display name" formControlName="displayName" style="width: 100%;"/>
+            </div>
+            <div nz-col nzSpan="3">
+                <nz-select formControlName="dataType" (ngModelChange)="dateTypeChange($event, item)">
+                    <ng-container *ngFor="let t of dataTypes">
+                        <nz-option [nzLabel]="t" [nzValue]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </div>
+            <div nz-col nzSpan="6">
+                <ng-container [ngSwitch]="item.get('dataType').value">
+                    <app-action-def-control *ngSwitchCase="'Action'" formControlName="action"></app-action-def-control>
+                    <app-menu-def-control *ngSwitchCase="'Menu'" formControlName="action"
+                                          [preview]="false"></app-menu-def-control>
+                    <app-single-widget-def-control *ngSwitchCase="'Widget'" formControlName="action"></app-single-widget-def-control>
+                    <input *ngSwitchDefault type="hidden" formControlName="action">
+                </ng-container>
+            </div>
+            <div nz-col nzSpan="2">
+                <i nz-icon nzType="close-circle" nzTheme="outline" (click)="removeItem(i)"></i>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.schema-editor {
+  height: 100%;
+}
+
+.col {
+  overflow: auto;
+  border-left: 1px solid #EEE;
+  height: 100%;
+  &:first-child {
+    border-left: none;
+  }
+}
+
+.custom-node {
+  cursor: pointer;
+  padding: 0 5px;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24px;
+  border-radius: 2px;
+
+  &:hover {
+    background: #c5d8db;
+  }
+  &.active {
+    background: #beedff!important;
+  }
+
+  .folder-desc, .file-desc {
+    padding: 0 2px;
+    font-size: 0.875rem;
+    color: #BBB;
+  }
+}
+
+.ant-modal-footer {
+  padding: 0;
+  padding-top: 1rem;
+}

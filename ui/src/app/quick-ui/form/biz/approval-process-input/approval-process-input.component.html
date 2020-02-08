@@ -1,0 +1,89 @@
+<div class="qui-custom-form-control qui-custom-form-approval-process-input">
+    <nz-alert style="margin: 1rem 0"
+              nzType="info"
+              *ngIf="!isRunningCommand && !formArray"
+              nzMessage="Steps are not defined, approval is not required for this service."
+              nzShowIcon nzCloseText="Setup Now" (nzOnClose)="initForm()"></nz-alert>
+    <div class="preview" *ngIf="formArray">
+        <ng-template #stepNotSetTpl>
+            <nz-empty></nz-empty>
+        </ng-template>
+        <nz-steps *ngIf="previewStepNames && previewStepNames?.length; else stepNotSetTpl" nzSize="small" [nzProgressDot]="true"
+                  nzLabelPlacement="vertical">
+            <nz-step nzTitle="Start"></nz-step>
+            <nz-step [nzTitle]="s.stepName" *ngFor="let s of previewStepNames"></nz-step>
+            <nz-step nzTitle="End"></nz-step>
+        </nz-steps>
+    </div>
+    <div class="form-fields" *ngIf="formArray">
+        <div nz-row nzGutter="8" class="header row">
+            <div nz-col nzSpan="2">No.</div>
+            <div nz-col nzSpan="4">Step</div>
+            <div nz-col nzSpan="4">Approved by</div>
+            <div nz-col nzSpan="12">Description</div>
+            <div nz-col nzSpan="2"></div>
+        </div>
+        <div class="list" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)"
+             style="display: block;">
+            <nz-form-item cdkDrag *ngFor="let item of formArray?.controls; let i = index;">
+                <div nz-row nzGutter="8" class="row" [formGroup]="item">
+                    <div nz-col nzSpan="2">
+                        <div cdkDragHandle style="cursor: move; color: inherit; margin-top: 9px;">
+                            <i nz-icon nzType="more-vertical" style="color: #CCC; fill: #CCC;"></i>
+                            {{i+1}}
+                        </div>
+                    </div>
+                    <div nz-col nzSpan="4">
+                        <nz-form-control nzHasFeedback>
+                            <input nz-input formControlName="stepName">
+                        </nz-form-control>
+                    </div>
+                    <div nz-col nzSpan="4">
+                        <nz-form-control>
+                            <nz-select style="width: 100%;" formControlName="approvalId"
+                                       (ngModelChange)="approvalChange($event, item)">
+                                <nz-option [nzValue]="dt.id" [nzLabel]="dt.approvedBy"
+                                           *ngFor="let dt of templates"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <nz-form-control nzHasFeedback>
+                            <input type="hidden" formControlName="approverId">
+                            <input type="hidden" formControlName="approverName">
+                            <ng-template #constStep>
+                                <div class="approval-description">
+                                    {{getApprovalDef(item.get('approvalId').value)?.description}}
+                                </div>
+                            </ng-template>
+                            <div style="display: flex; align-items: center;"
+                                 *ngIf="getApprovalDef(item.get('approvalId').value)?.dataSource; else constStep">
+                                <qui-select formControlName="approverId"
+                                            style="width: 100%"
+                                            [schema]="getFormSchemaDef(item.get('approvalId').value)"
+                                            [ui]="getUiDataSourceDef(item.get('approvalId').value)"></qui-select>
+                                <button nz-button nzType="link" nz-tooltip
+                                        [nzTooltipTitle]="getApprovalDef(item.get('approvalId').value)?.description">
+                                    <i class="tooltip" nz-icon nzType="form-attention"></i>
+                                </button>
+                            </div>
+                        </nz-form-control>
+                    </div>
+                    <div nz-col nzSpan="2">
+                        <button nz-button nzType="link" (click)="removeItem(i)">
+                            <i nz-icon nzType="remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </nz-form-item>
+        </div>
+        <div nz-row nzGutter="8" class="header row">
+            <div nz-col nzSpan="12">
+                <button nz-button nzSize="small" nzType="link" (click)="appendItem()">
+                    <i nz-icon nzType="plus"></i> Add Field
+                </button>
+            </div>
+        </div>
+    </div>
+    <qui-spinner *ngIf="isRunningCommand"></qui-spinner>
+</div>

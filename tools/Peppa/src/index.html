@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Peppa Studio</title>
+    <base href="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+<app-root>
+    <style>
+        app-root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #333;
+            color: #CCC;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            background: #F2F2F2;
+            font-family: Arial, sans-serif;
+        }
+
+        .spinner {
+            text-align: center;
+        }
+
+        .spinner:before {
+            content: '';
+            box-sizing: border-box;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 4px solid #1688fe;
+            border-top-color: #36a2fe;
+            animation: spinner .6s linear infinite;
+        }
+
+        small {
+            font-size: 14px;
+        }
+
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <div style="text-align: center;">
+        <div class="spinner"></div>
+        <small>Hi Peppa...</small>
+    </div>
+</app-root>
+<script src="assets/ace/ace.js"></script>
+<script src="assets/ace/mode-json.js"></script>
+<script src="assets/ace/theme-github.js"></script>
+</body>
+</html>

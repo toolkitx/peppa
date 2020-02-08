@@ -1,0 +1,9 @@
+<input nz-input style="width: 100%" [ngModel]="value" (ngModelChange)="modelChange($event)" [nzAutocomplete]="auto"/>
+<nz-autocomplete nzBackfill #auto>
+    <nz-auto-option nzValue="$view(VIEW_NAME)">$view(VIEW_NAME), redirect to view VIEW_NAME</nz-auto-option>
+    <nz-auto-option nzValue="$view(VIEW_NAME, {key: $id})">$view(VIEW_NAME, {{'{'}}key: $id{{'}'}}), redirect to view
+        VIEW_NAME?key=[id]
+    </nz-auto-option>
+    <nz-auto-option disabled nzValue="$popup(VIEW_NAME, {key: $id})">$popup(VIEW_NAME, {{'{'}}key: $id{{'}'}}), popup view VIEW_NAME?key=[id]
+    </nz-auto-option>
+</nz-autocomplete>

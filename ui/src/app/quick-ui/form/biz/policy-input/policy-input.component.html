@@ -1,0 +1,38 @@
+<nz-spin class="policy-input-spin" [nzSpinning]="isRunningCommand">
+    <div class="qui-custom-form-control qui-custom-form-policy-input">
+        <nz-list *ngIf="instanceValue?.length" [nzDataSource]="instanceValue" nzSize="small" [nzRenderItem]="itemTpl">
+            <ng-template #itemTpl let-item>
+                <li nz-list-item [nzActions]="[opAction]" [nzContent]="item.name" [nzNoFlex]="true"></li>
+                <ng-template #opAction>
+                    <ng-container [ngSwitch]="getTargetAttributeType(item.name)">
+                        <ng-container *ngSwitchCase="'TargetNamingRule'">
+                            <qui-naming-rule-preview [data]="item.value" [editable]="false"></qui-naming-rule-preview>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'TargetBoolean'">
+                            <nz-switch [ngModel]="true" *ngIf="item.value==='true'" name="value"
+                                       [nzDisabled]="true"></nz-switch>
+                            <nz-switch [ngModel]="false" *ngIf="item.value==='false'" name="value"
+                                       [nzDisabled]="true"></nz-switch>
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>{{item.value}}</ng-container>
+                    </ng-container>
+                </ng-template>
+            </ng-template>
+        </nz-list>
+
+        <button *ngIf="instanceValue?.length" nz-button nzType="default" (click)="toggleVisible()"
+                class="policy-input-edit-button"
+                [disabled]="!templates?.length"
+                style="margin-top: 1rem;">
+            <i nz-icon nzType="cog"></i> Edit
+        </button>
+
+        <nz-empty *ngIf="!instanceValue?.length" [nzNotFoundFooter]="footerTpl">
+            <ng-template #footerTpl>
+                <button nz-button nzType="default" (click)="toggleVisible()" class="policy-input-init-button">Setup
+                </button>
+            </ng-template>
+        </nz-empty>
+    </div>
+</nz-spin>
+

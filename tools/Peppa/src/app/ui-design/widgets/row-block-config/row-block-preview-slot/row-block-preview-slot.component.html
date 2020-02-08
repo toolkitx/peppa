@@ -1,0 +1,30 @@
+<nz-card [nzBordered]="false" nzSize="small" nzTitle="Row" [nzExtra]="extraTemplate">
+    <div nz-row [nzGutter]="conf?.config.gutter || 0">
+        <div nz-col class="column" [nzSpan]="col.width" *ngFor="let col of conf?.config.columns; let i = index;">
+            <div class="column-actions">
+                <i nz-icon nzType="setting" nzTheme="outline" nz-dropdown [nzDropdownMenu]="tabMenu" (click)="selectTab(col)"></i>
+            </div>
+            <nz-dropdown-menu #tabMenu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item (click)="rename(i)">
+                        <i nz-icon nzType="edit"></i> Edit column span
+                    </li>
+                    <li nz-menu-item
+                        nz-popconfirm
+                        nzPopconfirmTitle="Are you sure you want to remove this column?"
+                        (nzOnConfirm)="closeTab(i)">
+                        <i nz-icon nzType="close"></i> Remove column
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+            <app-widget-preview-list [widgets]="col.widgets"
+                                     [showEmptyMessage]="false"
+                                     (valueChange)="col.widgets=$event"></app-widget-preview-list>
+        </div>
+    </div>
+    <ng-template #extraTemplate>
+        <i class="ant-tabs-new-tab" nz-icon nzType="plus" (click)="newColumn()"></i>
+    </ng-template>
+
+    <nz-empty *ngIf="!conf?.config.columns?.length" nzNotFoundContent="Please add your first column"></nz-empty>
+</nz-card>

@@ -1,0 +1,38 @@
+<nz-form-item>
+    <nz-form-label [nzSm]="6">
+        Data type
+    </nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <nz-select style="width: 100%" [(ngModel)]="newPropertyDef.type">
+            <nz-option [nzValue]="t" [nzLabel]="t" *ngFor="let t of types"></nz-option>
+        </nz-select>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-label [nzSm]="6">
+        Property Name
+    </nz-form-label>
+    <nz-form-control [nzSm]="18" [nzValidateStatus]="isValid ? 'success' : 'error'">
+        <input nz-input
+               placeholder="Name, should be start with lower case character."
+               [(ngModel)]="newPropertyDef.name" pattern="^[a-z][A-Za-z0-9]+$"/>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item *ngIf="newPropertyDef.type==='array'">
+    <nz-form-label [nzSm]="6">
+        Item data type
+    </nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <nz-select style="width: 100%" [(ngModel)]="newPropertyDef.itemType">
+            <ng-container *ngFor="let t of types">
+                <nz-option [nzValue]="t" [nzLabel]="t" *ngIf="t!=='array'"></nz-option>
+            </ng-container>
+        </nz-select>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-label [nzSm]="6" nzNoColon="true"></nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <label nz-checkbox [(ngModel)]="addAnother">Create another</label>
+    </nz-form-control>
+</nz-form-item>

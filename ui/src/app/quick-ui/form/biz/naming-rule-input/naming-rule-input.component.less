@@ -1,0 +1,89 @@
+:host {
+
+    & ::ng-deep {
+        & ~ .ant-form-item-children-icon {
+            position: relative;
+            top: 45px !important;
+            right: -30px !important;
+            display: none;
+        }
+
+        &.form-init-before ~ .ant-form-item-children-icon {
+            display: block;
+        }
+    }
+}
+
+.qui-custom-form-naming-rule-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.naming-rule-section {
+    flex: 1;
+    padding: 0 3px 0 0;
+    margin: 0;
+}
+
+.naming-rule-section-description {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &::ng-deep {
+        label {
+            color: #888;
+        }
+    }
+}
+
+.naming-rule-section-control {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    & ::ng-deep {
+        .ant-form-item-control {
+            width: 100%;
+
+            nz-select.ng-untouched, nz-select.ng-valid {
+                & > .ant-select-selection {
+                    border-color: #d9d9d9;
+
+                    .ant-select-arrow {
+                        color: #d9d9d9;
+                    }
+                }
+            }
+
+            .ant-input.ng-valid, .ant-input.ng-untouched, .ant-input.ant-input-disabled {
+                border-color: #d9d9d9;
+
+                &:focus {
+                    box-shadow: 0 0 0 2px rgba(1, 106, 156, 0.2);
+                }
+            }
+
+            .ant-input.ant-input-disabled {
+                background-color: #f5f5f5 !important;
+            }
+        }
+    }
+}
+
+.connector-field {
+    display: block;
+    text-align: center;
+
+    span {
+        width: 80%;
+        height: 32px;
+        display: inline-block;
+        font-weight: bold;
+        border: 1px dashed #d9d9d9;
+        background-color: #f5f5f5;
+    }
+}

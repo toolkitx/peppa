@@ -1,0 +1,16 @@
+<nz-spin [nzSpinning]="runningCommand">
+    <div class="qui-confirm-action-widget widget">
+        <h1 class="title" *ngIf="conf?.config?.title">{{conf?.config?.title | sentence: null: context}}</h1>
+        <p class="description" *ngIf="conf?.config?.description">
+            {{conf?.config?.description | sentence: null: context}}
+        </p>
+        <div class="actions">
+            <button id="confirm-action-ok-btn" nz-button nzType="primary" style="margin-right: 8px;" (click)="ok()" [nzLoading]="runningCommand">
+                {{conf?.config?.okText || 'OK'}}
+            </button>
+            <button id="confirm-action-cancel-btn" nz-button nzType="default" (click)="cancel()">
+                {{conf?.config?.cancelText || 'Cancel'}}
+            </button>
+        </div>
+    </div>
+</nz-spin>

@@ -1,0 +1,8 @@
+<div class="qui-view-layout" [class.has-sidebar]="hasSidebar">
+    <aside class="qui-side-menu" *ngIf="hasSidebar" [@sidebarToggle]="hasSidebar">
+        <div quiSlot [data]="{type: 'SideMenu', config: {menu: menu}}"></div>
+    </aside>
+    <section class="qui-view-content">
+        <ng-content></ng-content>
+    </section>
+</div>

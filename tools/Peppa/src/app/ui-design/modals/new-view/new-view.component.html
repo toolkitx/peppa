@@ -1,0 +1,41 @@
+<form nz-form nzLayout="vertical">
+    <nz-form-item>
+        <nz-form-label>Template</nz-form-label>
+        <nz-form-control>
+            <nz-select name="template" [(ngModel)]="selectedTemplate">
+                <nz-option *ngFor="let tpl of templates" [nzLabel]="tpl.displayName" [nzValue]="tpl.data"
+                           nzCustomContent>
+                    <div class="template-item">
+                        {{tpl.displayName}}
+                        <small>{{tpl.description}}</small>
+                    </div>
+                </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label>Name</nz-form-label>
+        <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+            <input nz-input formControlName="name" name="name"/>
+            <ng-template #errorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    Name is required.
+                </ng-container>
+                <ng-container *ngIf="control.hasError('unique')">
+                    Name has been taken.
+                </ng-container>
+                <ng-container *ngIf="control.hasError('pattern')">
+                    Please check your pattern.
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Page Title</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="title" name="title"/>
+        </nz-form-control>
+    </nz-form-item>
+</form>

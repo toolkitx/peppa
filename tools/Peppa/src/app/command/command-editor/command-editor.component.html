@@ -1,0 +1,320 @@
+<app-editor-layout name="Command Management Tool" (filterChange)="searchKeyword=$event">
+    <app-editor-primary-actions>
+
+    </app-editor-primary-actions>
+
+    <app-editor-secondary-actions>
+        <button nz-button nz-dropdown [nzDropdownMenu]="newMenu" nzType="primary" style="margin-right: 8px;">
+            <i nz-icon nzType="plus"></i> New
+            <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+        </button>
+        <button nz-button nz-dropdown [nzDropdownMenu]="saveMenu" nzType="primary">
+            <i nz-icon nzType="export"></i> Export
+            <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+        </button>
+        <!--<nz-dropdown style="margin-right: 8px;">-->
+            <!--<button nz-button nz-dropdown nzType="primary"><i nz-icon nzType="plus"></i> New-->
+                <!--<i nz-icon nzType="caret-down" nzTheme="outline"></i></button>-->
+            <!--<ul nz-menu>-->
+                <!--<li nz-menu-item (click)="showDialog('New Service', newServiceTpl);">-->
+                    <!--<a>Service</a>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;<li nz-menu-item&ndash;&gt;-->
+                <!--&lt;!&ndash;(click)="createDefaultCommandObject(); selectedRaw && showDialog('New Command', newCommandTpl);"&ndash;&gt;-->
+                <!--&lt;!&ndash;[nzDisabled]="!selectedRaw">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a>Command</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--</ul>-->
+        <!--</nz-dropdown>-->
+        <!--<nz-dropdown-button nzType="primary" (nzClick)="generateProject()">-->
+            <!--<span><i nz-icon nzType="export" nzTheme="outline"></i> Export</span>-->
+            <!--<ul nz-menu>-->
+                <!--<li nz-menu-item (click)="saveAs()"><i nz-icon nzType="save" nzTheme="outline"></i> Save as JSON</li>-->
+            <!--</ul>-->
+        <!--</nz-dropdown-button>-->
+    </app-editor-secondary-actions>
+    <nz-dropdown-menu #newMenu="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item (click)="showDialog('New Service', newServiceTpl);">
+                <a>Service</a>
+            </li>
+            <!--<li nz-menu-item-->
+            <!--(click)="createDefaultCommandObject(); selectedRaw && showDialog('New Command', newCommandTpl);"-->
+            <!--[nzDisabled]="!selectedRaw">-->
+            <!--<a>Command</a>-->
+            <!--</li>-->
+        </ul>
+    </nz-dropdown-menu>
+    <nz-dropdown-menu #saveMenu="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item (click)="generateProject()"><i nz-icon nzType="export" nzTheme="outline"></i> Export</li>
+            <li nz-menu-item (click)="saveAs()"><i nz-icon nzType="save" nzTheme="outline"></i> Save as JSON</li>
+            <li nz-menu-item (click)="saveAsMock()"><i nz-icon nzType="save" nzTheme="outline"></i> Save as command.json</li>
+        </ul>
+    </nz-dropdown-menu>
+    <app-editor-sider>
+        <div style="padding: 8px;">
+            <nz-tree [nzSearchValue]="searchKeyword" #tree [nzData]="commandTree" nzMultiple="false"
+                     (nzClick)="activeNode($event)" nzBlockNode>
+                <nz-dropdown-menu #contextTpl="nzDropdownMenu">
+                    <ul nz-menu nzInDropDown *ngIf="contextTargetNode">
+                        <li nz-menu-item *ngIf="contextTargetNode.level === 0"
+                            (click)="showDialog('New Service', newServiceTpl);">
+                            <i nz-icon nzType="plus" nzTheme="outline"></i> New Service
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetType === 'Service' && contextTargetNode.level > 0"
+                            (click)="createDefaultCommandObject(); showDialog('New Command', newCommandTpl);">
+                            <i nz-icon nzType="plus" nzTheme="outline"></i> New Command
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetType === 'Command' && contextTargetNode.level > 0"
+                            (click)="createDefaultCommandObject(contextTargetNode.origin.raw); showDialog('Edit [' + contextTargetNode.origin.raw.name+']', editCommandTpl)">
+                            <i nz-icon nzType="edit" nzTheme="outline"></i> Edit
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetType === 'Command' && contextTargetNode.level > 0"
+                            (click)="showDialog('Duplicate', duplicateTpl)">
+                            <i nz-icon nzType="copy" nzTheme="outline"></i> Duplicate
+                        </li>
+                        <li nz-menu-item *ngIf="contextTargetNode.level > 0"
+                            (click)="deleteNode()">
+                            <i nz-icon nzType="delete" nzTheme="outline"></i> Remove
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+                <ng-template #nzTreeTemplate let-node>
+                <span class="custom-node" [class.active]="activedTreeNode?.key === node.key">
+                  <span *ngIf="!node.isLeaf"
+                        (contextmenu)="contextMenu(node, $event, contextTpl)">
+                    <span class="folder-name">{{ node.title }}</span>
+                  </span>
+                  <span *ngIf="node.isLeaf"
+                        (contextmenu)="contextMenu(node, $event, contextTpl)">
+                    <span class="file-name">{{ node.title }}</span>
+                      <span class="folder-desc">
+                          <i *ngIf="node.origin?.raw?.type === 'Internal'" nz-icon nzType="lock" nzTheme="outline"></i>
+                      </span>
+                  </span>
+                </span>
+                </ng-template>
+            </nz-tree>
+        </div>
+    </app-editor-sider>
+
+    <app-editor-content>
+        <ng-container *ngIf="selectedType === 'Command'">
+            <nz-page-header>
+                <nz-breadcrumb nz-page-header-breadcrumb>
+                    <nz-breadcrumb-item>{{selectedServiceName}}</nz-breadcrumb-item>
+                    <nz-breadcrumb-item *ngIf="selectedRaw">
+                        {{selectedRaw?.name}}
+                    </nz-breadcrumb-item>
+                </nz-breadcrumb>
+                <nz-page-header-title>
+                    {{selectedRaw?.name}}
+                </nz-page-header-title>
+                <nz-page-header-tags>
+                    <button (click)="switchCommandType()" nz-button nzType="default" nzSize="small"
+                            style="margin-right: 8px;">
+                        Type: {{selectedRaw?.type}}
+                    </button>
+                    <nz-tag *ngIf="selectedRaw?.feature">Feature: {{selectedRaw?.feature}}</nz-tag>
+                    <nz-tag *ngIf="selectedRaw?.securityRole">SecurityRole: {{selectedRaw?.securityRole}}</nz-tag>
+                </nz-page-header-tags>
+                <nz-page-header-extra>
+                    <button nz-button nzType="primary" (click)="applyCommand()" nz-tooltip
+                            nzTitle="Apply changes to Service"> Update
+                    </button>
+                </nz-page-header-extra>
+            </nz-page-header>
+            <nz-card class="command-card">
+                <nz-tabset nzAnimated="false">
+                    <nz-tab nzTitle="Input Schema">
+                        <app-schema-editor [data]="selectedRaw?.inputSchema"
+                                           (change)="schemaChange('inputSchema', $event)"></app-schema-editor>
+                    </nz-tab>
+                    <nz-tab nzTitle="Output Schema">
+                        <app-schema-editor [data]="selectedRaw?.outputSchema"
+                                           (change)="schemaChange('outputSchema', $event)"></app-schema-editor>
+                    </nz-tab>
+                    <nz-tab nzTitle="JSON">
+                        <app-json-editor [data]="updatedCommandDef"></app-json-editor>
+                    </nz-tab>
+                </nz-tabset>
+            </nz-card>
+        </ng-container>
+        <ng-container *ngIf="selectedType === 'Service'">
+            <nz-card style="height: 100%;">
+                <div class="service-form">
+                    <div>
+                        <h2>Service: {{selectedRaw.name}}</h2>
+                        <p>
+                            Command count: {{selectedRaw?.commands?.length || 0}}
+                        </p>
+                    </div>
+                </div>
+            </nz-card>
+        </ng-container>
+        <div class="empty" *ngIf="!selectedRaw">
+            <nz-empty *ngIf="data?.services?.length" nzNotFoundContent="Please select item from left side"></nz-empty>
+            <nz-empty *ngIf="!data?.services?.length" nzNotFoundContent="Please create your first service"></nz-empty>
+        </div>
+    </app-editor-content>
+    <app-editor-footer>
+        <div class="footer">
+            <small *ngIf="currentDirectory">Current Directory: {{currentDirectory}}</small>
+        </div>
+    </app-editor-footer>
+</app-editor-layout>
+
+<ng-template #newServiceTpl>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6">
+            Name:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <input nz-input placeholder="Service name, eg: PolicyManagement" [(ngModel)]="newServiceName"
+                   (keyup)="checkFirstChar('newService')"
+                   (keyup.enter)="isServiceNameValid(newServiceName) && newServiceByName(newServiceName)"/>
+            <nz-form-explain>
+                <p>The service name should be Unique.</p>
+            </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+    <div class="ant-modal-footer">
+        <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+        <button nz-button nzType="primary" [disabled]="!isServiceNameValid(newServiceName)"
+                (click)="newServiceByName(newServiceName);">
+            New Service
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #newCommandTpl>
+    <form nz-form #newCommandForm="ngForm">
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Name:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-input-group [nzAddOnBefore]="moduleInfo?.name + '_'" nzAddOnAfter="Command">
+                    <input nz-input placeholder="Command name" [(ngModel)]="newCommandDef.name" name="commandName"
+                           (keyup)="checkFirstChar('new')"
+                           required
+                           (keyup.enter)="isCommandNameValid(newCommandDef.name) && newCommand(newCommandDef)"/>
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Type:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="newCommandDef.type" name="commandType" requried>
+                    <ng-container *ngFor="let t of ['Private', 'Public']">
+                        <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Feature:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="newCommandDef.feature" name="commandFeature" requried>
+                    <ng-container *ngFor="let t of featureList">
+                        <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Security Role:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="newCommandDef.securityRole" name="commandSecurityRole">
+                    <ng-container *ngFor="let t of commandSecurityRoles">
+                        <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <div class="ant-modal-footer" style="padding: 10px 0;">
+            <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+            <button nz-button nzType="primary"
+                    [disabled]="newCommandForm.invalid || !isCommandNameValid(newCommandDef.name)"
+                    (click)="newCommand(newCommandDef)">
+                New Command
+            </button>
+        </div>
+    </form>
+</ng-template>
+<ng-template #editCommandTpl>
+    <form nz-form #editCommandForm="ngForm">
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Type:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="newCommandDef.type" name="commandType" requried>
+                    <ng-container *ngFor="let t of ['Private', 'Public']">
+                        <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Feature:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="newCommandDef.feature" name="commandFeature" requried>
+                    <ng-container *ngFor="let t of featureList">
+                        <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6">
+                Security Role:
+            </nz-form-label>
+            <nz-form-control [nzSm]="18">
+                <nz-select style="width: 100%" [(ngModel)]="newCommandDef.securityRole" name="commandSecurityRole">
+                    <ng-container *ngFor="let t of commandSecurityRoles">
+                        <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <div class="ant-modal-footer" style="padding: 10px 0;">
+            <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+            <button nz-button nzType="primary"
+                    [disabled]="editCommandForm.invalid"
+                    (click)="updateCommand(newCommandDef)">
+                Update Command
+            </button>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #duplicateTpl>
+    <p>
+        You are duplicating command <strong>{{contextTargetNode?.title}}</strong>, please enter a new name for it.
+    </p>
+    <p>
+        <nz-input-group [nzAddOnBefore]="moduleInfo?.name + '_'" nzAddOnAfter="Command">
+            <input nz-input placeholder="Command name" [(ngModel)]="duplicateName"
+                   (keyup)="checkFirstChar('duplicate')"
+                   (keyup.enter)="isServiceNameValid(duplicateName) && duplicate(duplicateName)"/>
+        </nz-input-group>
+    </p>
+    <div class="ant-modal-footer">
+        <button nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+        <button nz-button nzType="primary" [disabled]="!isCommandNameValid(duplicateName)"
+                (click)="duplicate(duplicateName);">
+            Duplicate
+        </button>
+    </div>
+</ng-template>
+

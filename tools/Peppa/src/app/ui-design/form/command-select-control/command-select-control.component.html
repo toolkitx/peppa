@@ -1,0 +1,7 @@
+<nz-select style="width: 100%;"
+           nzShowSearch
+           nzPlaceHolder="Select a command"
+           name="command"
+           [ngModel]="commandName" (ngModelChange)="commandChange($event)">
+    <nz-option *ngFor="let cmd of commandDefs" [nzLabel]="cmd.name" [nzValue]="cmd.name"></nz-option>
+</nz-select>

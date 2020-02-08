@@ -1,0 +1,19 @@
+<button nz-button (click)="toggleVisible()" [ngStyle]="{'margin-bottom': preview? '1rem': '0'}">
+    <i nz-icon nzType="setting" nzTheme="outline"></i> {{instanceValue?.length || 0}}
+</button>
+<nz-table [hidden]="!instanceValue?.length || !preview" #table [nzData]="instanceValue" nzFrontPagination="false" nzSize="small">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of table.data">
+        <td>{{item.name}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.action}}</td>
+    </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,12 @@
+<nz-card [quiAction]="conf?.config.action">
+    <nz-card-meta
+        [nzAvatar]="avatarTpl"
+        [nzTitle]="conf?.config.title"
+        [nzDescription]="conf?.config.description">
+    </nz-card-meta>
+</nz-card>
+
+<ng-template #avatarTpl>
+    <!--<i nz-icon [nzType]="conf?.config.avatarIcon"></i>-->
+    <nz-avatar nzSize="large" [nzIcon]="conf?.config.avatarIcon" [ngStyle]="{background: conf?.config.avatarBackground}"></nz-avatar>
+</ng-template>

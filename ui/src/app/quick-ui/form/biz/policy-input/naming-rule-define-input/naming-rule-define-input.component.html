@@ -1,0 +1,85 @@
+<div class="naming-rule-container" [hidden]="hidden">
+    <div nz-row nzGutter="8" class="header row">
+        <div nz-col nzSpan="2">No.</div>
+        <div nz-col nzSpan="6">Field</div>
+        <div nz-col nzSpan="6">Data Type</div>
+        <div nz-col nzSpan="8">Value</div>
+        <div nz-col nzSpan="2"></div>
+    </div>
+    <div class="list" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="drop($event)"
+         style="display: block;">
+        <nz-form-item cdkDrag *ngFor="let item of formArray?.controls; let i = index;">
+            <div nz-row nzGutter="8" class="row" [formGroup]="item">
+                <div nz-col nzSpan="2">
+                    <div cdkDragHandle style="cursor: move; color: inherit; margin-top: 9px;">
+                        <i nz-icon nzType="more-vertical" style="color: #CCC; fill: #CCC;"></i>
+                        {{i+1}}
+                    </div>
+                </div>
+                <div nz-col nzSpan="6">
+                    <nz-form-control nzHasFeedback>
+                        <input nz-input class="description" formControlName="description"
+                               [attr.id]="'description-' + i">
+                    </nz-form-control>
+                </div>
+                <div nz-col nzSpan="6">
+                    <nz-form-control>
+                        <nz-select class="dataType" style="width: 100%;" formControlName="dataType"
+                                   [attr.id]="'data-type-' + i"
+                                   (ngModelChange)="dataTypeChange($event, item)">
+                            <nz-option [nzValue]="dt.type" [nzLabel]="dt.displayName"
+                                       *ngFor="let dt of dataTypes"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </div>
+                <div nz-col nzSpan="8">
+                    <nz-form-control nzHasFeedback>
+                        <ng-container [ngSwitch]="item.get('dataType').value">
+                            <nz-select class="value" *ngSwitchCase="'UserAttribute'" style="width: 100%;"
+                                       formControlName="value">
+                                <nz-option [nzValue]="dt.value" [nzLabel]="dt.displayName"
+                                           *ngFor="let dt of userAttributes"></nz-option>
+                            </nz-select>
+                            <nz-select class="value" *ngSwitchCase="'Connector'" style="width: 100%;"
+                                       formControlName="value">
+                                <nz-option [nzValue]="dt.value" [nzLabel]="dt.displayName"
+                                           *ngFor="let dt of namingRuleConnectors"></nz-option>
+                            </nz-select>
+                            <nz-select class="value" *ngSwitchCase="'Enumeration'" style="width: 100%;"
+                                       formControlName="value"
+                                       nzMode="tags">
+                            </nz-select>
+                            <div *ngSwitchCase="'FlexibleText'">
+                                <input class="value" type="hidden" formControlName="value">
+                                <small>User can input flexible text in the field.</small>
+                            </div>
+                            <input *ngSwitchDefault class="value" nz-input formControlName="value">
+                        </ng-container>
+                    </nz-form-control>
+                </div>
+                <div nz-col nzSpan="2">
+                    <button nz-button nzType="link" (click)="removeItem(i)" class="remove-field-button"
+                            [attr.id]="'remove-field-' + i">
+                        <i nz-icon nzType="remove"></i>
+                    </button>
+                </div>
+            </div>
+        </nz-form-item>
+    </div>
+    <div nz-row nzGutter="8" class="header row">
+        <div nz-col nzSpan="12">
+            <button nz-button nzSize="small" nzType="link" (click)="appendItem()" id="add-naming-rule-field-button">
+                <i nz-icon nzType="plus"></i> Add Field
+            </button>
+        </div>
+        <div nz-col nzSpan="12" style="text-align: right">
+            <button nz-button nzSize="small" nzType="default" (click)="save()" [disabled]="formArray?.invalid"
+                    style="margin-right: 8px;" id="save-naming-rule-field-button">
+                <i nz-icon nzType="save"></i> Save
+            </button>
+            <button nz-button nzSize="small" nzType="link" (click)="hide()" id="cancel-naming-rule-field-button">
+                <i nz-icon nzType="cross"></i> Cancel
+            </button>
+        </div>
+    </div>
+</div>

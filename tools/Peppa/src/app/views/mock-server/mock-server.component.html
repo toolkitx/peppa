@@ -1,0 +1,95 @@
+<nz-page-header class="nav" (nzBack)="onBack()" nzBackIcon nzTitle="Mock Server">
+    <nz-page-header-tags>
+        <nz-tag [nzColor]="'green'" *ngIf="status">Running @ {{status | json}}</nz-tag>
+    </nz-page-header-tags>
+    <nz-page-header-extra>
+        <button nz-button (click)="stopMockServer()" *ngIf="status" nzType="danger">
+            <i nz-icon nzType="stop"></i>Stop
+        </button>
+    </nz-page-header-extra>
+</nz-page-header>
+<div class="content">
+    <nz-empty style="margin-top: 20%; padding: 1rem;" *ngIf="!status" nzNotFoundContent="Server not started"
+              [nzNotFoundFooter]="footerTpl">
+        <ng-template #footerTpl>
+            <button nz-button (click)="showDialog('Select folder', selectMockData, selectMockDataFooterTpl)" *ngIf="!status" nzType="primary">
+                <i nz-icon nzType="play-circle"></i> Start
+            </button>
+        </ng-template>
+    </nz-empty>
+    <div class="request-list-view" *ngIf="status">
+        <as-split unit="pixel" direction="horizontal" gutterSize="3">
+            <as-split-area size="320" style="background: #FFF;">
+                <div class="request-list ant-list ant-list-split">
+                    <div class="ant-list-header">
+                        Requests
+                        <button style="float: right" nz-button nzSize="small" (click)="clearLogs()"
+                                *ngIf="status && requests?.length">
+                            Clear All
+                        </button>
+                    </div>
+                    <div class="ant-list-items">
+                        <ng-container *ngFor="let req of requests">
+                            <section class="ant-list-item" [class.active]="req.id === activedRequest?.id"
+                                     *ngIf="req.type==='success'" (click)="selectRequest(req)">
+                                <div class="item-detail">
+                                    {{req.data.command}}
+                                </div>
+                            </section>
+                        </ng-container>
+                    </div>
+                </div>
+            </as-split-area>
+            <as-split-area size="*" style="position: relative">
+                <nz-empty style="margin-top: 20%; padding: 1rem;" *ngIf="status && !requests.length && !activedRequest"
+                          nzNotFoundContent="Server is listening..."></nz-empty>
+                <ng-container *ngIf="activedRequest">
+                    <nz-page-header [nzTitle]="activedRequest?.data.command"></nz-page-header>
+                    <section class="request-detail">
+                        <nz-tabset nzAnimated="false">
+                            <nz-tab nzTitle="Request">
+                                <app-json-editor [data]="activedRequest?.data.payload"></app-json-editor>
+                            </nz-tab>
+                            <nz-tab nzTitle="Request Headers">
+                                <app-json-editor [data]="activedRequest?.data.headers"></app-json-editor>
+                            </nz-tab>
+                            <nz-tab nzTitle="Response">
+                                <app-json-editor [data]="activedRequest?.data.response"></app-json-editor>
+                            </nz-tab>
+                        </nz-tabset>
+                    </section>
+                </ng-container>
+            </as-split-area>
+        </as-split>
+    </div>
+</div>
+
+<ng-template #selectMockData>
+    <form nz-form #mockForm="ngForm" nzLayout="vertical">
+        <nz-form-item>
+            <nz-form-label>Please select a folder contains mock data.</nz-form-label>
+            <nz-form-control>
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                    <input type="text" nz-input name="directory" [(ngModel)]="mockConfig.directory"
+                           placeholder="Click Choose button to select folder" readonly required/>
+                </nz-input-group>
+                <ng-template #suffixButton>
+                    <button nz-button nzType="primary" (click)="openMockDataSelectDialog()">Choose</button>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label>Port</nz-form-label>
+            <nz-form-control>
+                <nz-input-number [(ngModel)]="mockConfig.port" name="port" [nzStep]="1" required></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>
+
+<ng-template #selectMockDataFooterTpl>
+    <button style="margin-right: 8px;" nz-button nzType="default" (click)="destroyTplDialog()">Cancel</button>
+    <button nz-button nzType="primary" (click)="startMockServer()">
+        Start
+    </button>
+</ng-template>

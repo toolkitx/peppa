@@ -1,0 +1,33 @@
+<div class="qui-tab-block-widget widget">
+    <nz-card style="width:100%;" [nzBordered]="false"
+             [class.hide-title]="!hasHeader"
+             [nzTitle]="titleTemplate"
+             [nzExtra]="extraTemplate">
+        <nz-tabset>
+            <nz-tab [nzTitle]="tab.name" *ngFor="let tab of conf?.config.tabs">
+                <ng-container *ngIf="tab.widgets?.length">
+                    <ng-container *ngFor="let w of tab.widgets">
+                        <ng-template nz-tab>
+                        <div quiSlot [data]="w"></div>
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+            </nz-tab>
+        </nz-tabset>
+    </nz-card>
+    <ng-template #titleTemplate>
+        <nz-card-meta class="block-meta"
+            [nzTitle]="conf?.config?.title"
+            [nzDescription]="conf?.config?.description">
+        </nz-card-meta>
+    </ng-template>
+    <ng-template #extraTemplate>
+        <div class="block-operations" *ngIf="conf?.config?.actions">
+            <button class="no-border" nz-button *ngFor="let m of conf?.config.actions"
+                    [quiAction]="m.action" nzGhost nzSize="small" [ngStyle]="m.styles"
+                    nzType="primary">
+                <i nz-icon [type]="m.icon" *ngIf="m.icon"></i> {{m.name}}
+            </button>
+        </div>
+    </ng-template>
+</div>

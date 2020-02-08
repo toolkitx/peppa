@@ -1,0 +1,78 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-collapse nzBordered="true">
+        <nz-collapse-panel nzHeader="Command" nzActive="true">
+            <nz-form-item>
+                <nz-form-label>Load data from</nz-form-label>
+                <nz-form-control>
+                    <app-command-def-control formControlName="data" allowClear="true"></app-command-def-control>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Action</nz-form-label>
+                <nz-form-control>
+                    <app-command-select-control formControlName="command"
+                                                (valueChange)="submitCommandChange($event)"></app-command-select-control>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-collapse-panel>
+        <nz-collapse-panel nzHeader="UI" nzActive="true">
+            <nz-form-item>
+                <nz-form-label>Show in popup?</nz-form-label>
+                <nz-form-control>
+                    <nz-switch formControlName="popup"></nz-switch>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item [hidden]="!form.get('popup').value">
+                <nz-form-label>Post action</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="postAction"/>
+                </nz-form-control>
+            </nz-form-item>
+            <div formGroupName="ui">
+                <nz-form-item>
+                    <nz-form-label>Title</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="title" placeholder="Title"/>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label>Description</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="description" placeholder="Description"/>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label>Submit Button Text</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="submitText" placeholder="Submit Button Text, 'Submit' by default"/>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label>Cancel Button Text</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="cancelText" placeholder="Cancel Button Text, 'Cancel' by default"/>
+                    </nz-form-control>
+                </nz-form-item>
+                <div formGroupName="messages">
+                    <nz-form-item>
+                        <nz-form-label>Success Message</nz-form-label>
+                        <nz-form-control>
+                            <input nz-input formControlName="success" placeholder="Success message"/>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-label>Error Message</nz-form-label>
+                        <nz-form-control>
+                            <input nz-input formControlName="error" placeholder="Error message"/>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div>
+                    <app-schema-ui-def-modal formControlName="fields"
+                                             [commandDef]="actionCommandDef"></app-schema-ui-def-modal>
+                </div>
+            </div>
+        </nz-collapse-panel>
+    </nz-collapse>
+
+</form>

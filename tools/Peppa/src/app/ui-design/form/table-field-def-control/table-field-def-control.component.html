@@ -1,0 +1,25 @@
+<div [hidden]="!command">
+    <button nz-button (click)="toggleVisible()" style="margin-bottom: 1rem;">
+        <i nz-icon nzType="setting" nzTheme="outline"></i> {{instanceValue?.length || 0}}
+    </button>
+    <nz-table [hidden]="!instanceValue?.length" #table [nzData]="instanceValue" nzFrontPagination="false" nzSize="small">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Display Name</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of table.data">
+                <td>{{item.key}}</td>
+                <td>{{item.displayName}}</td>
+                <td>{{item.dataType}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+
+<div *ngIf="!command">
+    <nz-alert nzType="warning" nzMessage="Please select a command"></nz-alert>
+</div>

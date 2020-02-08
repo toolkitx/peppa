@@ -1,0 +1,125 @@
+<app-editor-layout name="Command Management Tool" (filterChange)="searchKeyword=$event">
+    <app-editor-primary-actions>
+
+    </app-editor-primary-actions>
+
+    <app-editor-secondary-actions>
+        <button nz-button nz-dropdown [nzDropdownMenu]="saveMenu" nzType="primary">
+            <i nz-icon nzType="export"></i> Export
+            <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+        </button>
+        <nz-dropdown-menu #saveMenu="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item (click)="generateProject()"><i nz-icon nzType="export" nzTheme="outline"></i> Export Configurations</li>
+                <!--<li nz-menu-item (click)="saveAs()"><i nz-icon nzType="save" nzTheme="outline"></i> Save as JSON</li>-->
+                <li nz-menu-item (click)="saveAsMock()"><i nz-icon nzType="save" nzTheme="outline"></i> Save as command.json</li>
+            </ul>
+        </nz-dropdown-menu>
+    </app-editor-secondary-actions>
+
+    <app-editor-sider>
+        <div class="properties">
+            <button nz-button nzType="link" nzSize="small" (click)="actionNewService()">
+                <i nz-icon nzType="plus"></i> New Service
+            </button>
+        </div>
+        <ul nz-menu nzMode="inline" style="border: none">
+            <li nz-submenu [nzTitle]="svcTitleTpl" *ngFor="let svc of data.services">
+                <ng-template #svcTitleTpl>
+                    <div nz-row nzType="flex" nzJustify="space-between" class="service-name"
+                         (contextmenu)="serviceMenu($event, svcMenuRef, svc)">
+                        <div nz-col nzSpan="24">
+                            <i nz-icon nzType="appstore"></i>
+                            <span> {{svc.name}} ({{svc?.commands.length || 0}})</span>
+                        </div>
+                    </div>
+                </ng-template>
+                <ul>
+                    <li nz-menu-item (click)="selectCommand(cmd, svc.name)"
+                        *ngFor="let cmd of svc.commands"
+                        [nzSelected]="cmd.name === currentCommandDef?.name"
+                        (contextmenu)="commandMenu($event, commandMenuRef, cmd, svc)"
+                        style="margin-bottom: 0; height: 30px; line-height: 30px;">
+                        {{cmd.name}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <nz-dropdown-menu #svcMenuRef="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item (click)="menuNewCommand()">
+                    <i nz-icon nzType="plus" nzTheme="outline"></i> New Command
+                </li>
+                <li nz-menu-item (click)="menuRemoveService()">
+                    <i nz-icon nzType="delete" nzTheme="outline"></i> Remove Service
+                </li>
+            </ul>
+        </nz-dropdown-menu>
+        <nz-dropdown-menu #commandMenuRef="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item (click)="menuEditCommand()">
+                    <i nz-icon nzType="edit" nzTheme="outline"></i> Edit
+                </li>
+                <li nz-menu-item (click)="menuDuplicateCommand()">
+                    <i nz-icon nzType="copy" nzTheme="outline"></i> Duplicate
+                </li>
+                <li nz-menu-item (click)="menuRemoveCommand()">
+                    <i nz-icon nzType="delete" nzTheme="outline"></i> Remove
+                </li>
+            </ul>
+        </nz-dropdown-menu>
+    </app-editor-sider>
+    <app-editor-content>
+        <ng-container *ngIf="currentCommandDef">
+            <nz-page-header>
+                <nz-breadcrumb nz-page-header-breadcrumb>
+                    <nz-breadcrumb-item><i nz-icon nzType="appstore"></i> {{currentServiceName}}</nz-breadcrumb-item>
+                    <nz-breadcrumb-item>
+                        {{currentCommandDef?.name}}
+                    </nz-breadcrumb-item>
+                </nz-breadcrumb>
+                <nz-page-header-title>
+                    {{currentCommandDef?.name}}
+                </nz-page-header-title>
+                <nz-page-header-tags>
+                    <button nz-button [nzType]="currentCommandDef?.type === 'Public' ? 'danger' : 'default'"
+                            nzSize="small" style="margin-right: 8px;">
+                        Type: {{currentCommandDef?.type}}
+                    </button>
+                    <button nz-button [nzType]="currentCommandDef?.securityRole !== 'Admin' ? 'danger' : 'default'"
+                            nzSize="small" *ngIf="currentCommandDef?.securityRole" style="margin-right: 8px;">
+                        SecurityRole: {{currentCommandDef?.securityRole}}
+                    </button>
+                    <button nz-button nzType="default" nzSize="small" *ngIf="currentCommandDef?.feature">
+                        Feature: {{currentCommandDef?.feature}}
+                    </button>
+                </nz-page-header-tags>
+            </nz-page-header>
+            <nz-card class="command-card">
+                <nz-tabset nzAnimated="false">
+                    <nz-tab nzTitle="Input Schema">
+                        <app-schema-editor2 [data]="currentCommandDef?.inputSchema"
+                                           (apply)="schemaChange('inputSchema', $event)"></app-schema-editor2>
+                    </nz-tab>
+                    <nz-tab nzTitle="Output Schema">
+                        <app-schema-editor2 [data]="currentCommandDef?.outputSchema"
+                                            (apply)="schemaChange('outputSchema', $event)"></app-schema-editor2>
+                    </nz-tab>
+                    <nz-tab nzTitle="JSON">
+                        <app-command-json-editor [data]="currentCommandDefCopy" (apply)="editorValueChange($event)"></app-command-json-editor>
+                    </nz-tab>
+                </nz-tabset>
+            </nz-card>
+        </ng-container>
+        <ng-container *ngIf="!currentCommandDef">
+
+        </ng-container>
+    </app-editor-content>
+    <app-editor-footer>
+        <div class="foot-infos">
+            <i nz-icon nzType="folder-open" nzTheme="outline"></i> {{data?.module?.name}}@{{currentDirectory}}
+            <nz-divider nzType="vertical"></nz-divider>
+        </div>
+    </app-editor-footer>
+</app-editor-layout>
+

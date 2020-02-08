@@ -1,0 +1,11 @@
+<div class="qui-row-block-widget widget">
+    <div nz-row class="qui-row-block-row" [nzGutter]="conf?.config?.gutter || 0">
+        <div nz-col [nzSpan]="col.width" class="qui-row-block-column" *ngFor="let col of conf?.config?.columns">
+            <ng-container *ngIf="col.widgets?.length">
+                <ng-container *ngFor="let w of col.widgets">
+                    <div quiSlot [data]="w"></div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>

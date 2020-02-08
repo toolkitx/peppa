@@ -1,0 +1,28 @@
+<div class="toolbar">
+    <div>
+        <button nz-button nzType="default" (click)="actionUndo(codeEditorRef)">
+            <i nz-icon nzType="undo" nzTheme="outline"></i> Undo
+        </button>
+        <button nz-button nzType="default" (click)="actionRedo(codeEditorRef)">
+            <i nz-icon nzType="redo" nzTheme="outline"></i> Redo
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button nzType="default" (click)="actionRestore()">
+            <i nz-icon nzType="rollback" nzTheme="outline"></i> Rollback
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button nzType="default" [disabled]="editorState.invalid" (click)="actionReformat()">
+            <i nz-icon nzType="menu-unfold" nzTheme="outline"></i> Format
+        </button>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: flex-end;">
+        <nz-alert style="margin-right: 8px;" *ngIf="editorState.invalid" nzBanner nzMessage="Invalid JSON"></nz-alert>
+        <button nz-button nzType="default" [disabled]="editorState.invalid" (click)="actionApply()">
+            <i nz-icon nzType="save" nzTheme="outline"></i> Apply
+        </button>
+    </div>
+</div>
+<div class="code-editor-container">
+    <app-code-editor #codeEditorRef [ngModel]="editorState.commandDef"
+                     (ngModelChange)="codeEditorValChange($event)"></app-code-editor>
+</div>

@@ -1,0 +1,125 @@
+<app-editor-layout name="UI Design Tool" *ngIf="uiConfiguration">
+    <app-editor-primary-actions>
+        <!--<nz-dropdown>-->
+        <!--<button nz-button nz-dropdown nzType="primary"><i nz-icon nzType="plus-square" nzTheme="fill"></i> New <i-->
+        <!--nz-icon nzType="caret-down" nzTheme="outline"></i></button>-->
+        <!--<ul nz-menu>-->
+        <!--<li nz-menu-item>-->
+        <!--<a>Command Project</a>-->
+        <!--</li>-->
+        <!--<li nz-menu-item>-->
+        <!--<a>UI Project</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</nz-dropdown>-->
+    </app-editor-primary-actions>
+
+    <app-editor-secondary-actions>
+        <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="saveMenu">
+            <i nz-icon nzType="export"></i> Save
+            <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+        </button>
+
+        <nz-dropdown-menu #saveMenu="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item (click)="saveJSON()"><i nz-icon nzType="save" nzTheme="outline"></i> Save to ui.json
+                </li>
+                <li nz-menu-item (click)="saveAsMock()"><i nz-icon nzType="save" nzTheme="outline"></i> Save as
+                    application.json
+                </li>
+            </ul>
+        </nz-dropdown-menu>
+    </app-editor-secondary-actions>
+
+    <app-editor-sider>
+        <div class="properties">
+            <button nz-button nzType="link" nzSize="small" (click)="addView()">
+                <i nz-icon nzType="plus"></i> New View
+            </button>
+        </div>
+        <div class="view-list">
+            <!--DO NOT use nzList here, performance sucks-->
+            <div class="view-item"
+                 (click)="selectView(item)"
+                 nz-row nzType="flex" nzJustify="space-between" nzAlign="middle"
+                 *ngFor="let item of views" [class.active]="item.name === selectedView?.name">
+                <div class="name" nz-col>
+                    {{item.name}}
+                    <span *ngIf="!item.name" nz-text nzType="warning">[required]</span>
+                    <small>{{item.title}}</small>
+                </div>
+                <div nz-col nzSpan="2" class="action">
+                    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                        <i nz-icon nzType="more" nzTheme="outline"></i>
+                    </a>
+                    <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <li nz-menu-item (click)="duplicateView(item)">Duplicate</li>
+                            <li nz-menu-item (click)="removeView(item.name)">Remove</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </div>
+            </div>
+        </div>
+        <nz-empty *ngIf="!views?.length" nzNotFoundContent="Please create a new view"></nz-empty>
+    </app-editor-sider>
+
+    <app-editor-content>
+        <as-split unit="pixel" direction="horizontal" gutterSize="1">
+            <as-split-area size="*">
+                <div class="content-wrapper preview" *ngIf="selectedView">
+                    <app-view-builder [view]="selectedView"></app-view-builder>
+                </div>
+            </as-split-area>
+            <as-split-area size="320" *ngIf="showRightPanel">
+                <div class="content-wrapper">
+                    <nz-tabset class="additional-tabset">
+                        <nz-tab nzTitle="View">
+                            <div class="properties" *ngIf="selectedView">
+                                <app-view-property [data]="selectedView"
+                                                   [sidebars]="uiConfiguration?.application.sidebarDefs"></app-view-property>
+                            </div>
+                        </nz-tab>
+                        <nz-tab nzTitle="Json">
+                            <app-json-editor [data]="selectedView"></app-json-editor>
+                        </nz-tab>
+                        <nz-tab nzTitle="Sidebars">
+                            <div class="properties">
+                                <app-sidebar-defs-builder
+                                    [data]="uiConfiguration?.application.sidebarDefs"
+                                    (valueChange)="sidebarDefChange($event)"></app-sidebar-defs-builder>
+                            </div>
+                        </nz-tab>
+                    </nz-tabset>
+                </div>
+            </as-split-area>
+        </as-split>
+    </app-editor-content>
+    <app-editor-footer>
+        <div style="width: 100%;" nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
+            <div nz-col nzSpan="18">
+                <span class="settings" nz-tooltip nzTooltipTitle="App Settings" nzTooltipPlacement="topLeft" style="cursor: pointer"
+                      (click)="showAppSettings()">
+                    <i nz-icon nzType="setting" nzTheme="outline"></i> <small> App Settings</small>
+                </span>
+                <ng-container *ngIf="openedFile">
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <i nz-icon nzType="file" nzTheme="outline"></i> {{openedFile}}
+                </ng-container>
+                <nz-divider nzType="vertical"></nz-divider>
+                Module {{uiConfiguration?.module.name}}
+                <ng-container *ngIf="selectedView?.name">
+                    <nz-divider nzType="vertical"></nz-divider>
+                    Editing view: {{selectedView?.name}}
+                </ng-container>
+            </div>
+            <div nz-col nzSpan="6" style="text-align: right">
+
+                <span class="toggle" [class.active]="showRightPanel" nz-tooltip nzTooltipTitle="Hide right panel"
+                      nzTooltipPlacement="topRight">
+                    <i nz-icon nzType="border-right" nzTheme="outline" (click)="toggleRightPanel()"></i>
+                </span>
+            </div>
+        </div>
+    </app-editor-footer>
+</app-editor-layout>

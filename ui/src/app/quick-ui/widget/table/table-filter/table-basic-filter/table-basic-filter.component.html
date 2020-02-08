@@ -1,0 +1,16 @@
+<div class="table-basic-filter" *ngIf="form" [formGroup]="form">
+    <div class="field-name">
+        {{filterConf?.displayName}} :
+        <input type="hidden" formControlName="field"/>
+        <input type="hidden" formControlName="operator"/>
+    </div>
+    <div class="field-control" [ngSwitch]="schema | formControlType: filterConf">
+        <qui-select *ngSwitchCase="'Select'"
+                    [schema]="schema"
+                    [ui]="filterConf"
+                    formControlName="value"
+                    [attr.id]="'custom-form-control-' + filterConf?.key"></qui-select>
+        <!--Text-->
+        <input *ngSwitchDefault nz-input formControlName="value" [attr.id]="'filter-form-control-' + filterConf?.key"/>
+    </div>
+</div>

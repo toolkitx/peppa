@@ -1,0 +1,56 @@
+<div class="policy-item">
+    <div class="name">
+        Base Template
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Base template types are special templates that Microsoft created for specific industries. '">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-select name="value" style="min-width: 150px;" [ngModel]="'Standard'">
+            <nz-option [nzValue]="v" [nzLabel]="v"
+                       *ngFor="let v of ['Standard', 'Education - Class Team','Education - Staff Team', 'Education - PLC team', 'Retail - Store', 'Retail - Manager collaboration', 'Healthcare - Ward', 'Healthcare - Hospital']"></nz-option>
+        </nz-select>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        Team Policies
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <i nz-icon nzType="edit" style="color: #016a9c;"></i>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        Channels
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-select name="value" style="min-width: 150px;"></nz-select>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        Apps
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-select name="value" style="min-width: 150px;"></nz-select>
+    </div>
+</div>
+
+

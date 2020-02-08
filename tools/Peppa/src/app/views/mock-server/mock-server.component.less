@@ -1,0 +1,74 @@
+:host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #FFF;
+    z-index: 2;
+}
+
+.content{
+    position: absolute;
+    top: 57px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.request-list-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+nz-page-header.nav {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+    z-index: 999;
+}
+
+.item-detail {
+    padding: 0 1rem;
+    cursor: default;
+}
+.ant-list-header {
+    font-weight: bold;
+    padding: 1rem;
+}
+
+.active {
+    background: #c3d9ff;
+}
+
+.request-detail {
+    position: absolute;
+    top: 57px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &::ng-deep {
+        .ant-tabs {
+            height: 100%;
+        }
+        .ant-tabs-content {
+            position: absolute;
+            top: 44px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .ant-tabs-tabpane {
+            height: 100%;
+        }
+
+        .ant-tabs-bar {
+            margin-bottom: 0;
+        }
+    }
+}

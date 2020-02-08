@@ -1,0 +1,15 @@
+<div class="content">
+    <div class="loading" *ngIf="registerState !== 'unregistered'">
+        <qui-spinner id="spinner"></qui-spinner>
+        <p>Signing in, it may take some time.</p>
+    </div>
+    <div class="not-register" *ngIf="registerState === 'unregistered'">
+        <h2>Account not found</h2>
+        <p>
+            To create your account, Team Management must be granted admin consent....
+        </p>
+        <button nz-button nzType="primary" nzSize="large">
+            Sign up now
+        </button>
+    </div>
+</div>

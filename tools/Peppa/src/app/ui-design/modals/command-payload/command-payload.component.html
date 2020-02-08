@@ -1,0 +1,27 @@
+<form [formGroup]="form" *ngIf="form" nzLayout="horizontal">
+    <nz-form-item *ngFor="let item of form?.controls | keys">
+        <nz-form-label nzSpan="6">{{item.key}}</nz-form-label>
+        <nz-form-control nzSpan="18">
+            <input nz-input [formControlName]="item.key" [name]="item.key" [nzAutocomplete]="auto"
+            >
+            <nz-autocomplete nzBackfill #auto>
+                <nz-auto-option nzValue="$query(key)">$query(key), get value from query params</nz-auto-option>
+                <nz-auto-option nzValue="$fragment(key)">$fragment(key), get value from fragment</nz-auto-option>
+                <nz-auto-option nzValue="$cache(key)">$cache(key): get value from local cache</nz-auto-option>
+                <nz-auto-option nzValue="$location(key)">$location(key): return location url</nz-auto-option>
+                <nz-auto-option nzValue="$value(key)">$value(key): return property key of $value</nz-auto-option>
+                <nz-auto-option nzValue="$value">$value: current value, use in form</nz-auto-option>
+            </nz-autocomplete>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<nz-modal [(nzVisible)]="isHelpVisible" nzTitle="Help" (nzOnCancel)="handleHelpCancel()" [nzFooter]="null">
+    <ul>
+        <li>$query(key): get value from query params.</li>
+        <li>$fragment(key), get value from fragment.</li>
+        <li>$cache(key): get value from local cache.</li>
+        <li>$location(key): return location url.</li>
+        <li>$value(key): return property key of $value.</li>
+        <li>$value: current value, use in form.</li>
+    </ul>
+</nz-modal>

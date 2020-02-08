@@ -1,0 +1,65 @@
+<div class="qui-widget qui-header">
+    <div class="primary-actions">
+        <div class="name">
+            <div class="product-logo">
+                <i nz-icon nzType="teams"></i>
+            </div>
+            <div class="product-name" [quiAction]="'$view('+nextViewName+')'">
+                {{conf?.config.title}}
+            </div>
+            <div class="split" *ngIf="conf?.config.primaryMenus"></div>
+        </div>
+        <div class="navigation" *ngIf="conf?.config.primaryMenus">
+            <ul nz-menu nzMode="horizontal" nzTheme="dark">
+                <ng-container *ngFor="let m of conf?.config.primaryMenus">
+                    <li nz-menu-item [quiAction]="m.action" *quiPermission="m.permissions">
+                        <i nz-icon [nzType]="m.icon" *ngIf="m?.icon"></i>
+                        <span>{{m.name}}</span>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+    <div class="extend-actions">
+        <ng-container *quiPermission="extendActionPermission">
+            <ng-container *ngIf="session">
+                <a nz-dropdown [nzDropdownMenu]="primaryMenu">
+                    <div class="session-info-wrapper">
+                        <i nz-icon nzType="profile"></i>
+                        <div class="session-info">
+                            <div id="session-name" class="session-name">{{session.name}}</div>
+                            <small id="session-email" class="session-email">{{session.email}}</small>
+                        </div>
+                    </div>
+                </a>
+                <nz-dropdown-menu #primaryMenu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item [nzDisabled]="true" style="cursor: default" *ngIf="region">
+                            Region: {{region}}
+                        </li>
+                        <li nz-menu-item [quiAction]="'$view(home)'" *ngIf="session?.securityRole === 'Admin'">
+                            <i nz-icon nzType="user"></i> User Panel
+                        </li>
+                        <li nz-menu-item [quiAction]="'$view(admin-home)'" *ngIf="session?.securityRole === 'Admin'">
+                            <i nz-icon nzType="cog"></i> Admin Panel
+                        </li>
+                        <li nz-menu-item (click)="logout()">
+                            <i nz-icon nzType="on-off"></i> Logout
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+                <div *ngIf="conf?.config?.widgets?.length" class="head-widget">
+                    <ng-container *ngFor="let w of conf.config.widgets">
+                        <div quiSlot [data]="w"></div>
+                    </ng-container>
+                </div>
+                <!--<div>-->
+                    <!--<nz-badge [nzCount]="0" [nzOverflowCount]="999">-->
+                        <!--<a><i nz-icon nzType="bell"></i></a>-->
+                    <!--</nz-badge>-->
+                <!--</div>-->
+            </ng-container>
+        </ng-container>
+        <a><i nz-icon nzType="status-info"></i></a>
+    </div>
+</div>

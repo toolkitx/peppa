@@ -1,0 +1,2401 @@
+{
+	"state": "Completed",
+	"output": {
+		"commandInfo": [
+			{
+				"commandName": "Main_CheckTeamNameExistsCommand",
+				"commandDefinition": {
+					"name": "Main_CheckTeamNameExistsCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"result": {
+								"type": "boolean",
+								"description": "exist is true, else false"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetJoinedTeamsCommand",
+				"commandDefinition": {
+					"name": "Main_GetJoinedTeamsCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"displayName": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"privacy": {
+											"type": "string"
+										},
+										"people": {
+											"type": "integer"
+										},
+										"categoryId": {
+											"type": "string"
+										},
+										"categoryName": {
+											"type": "string"
+										},
+										"memberType": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetNamingRuleByCategoryCommand",
+				"commandDefinition": {
+					"name": "Main_GetNamingRuleByCategoryCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"value": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetPrivacyByCategoryCommand",
+				"commandDefinition": {
+					"name": "Main_GetPrivacyByCategoryCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"label": {
+											"type": "string"
+										},
+										"value": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetTeamsCommand",
+				"commandDefinition": {
+					"name": "Main_GetTeamsCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"displayName": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"visibility": {
+											"type": "string",
+											"enum": [
+												"Public",
+												"Private"
+											]
+										},
+										"people": {
+											"type": "integer"
+										},
+										"categoryId": {
+											"type": "string"
+										},
+										"categoryName": {
+											"type": "string"
+										},
+										"lastAttestationDate": {
+											"type": "integer"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetUsersCommand",
+				"commandDefinition": {
+					"name": "Main_GetUsersCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"skip": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"userName": {
+											"type": "string"
+										},
+										"displayName": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_SetCategoryToAllTeamsCommand",
+				"commandDefinition": {
+					"name": "Main_SetCategoryToAllTeamsCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string",
+								"title": "Category"
+							}
+						},
+						"required": [
+							"categoryId"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"result": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_SetCategoryToTeamsByFilterCommand",
+				"commandDefinition": {
+					"name": "Main_SetCategoryToTeamsByFilterCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string",
+								"title": "Category"
+							},
+							"filter": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"categoryId",
+							"filter"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"result": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_SetCategoryToTeamsByIdCommand",
+				"commandDefinition": {
+					"name": "Main_SetCategoryToTeamsByIdCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string",
+								"title": "Category"
+							},
+							"idList": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						},
+						"required": [
+							"categoryId",
+							"idList"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"result": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GenerateAccessTokenCommand",
+				"commandDefinition": {
+					"name": "Main_GenerateAccessTokenCommand",
+					"type": "Public",
+					"securityRole": "Anonymous",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"aadToken": {
+								"type": "string"
+							},
+							"region": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"accessToken": {
+								"type": "string"
+							},
+							"refreshToken": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetSignInUrlCommand",
+				"commandDefinition": {
+					"name": "Main_GetSignInUrlCommand",
+					"type": "Public",
+					"securityRole": "Anonymous",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"redirectUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"redirectUrl"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"signInUrl": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_SignalRGenerateTokenCommand",
+				"commandDefinition": {
+					"name": "Main_SignalRGenerateTokenCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"url": {
+								"type": "string"
+							},
+							"accessToken": {
+								"type": "string"
+							}
+						}
+					},
+					"feature": "common",
+					"inputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_CreateCategoryCommand",
+				"commandDefinition": {
+					"name": "Main_CreateCategoryCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"title": "Name"
+							},
+							"securityGrade": {
+								"type": "string",
+								"title": "Security Grade",
+								"enum": [
+									"High",
+									"Medium",
+									"Low"
+								]
+							},
+							"automaticAttestations": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {}
+								},
+								"title": "Automatic Attestations",
+								"default": []
+							},
+							"policies": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"value": {
+											"type": "string"
+										}
+									}
+								},
+								"title": "Policies"
+							},
+							"description": {
+								"type": "string",
+								"title": "Description"
+							}
+						},
+						"title": "Create Category",
+						"required": [
+							"securityGrade",
+							"name",
+							"policies",
+							"description"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_DeleteCategoryByIdCommand",
+				"commandDefinition": {
+					"name": "Main_DeleteCategoryByIdCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_DeleteCategoryCommand",
+				"commandDefinition": {
+					"name": "Main_DeleteCategoryCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"ids": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_GetCategoriesCommand",
+				"commandDefinition": {
+					"name": "Main_GetCategoriesCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"id": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "string"
+										},
+										"policies": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"type": "string"
+													},
+													"type": {
+														"type": "string"
+													},
+													"description": {
+														"type": "string"
+													},
+													"coverage": {
+														"type": "string"
+													},
+													"value": {
+														"type": "string"
+													},
+													"id": {
+														"type": "string"
+													},
+													"code": {
+														"type": "string"
+													},
+													"isAutoCorrect": {
+														"type": "string"
+													},
+													"targetAttributeType": {
+														"type": "string"
+													},
+													"targetAttributeDefaultValue": {
+														"type": "string"
+													},
+													"targetAttributeOption": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													},
+													"codeName": {
+														"type": "string"
+													},
+													"checkingTypes": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"automaticAttestations": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {}
+											}
+										},
+										"securityGrade": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetDefaultCategoriesCommand",
+				"commandDefinition": {
+					"name": "Main_GetDefaultCategoriesCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"id": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "string"
+										},
+										"policies": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"name": {
+														"type": "string"
+													},
+													"type": {
+														"type": "string"
+													},
+													"description": {
+														"type": "string"
+													},
+													"coverage": {
+														"type": "string"
+													},
+													"value": {
+														"type": "string"
+													},
+													"id": {
+														"type": "string"
+													},
+													"code": {
+														"type": "string"
+													},
+													"isAutoCorrect": {
+														"type": "string"
+													},
+													"targetAttributeType": {
+														"type": "string"
+													},
+													"targetAttributeDefaultValue": {
+														"type": "string"
+													},
+													"targetAttributeOption": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													},
+													"codeName": {
+														"type": "string"
+													},
+													"checkingTypes": {
+														"type": "array",
+														"items": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"automaticAttestations": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {}
+											}
+										},
+										"securityGrade": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_ReadCategoryByIdCommand",
+				"commandDefinition": {
+					"name": "Main_ReadCategoryByIdCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"description": {
+								"type": "string"
+							},
+							"id": {
+								"type": "string"
+							},
+							"targetAttributeOption": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							},
+							"policies": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"type": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"coverage": {
+											"type": "string"
+										},
+										"value": {
+											"type": "string"
+										},
+										"id": {
+											"type": "string"
+										},
+										"code": {
+											"type": "string"
+										},
+										"isAutoCorrect": {
+											"type": "string"
+										},
+										"targetAttributeType": {
+											"type": "string"
+										},
+										"targetAttributeDefaultValue": {
+											"type": "string"
+										},
+										"targetAttributeOption": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"checkingTypes": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							},
+							"securityGrade": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_UpdateCategoryCommand",
+				"commandDefinition": {
+					"name": "Main_UpdateCategoryCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"title": "Name"
+							},
+							"securityGrade": {
+								"type": "string",
+								"enum": [
+									"High",
+									"Medium",
+									"Low"
+								],
+								"title": "Security Grade"
+							},
+							"policies": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"value": {
+											"type": "string"
+										}
+									}
+								},
+								"title": "Policies"
+							},
+							"automaticAttestations": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {}
+								},
+								"title": "Automatic Attestations",
+								"default": []
+							},
+							"id": {
+								"type": "string"
+							},
+							"description": {
+								"type": "string",
+								"title": "Description"
+							}
+						},
+						"title": "Update Category",
+						"required": [
+							"name",
+							"securityGrade",
+							"policies",
+							"description"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_GetAdminConsentUrlCommand",
+				"commandDefinition": {
+					"name": "Main_GetAdminConsentUrlCommand",
+					"type": "Public",
+					"securityRole": "Anonymous",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"redirectUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"redirectUrl"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"consentUrl": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetRegionsCommand",
+				"commandDefinition": {
+					"name": "Main_GetRegionsCommand",
+					"type": "Public",
+					"securityRole": "Anonymous",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"aadToken": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"aadToken"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"region": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_RegisterTenantCommand",
+				"commandDefinition": {
+					"name": "Main_RegisterTenantCommand",
+					"type": "Public",
+					"securityRole": "Anonymous",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"authorizationCode": {
+								"type": "string"
+							},
+							"region": {
+								"type": "string"
+							},
+							"redirectUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"authorizationCode",
+							"region",
+							"redirectUrl"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"result": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetPoliciesCommand",
+				"commandDefinition": {
+					"name": "Main_GetPoliciesCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"type": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"coverage": {
+											"type": "string"
+										},
+										"value": {
+											"type": "string"
+										},
+										"id": {
+											"type": "string"
+										},
+										"code": {
+											"type": "string"
+										},
+										"isAutoCorrect": {
+											"type": "string"
+										},
+										"targetAttributeType": {
+											"type": "string"
+										},
+										"targetAttributeDefaultValue": {
+											"type": "string"
+										},
+										"targetAttributeOption": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"codeName": {
+											"type": "string"
+										},
+										"targetAttribute": {
+											"type": "string"
+										},
+										"checkTypes": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetViolationHistoryCommand",
+				"commandDefinition": {
+					"name": "Main_GetViolationHistoryCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"skip": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"teamId": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"categoryId": {
+											"type": "string"
+										},
+										"categoryName": {
+											"type": "string"
+										},
+										"policyName": {
+											"type": "string"
+										},
+										"policyValue": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "string"
+										},
+										"operatorName": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetViolationDetailByIdCommand",
+				"commandDefinition": {
+					"name": "Main_GetViolationDetailByIdCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"propertyName": {
+											"type": "string"
+										},
+										"originalValue": {
+											"type": "string"
+										},
+										"policyValue": {
+											"type": "string"
+										},
+										"correctType": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetViolationItemByIdCommand",
+				"commandDefinition": {
+					"name": "Main_GetViolationItemByIdCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"teamId": {
+								"type": "string"
+							},
+							"teamDisplayName": {
+								"type": "string"
+							},
+							"categoryId": {
+								"type": "string"
+							},
+							"categoryName": {
+								"type": "string"
+							},
+							"policyName": {
+								"type": "string"
+							},
+							"policyValue": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							},
+							"createdTime": {
+								"type": "string"
+							},
+							"updatedTime": {
+								"type": "string"
+							},
+							"operatorName": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetViolationItemsCommand",
+				"commandDefinition": {
+					"name": "Main_GetViolationItemsCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"filter": {
+								"type": "string"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"skip": {
+								"type": "integer"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"teamId": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"categoryId": {
+											"type": "string"
+										},
+										"categoryName": {
+											"type": "string"
+										},
+										"policyName": {
+											"type": "string"
+										},
+										"policyValue": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_OperateViolationCommand",
+				"commandDefinition": {
+					"name": "Main_OperateViolationCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"violationId": {
+								"type": "string"
+							},
+							"operationType": {
+								"type": "string",
+								"enum": [
+									"Archive",
+									"Acknowledge"
+								]
+							}
+						}
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_AttestAllCommand",
+				"commandDefinition": {
+					"name": "Main_AttestAllCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"requestCode": {
+								"type": "string",
+								"title": "Question"
+							},
+							"reason": {
+								"type": "string",
+								"title": "Reason"
+							}
+						},
+						"required": [
+							"reason",
+							"requestCode"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_AttestByCategoryCommand",
+				"commandDefinition": {
+					"name": "Main_AttestByCategoryCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"requestCode": {
+								"type": "string",
+								"title": "Question"
+							},
+							"categoryId": {
+								"type": "string",
+								"title": "Category"
+							},
+							"reason": {
+								"type": "string",
+								"title": "Reason"
+							}
+						},
+						"required": [
+							"reason",
+							"requestCode",
+							"categoryId"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_AttestByIdsCommand",
+				"commandDefinition": {
+					"name": "Main_AttestByIdsCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"requestCode": {
+								"type": "string",
+								"title": "Question"
+							},
+							"reason": {
+								"type": "string",
+								"title": "Reason"
+							},
+							"idList": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_CreateTeamByUserCommand",
+				"commandDefinition": {
+					"name": "Main_CreateTeamByUserCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string",
+								"title": "Category"
+							},
+							"name": {
+								"type": "string",
+								"title": "Name"
+							},
+							"description": {
+								"type": "string",
+								"title": "Description"
+							},
+							"privacy": {
+								"type": "string",
+								"enum": [
+									"Public",
+									"Private"
+								],
+								"title": "Privacy"
+							},
+							"reason": {
+								"type": "string",
+								"title": "Reason"
+							}
+						},
+						"required": [
+							"name",
+							"categoryId",
+							"reason",
+							"privacy",
+							"description"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_CreateTeamCommand",
+				"commandDefinition": {
+					"name": "Main_CreateTeamCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"categoryId": {
+								"type": "string",
+								"title": "Category"
+							},
+							"name": {
+								"type": "string",
+								"title": "Name"
+							},
+							"description": {
+								"type": "string",
+								"title": "Description"
+							},
+							"owner": {
+								"type": "string",
+								"title": "Owner"
+							},
+							"privacy": {
+								"type": "string",
+								"enum": [
+									"Public",
+									"Private"
+								],
+								"title": "Privacy"
+							},
+							"reason": {
+								"type": "string",
+								"title": "Reason"
+							}
+						},
+						"required": [
+							"name",
+							"owner",
+							"categoryId",
+							"privacy",
+							"description"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_GetAllRequestsCommand",
+				"commandDefinition": {
+					"name": "Main_GetAllRequestsCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"filter": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"requestName": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"requester": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdBy": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "number"
+										},
+										"updatedBy": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "number"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetAllAttestationsCommand",
+				"commandDefinition": {
+					"name": "Main_GetAllAttestationsCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"filter": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"requestName": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"requester": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdBy": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "number"
+										},
+										"updatedBy": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "number"
+										},
+										"dueDate": {
+											"type": "number"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetMyApprovalsCommand",
+				"commandDefinition": {
+					"name": "Main_GetMyApprovalsCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"filter": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"requestName": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"requester": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdBy": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "number"
+										},
+										"updatedBy": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "number"
+										},
+										"recievedTime": {
+											"type": "number"
+										},
+										"approverState": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetMyAttestationsCommand",
+				"commandDefinition": {
+					"name": "Main_GetMyAttestationsCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"filter": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"requestName": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"requester": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdBy": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "number"
+										},
+										"updatedBy": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "number"
+										},
+										"recievedTime": {
+											"type": "number"
+										},
+										"dueDate": {
+											"type": "number"
+										},
+										"attestState": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetMyRequestsCommand",
+				"commandDefinition": {
+					"name": "Main_GetMyRequestsCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"skip": {
+								"type": "integer"
+							},
+							"take": {
+								"type": "integer"
+							},
+							"filter": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"requestName": {
+											"type": "string"
+										},
+										"teamDisplayName": {
+											"type": "string"
+										},
+										"requester": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"createdBy": {
+											"type": "string"
+										},
+										"createdTime": {
+											"type": "number"
+										},
+										"updatedBy": {
+											"type": "string"
+										},
+										"updatedTime": {
+											"type": "number"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_JoinTeamByUserCommand",
+				"commandDefinition": {
+					"name": "Main_JoinTeamByUserCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"teamId": {
+								"type": "string"
+							},
+							"memberType": {
+								"type": "string",
+								"enum": [
+									"Owner",
+									"Member"
+								],
+								"title": "Member Type"
+							},
+							"reason": {
+								"type": "string",
+								"title": "Reason"
+							}
+						},
+						"required": [
+							"memberType",
+							"reason"
+						]
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_GetRequestCodesCommand",
+				"commandDefinition": {
+					"name": "Main_GetRequestCodesCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": null,
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"total": {
+								"type": "integer"
+							},
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"code": {
+											"type": "string"
+										},
+										"question": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_SetRequestStateCommand",
+				"commandDefinition": {
+					"name": "Main_SetRequestStateCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"requestId": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							},
+							"reason": {
+								"type": "string",
+								"maxLength": 512,
+								"title": "Reason"
+							}
+						},
+						"required": [
+							"reason"
+						]
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"result": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetApprovalDefinitionsCommand",
+				"commandDefinition": {
+					"name": "Main_GetApprovalDefinitionsCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": null,
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"approvedBy": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"dataSource": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetSelfServiceCommand",
+				"commandDefinition": {
+					"name": "Main_GetSelfServiceCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 255
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"description": {
+								"type": "string"
+							},
+							"approvalSteps": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"stepName": {
+											"type": "string"
+										},
+										"approvalId": {
+											"type": "string"
+										},
+										"approverId": {
+											"type": "string"
+										},
+										"approverName": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"needEscalation": {
+								"type": "boolean"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_GetSelfServicesCommand",
+				"commandDefinition": {
+					"name": "Main_GetSelfServicesCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": null,
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										},
+										"approvalSteps": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"stepName": {
+														"type": "string"
+													},
+													"approvalId": {
+														"type": "string"
+													},
+													"approverId": {
+														"type": "string"
+													},
+													"approverName": {
+														"type": "string"
+													}
+												}
+											}
+										},
+										"needEscalation": {
+											"type": "boolean"
+										}
+									}
+								}
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_UpdateSelfServiceCommand",
+				"commandDefinition": {
+					"name": "Main_UpdateSelfServiceCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 255
+							},
+							"needEscalation": {
+								"type": "boolean",
+								"title": "Escalation"
+							},
+							"approvalSteps": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"stepName": {
+											"type": "string"
+										},
+										"approvalId": {
+											"type": "string"
+										},
+										"approverId": {
+											"type": "string"
+										},
+										"approverName": {
+											"type": "string"
+										}
+									}
+								},
+								"title": "Approval Steps"
+							}
+						},
+						"required": [
+							"id",
+							"needEscalation"
+						],
+						"title": "$context(name) Self-Sevice Settings"
+					},
+					"outputSchema": null
+				}
+			},
+			{
+				"commandName": "Main_GetSyncStatusCommand",
+				"commandDefinition": {
+					"name": "Main_GetSyncStatusCommand",
+					"type": "Public",
+					"securityRole": "GeneralUser",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"syncId": {
+								"type": "string"
+							},
+							"syncType": {
+								"type": "integer"
+							},
+							"tenantId": {
+								"type": "string"
+							},
+							"numberOfSuccessfulCreates": {
+								"type": "integer"
+							},
+							"numberOfFailedCreates": {
+								"type": "integer"
+							},
+							"numberOfSuccessfulUpdates": {
+								"type": "integer"
+							},
+							"numberOfFailedUpdates": {
+								"type": "integer"
+							},
+							"numberOfSuccessfulDeletes": {
+								"type": "integer"
+							},
+							"numberOfFailedDeletes": {
+								"type": "integer"
+							},
+							"message": {
+								"type": "string"
+							},
+							"failureCause": {
+								"type": "string"
+							},
+							"validNumberOfReads": {
+								"type": "integer"
+							},
+							"totalNumberOfReads": {
+								"type": "integer"
+							},
+							"startTime": {
+								"type": "number"
+							},
+							"terminatedTime": {
+								"type": "number"
+							},
+							"finishedTime": {
+								"type": "number"
+							},
+							"status": {
+								"type": "string",
+								"enum": [
+									"Pending",
+									"Running",
+									"Finished",
+									"Failed"
+								]
+							}
+						}
+					}
+				}
+			},
+			{
+				"commandName": "Main_RunSyncServiceCommand",
+				"commandDefinition": {
+					"name": "Main_RunSyncServiceCommand",
+					"type": "Public",
+					"securityRole": "Admin",
+					"feature": "common",
+					"inputSchema": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					},
+					"outputSchema": {
+						"type": "object",
+						"properties": {
+							"syncId": {
+								"type": "string"
+							},
+							"syncType": {
+								"type": "integer"
+							},
+							"tenantId": {
+								"type": "string"
+							},
+							"numberOfSuccessfulCreates": {
+								"type": "integer"
+							},
+							"numberOfFailedCreates": {
+								"type": "integer"
+							},
+							"numberOfSuccessfulUpdates": {
+								"type": "integer"
+							},
+							"numberOfFailedUpdates": {
+								"type": "integer"
+							},
+							"numberOfSuccessfulDeletes": {
+								"type": "integer"
+							},
+							"numberOfFailedDeletes": {
+								"type": "integer"
+							},
+							"message": {
+								"type": "string"
+							},
+							"failureCause": {
+								"type": "string"
+							},
+							"validNumberOfReads": {
+								"type": "integer"
+							},
+							"totalNumberOfReads": {
+								"type": "integer"
+							},
+							"startTime": {
+								"type": "number"
+							},
+							"terminatedTime": {
+								"type": "number"
+							},
+							"finishedTime": {
+								"type": "number"
+							},
+							"status": {
+								"type": "string",
+								"enum": [
+									"Pending",
+									"Running",
+									"Finished",
+									"Failed"
+								]
+							}
+						}
+					}
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,81 @@
+<div class="policy-item">
+    <div class="name">
+        <label nz-checkbox class="policy-item-enable-checkbox">
+            Naming Rule
+        </label>
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <qui-naming-rule-preview class="policy-item-naming-rule-input" [editable]="true"></qui-naming-rule-preview>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        <label nz-checkbox class="policy-item-enable-checkbox">
+            Allow Guest
+        </label>
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-switch class="policy-item-boolean-input"></nz-switch>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        <label nz-checkbox class="policy-item-enable-checkbox">
+            Privacy
+        </label>
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-select style="width: 100px;" name="value" [ngModel]="'Private'">
+            <nz-option [nzValue]="v" [nzLabel]="v"
+                       *ngFor="let v of ['Private', 'Public']"></nz-option>
+        </nz-select>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        <label nz-checkbox class="policy-item-enable-checkbox">
+            Minimum Owner Count
+        </label>
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-input-number class="policy-item-number-input" [ngModel]="'2'"
+                         [nzMin]="0" [nzStep]="1"></nz-input-number>
+    </div>
+</div>
+
+<div class="policy-item">
+    <div class="name">
+        <label nz-checkbox class="policy-item-enable-checkbox">
+            Minimum Member Count
+        </label>
+        <button nz-button nzType="link" nz-tooltip
+                [nzTooltipTitle]="'Description'">
+            <i class="tooltip" nz-icon nzType="form-attention"></i>
+        </button>
+    </div>
+    <div class="value">
+        <nz-input-number class="policy-item-number-input" [ngModel]="'0'"
+                         [nzMin]="0" [nzStep]="1"></nz-input-number>
+    </div>
+</div>
+
+

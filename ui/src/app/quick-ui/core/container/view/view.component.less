@@ -1,0 +1,30 @@
+@import "../../../../../styles";
+
+@side-menu-width: 200px;
+.qui-view-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    flex-wrap: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+.qui-side-menu {
+    overflow: auto;
+    width: @side-menu-width;
+    background: @layout-header-background;
+    display: none;
+    flex-shrink: 0;
+}
+
+.qui-view-content {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.has-sidebar {
+    .qui-side-menu {
+        display: block;
+    }
+}

@@ -1,0 +1,73 @@
+<div class="schema-editor" nz-row>
+    <div class="col" nz-col nzXs="8">
+        <div [class.qui-hide]="!editorState.tree">
+            <nz-tree #tree
+                     [nzData]="editorState.tree"
+                     [nzMultiple]="false"
+                     [nzDraggable]="true"
+                     [nzBeforeDrop]="dropChecker"
+                     (nzClick)="actionSelectNode($event)" (nzOnDragEnd)="actionDropNode($event)">
+                <ng-template #nzTreeTemplate let-node>
+                <span
+                    class="custom-node"
+                    (contextmenu)="actionShowTreeContextMenu(node, $event, contextTpl)"
+                    [attr.draggable]="true"
+                    [class.draggable]="true"
+                    [class.active]="editorState.currentNode?.key === node.key">
+                  <span *ngIf="!node.isLeaf">
+                    <span class="folder-name">{{ node.title }}</span>
+                    <span class="folder-desc">{{node.origin?.raw?.type}}</span>
+                  </span>
+                  <span *ngIf="node.isLeaf">
+                    <span class="file-name">{{ node.title }}</span>
+                    <span class="file-desc">{{node.origin?.raw?.type}}</span>
+                  </span>
+                </span>
+                </ng-template>
+            </nz-tree>
+            <nz-dropdown-menu #contextTpl="nzDropdownMenu">
+                <ul nz-menu nzInDropDown>
+                    <li nz-menu-item *ngIf="editorState.currentNode?.origin?.raw.type === 'object'" (click)="menuCreate()">
+                        <i nz-icon nzType="plus" nzTheme="outline"></i> Create property
+                    </li>
+                    <li nz-menu-item *ngIf="editorState.currentNode?.title!=='items' && editorState.currentNode?.level > 0" (click)="menuDuplicate()">
+                        <i nz-icon nzType="copy" nzTheme="outline"></i> Duplicate
+                    </li>
+                    <li nz-menu-item *ngIf="editorState.currentNode?.title!=='items' && editorState.currentNode?.level > 0" (click)="menuRename()">
+                        <i nz-icon nzType="edit" nzTheme="outline"></i> Rename
+                    </li>
+                    <li nz-menu-item *ngIf="editorState.currentNode?.title!=='items' && editorState.currentNode?.level > 0"  (click)="menuDeleteProperty()">
+                        <i nz-icon nzType="delete" nzTheme="outline"></i> Delete
+                    </li>
+                    <li nz-menu-item (click)="menuCopySchema()">
+                        <i nz-icon nzType="snippets" nzTheme="outline"></i> Copy
+                    </li>
+                    <li nz-menu-item *ngIf="editorState.clipboardData" (click)="menuPasteSchema()">
+                        <i nz-icon nzType="block" nzTheme="outline"></i> Paste
+                    </li>
+                    <li nz-menu-item *ngIf="editorState.currentNode?.level === 0" (click)="menuDeleteSchema()">
+                        <i nz-icon nzType="warning" nzTheme="outline"></i> Delete schema
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+        <div [class.qui-hide]="editorState.tree"
+             style="height: 100%; display: flex; align-items: center; justify-content: center">
+            <div style="display: flex; flex-direction: column;">
+                <button nz-button nzType="default" (click)="actionInitSchema()" style="margin-bottom: 8px;">
+                    Initialize schema
+                </button>
+
+                <button nz-button nzType="default" (click)="menuPasteSchema(true)" *ngIf="editorState.clipboardData">
+                    Paste
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col" nz-col nzXs="8">
+        <app-custom-form [data]="editorState.currentNodeRaw" [autoUpdate]="true" (apply)="eventItemChanged($event)"></app-custom-form>
+    </div>
+    <div class="col" nz-col nzXs="8">
+        <app-json-editor [data]="editorState.currentValue"></app-json-editor>
+    </div>
+</div>

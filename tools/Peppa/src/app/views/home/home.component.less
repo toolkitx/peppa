@@ -1,0 +1,55 @@
+@import "../../../styles";
+
+:host ::ng-deep {
+    .ant-modal-body {
+        padding: 24px 24px 0 24px !important;
+    }
+}
+
+.welcome {
+    height: 100vh;
+    background: @layout-header-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    text-align: center;
+}
+
+h1 {
+    color: @text-color-inverse;
+}
+
+.logo {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+
+    img {
+        height: 100%;
+        position: relative;
+    }
+}
+
+.actions {
+    width: 200px;
+
+    & > button {
+        margin-bottom: 1rem;
+    }
+}
+
+
+@keyframes shake {
+    0%, 100% {transform: translateY(0);}
+    10%, 30%, 50%, 70%, 90% {transform: translateY(-5px);}
+    20%, 40%, 60%, 80% {transform: translateY(5px);}
+}
+
+.shake {
+    -webkit-animation-name: shake;
+    animation-name: shake;
+    animation-duration: 1.5s;
+}

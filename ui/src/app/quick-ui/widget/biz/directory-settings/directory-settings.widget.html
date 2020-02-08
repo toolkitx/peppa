@@ -1,0 +1,13 @@
+<nz-list *ngIf="settings?.length" [nzDataSource]="settings" [nzRenderItem]="itemTpl">
+    <ng-template #itemTpl let-item>
+        <li nz-list-item [nzActions]="[opAction]" [nzContent]="item.name" [nzNoFlex]="true"></li>
+        <ng-template #opAction>
+            <ng-container [ngSwitch]="item.targetAttributeType">
+                <ng-container *ngSwitchCase="'TargetBoolean'">
+                    <nz-switch [ngModel]="true" name="value"></nz-switch>
+                </ng-container>
+                <ng-container *ngSwitchDefault>{{item.value}} <i nz-icon nzType="pencil" style="color: #016a9c;"></i></ng-container>
+            </ng-container>
+        </ng-template>
+    </ng-template>
+</nz-list>

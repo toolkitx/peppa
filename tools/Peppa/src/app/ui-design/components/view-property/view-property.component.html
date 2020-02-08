@@ -1,0 +1,37 @@
+<form nz-form nzLayout="vertical" *ngIf="data">
+    <nz-form-item>
+        <nz-form-label>Name</nz-form-label>
+        <nz-form-control nzHasFeedback>
+            <input nz-input [ngModel]="data.name" name="name" (ngModelChange)="nameChange($event)" pattern="^[a-z][a-z0-9_-]+"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Title</nz-form-label>
+        <nz-form-control>
+            <input nz-input [(ngModel)]="data.title" name="title"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Default</nz-form-label>
+        <nz-form-control>
+            <nz-switch [(ngModel)]="data.default" name="default"></nz-switch>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>permissions</nz-form-label>
+        <nz-form-control>
+            <nz-select [(ngModel)]="data.permissions" nzMode="multiple" name="permissions">
+                <nz-option [nzValue]="role" [nzLabel]="role" *ngFor="let role of viewSecurityRoles"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Sidebar</nz-form-label>
+        <nz-form-control nzExtra="Leave empty to disable sidebar">
+            <nz-select [(ngModel)]="data.sidebar" name="sidebar" nzAllowClear="true">
+                <nz-option [nzValue]="sb.name" [nzLabel]="sb.name" *ngFor="let sb of sidebars"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+</form>

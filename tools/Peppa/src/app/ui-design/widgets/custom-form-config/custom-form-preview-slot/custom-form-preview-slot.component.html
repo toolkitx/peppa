@@ -1,0 +1,32 @@
+<nz-card [nzBordered]="false" nzSize="small">
+    <form nz-form>
+        <nz-form-item>
+            <nz-form-label>E-mail</nz-form-label>
+            <nz-form-control><input style="width: 240px;" nz-input readonly/></nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label>Password</nz-form-label>
+            <nz-form-control><input  style="width: 240px;" nz-input readonly/></nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label>Region</nz-form-label>
+            <nz-form-control>
+                <nz-select style="width: 120px;">
+                    <nz-option nzValue="Canada" nzLabel="Canada"></nz-option>
+                    <nz-option nzValue="China" nzLabel="China"></nz-option>
+                    <nz-option nzValue="USA" nzLabel="USA"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label>Size</nz-form-label>
+            <nz-form-control>
+                <nz-radio-group>
+                    <label nz-radio-button nzValue="large"><span>Large</span></label>
+                    <label nz-radio-button nzValue="default"><span>Default</span></label>
+                    <label nz-radio-button nzValue="small"><span>Small</span></label>
+                </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-card>

@@ -1,0 +1,19 @@
+<form>
+    <div nz-row nzGutter="16" style="margin-bottom: 1rem;" *ngFor="let item of form.controls; let i = index;" [formGroup]="item">
+        <div nz-col nzSpan="10">
+            <input nz-input placeholder="Key" formControlName="key"/>
+        </div>
+        <div nz-col nzSpan="10">
+            <input nz-input placeholder="Value" formControlName="value"/>
+        </div>
+        <div nz-col nzSpan="4">
+            <button nz-button (click)="removeItem(i)">
+                <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<button nz-button (click)="appendItem()">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+</button>

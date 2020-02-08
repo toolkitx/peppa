@@ -1,0 +1,9 @@
+<div [nzTooltipTitle]="titleTemplate" nzTooltipPlacement="bottomRight" nz-tooltip>
+    <i nz-icon [nzType]="conf?.config?.icon"></i>
+</div>
+<nz-badge nzStatus="processing" nzColor="#016a9c"></nz-badge>
+<ng-template #titleTemplate>
+    <div>
+        {{conf?.config?.pendingMessage}}
+    </div>
+</ng-template>

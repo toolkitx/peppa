@@ -1,0 +1,48 @@
+<nz-form-item [hidden]="data">
+    <nz-form-label [nzSm]="6">
+        Name:
+    </nz-form-label>
+    <nz-form-control [nzSm]="18" [nzValidateStatus]="isValid ? 'success' : 'error'">
+        <nz-input-group [nzAddOnBefore]="moduleName + '_'" nzAddOnAfter="Command">
+            <input nz-input placeholder="Command name" [(ngModel)]="newCommandDef.name" name="commandName"
+                   (keyup)="checkFirstCommandChar()"
+                   required/>
+        </nz-input-group>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-label [nzSm]="6">
+        Type:
+    </nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <nz-select style="width: 100%" [(ngModel)]="newCommandDef.type" name="commandType" requried>
+            <ng-container *ngFor="let t of ['Private', 'Public']">
+                <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+            </ng-container>
+        </nz-select>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-label [nzSm]="6">
+        Feature:
+    </nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <nz-select style="width: 100%" [(ngModel)]="newCommandDef.feature" name="commandFeature" requried>
+            <ng-container *ngFor="let t of featureList">
+                <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+            </ng-container>
+        </nz-select>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-label [nzSm]="6">
+        Security Role:
+    </nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <nz-select style="width: 100%" [(ngModel)]="newCommandDef.securityRole" name="commandSecurityRole">
+            <ng-container *ngFor="let t of commandSecurityRoles">
+                <nz-option [nzValue]="t" [nzLabel]="t"></nz-option>
+            </ng-container>
+        </nz-select>
+    </nz-form-control>
+</nz-form-item>

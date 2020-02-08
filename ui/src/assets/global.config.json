@@ -1,0 +1,10 @@
+{
+    "aadClientId": "54e6f3b0-be59-404a-883e-2fea07044601",
+    "regions": [
+        {
+            "name": "us",
+            "displayName": "US",
+            "apiBaseUrl": "http://localhost:8000/aad"
+        }
+    ]
+}

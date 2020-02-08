@@ -1,0 +1,32 @@
+<nz-select
+    class="qui-custom-form-control qui-custom-form-select"
+    *ngIf="!isRemoteDataSource"
+    style="width: 100%;"
+    [nzShowSearch]="true"
+    [nzAllowClear]="true"
+    [nzDisabled]="isDisabled"
+    [nzPlaceHolder]="ui?.placeholder"
+    [(ngModel)]="instanceValue"
+    [nzMode]="ui?.mode"
+    (ngModelChange)="valueChange($event)">
+    <nz-option [nzLabel]="item.label" [nzValue]="item.value" *ngFor="let item of options | labelValue"></nz-option>
+</nz-select>
+<nz-select
+    class="qui-custom-form-control qui-custom-form-select server-search-enabled"
+    *ngIf="isRemoteDataSource"
+    style="width: 100%;"
+    [nzShowSearch]="true"
+    [nzAllowClear]="true"
+    [nzDisabled]="isDisabled"
+    [nzPlaceHolder]="ui?.placeholder"
+    [(ngModel)]="instanceValue"
+    [nzLoading]="remoteSearching"
+    [nzServerSearch]="true"
+    [nzMode]="ui?.mode"
+    (ngModelChange)="valueChange($event)"
+    (nzOnSearch)="serverSearch($event)"
+    (nzScrollToBottom)="loadMore()">
+    <nz-option [nzLabel]="item.label" [nzValue]="item.value"
+               *ngFor="let item of options | labelValue: ui?.dataSource"></nz-option>
+</nz-select>
+

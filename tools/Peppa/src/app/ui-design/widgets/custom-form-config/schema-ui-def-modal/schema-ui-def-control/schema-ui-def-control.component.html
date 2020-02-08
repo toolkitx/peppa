@@ -1,0 +1,138 @@
+<form nz-form *ngIf="instanceValue" nzLayout="horizontal">
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Widget
+                </nz-form-label>
+                <nz-form-control>
+                    <nz-select name="widget" [(ngModel)]="instanceValue.widget"
+                               (ngModelChange)="widgetTypeChange($event)">
+                        <nz-option *ngFor="let w of supportedFormControls.SSP" [nzLabel]="w" [nzValue]="w"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Size
+                </nz-form-label>
+                <nz-form-control>
+                    <nz-select name="size" [(ngModel)]="instanceValue.size">
+                        <nz-option nzValue="default" nzLabel="default"></nz-option>
+                        <nz-option nzValue="small" nzLabel="small"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Placeholder
+                </nz-form-label>
+                <nz-form-control>
+                    <input name="placeholder" [(ngModel)]="instanceValue.placeholder" nz-input/>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8" *ngIf="instanceValue.widget === 'Checkbox'">
+            <nz-form-item>
+                <nz-form-label>
+                    Label
+                </nz-form-label>
+                <nz-form-control>
+                    <input name="checkboxLabel" [(ngModel)]="instanceValue.label" nz-input placeholder="Label"/>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8" *ngIf="instanceValue.widget === 'Select'">
+            <nz-form-item>
+                <nz-form-label>
+                    Select Mode
+                </nz-form-label>
+                <nz-form-control>
+                    <nz-select name="selectMode" [(ngModel)]="instanceValue.mode">
+                        <nz-option nzValue="default" nzLabel="default"></nz-option>
+                        <nz-option nzValue="tags" nzLabel="tags"></nz-option>
+                        <nz-option nzValue="multiple" nzLabel="multiple"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Async Validator
+                </nz-form-label>
+                <nz-form-control>
+                    <app-command-def-control name="asyncValidator" [(ngModel)]="instanceValue.validator"
+                                             allowClear="true"></app-command-def-control>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Errors
+                </nz-form-label>
+                <nz-form-control>
+                    <app-key-value-def-control name="errors"
+                                               [(ngModel)]="instanceValue.errors"></app-key-value-def-control>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    DataSource
+                </nz-form-label>
+                <nz-form-control>
+                    <app-data-source-def-control name="dataSource"
+                                                 [(ngModel)]="instanceValue.dataSource"></app-data-source-def-control>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Visible
+                </nz-form-label>
+                <nz-form-control>
+                    <app-visible-def-control name="visible"
+                                             [(ngModel)]="instanceValue.visible"></app-visible-def-control>
+                    <input *ngIf="instanceValue.visible===false" name="value" [(ngModel)]="instanceValue.value" nz-input placeholder="Hidden value"/>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label>
+                    Section
+                </nz-form-label>
+                <nz-form-control>
+                    <div nz-row nzType="flex" nzJustify="start">
+                        <div nz-col nzSpan="4">
+                            <nz-switch name="sectionSwitch" [(ngModel)]="isSection"
+                                       (ngModelChange)="sectionSwitch($event)"></nz-switch>
+                        </div>
+                        <div nz-col>
+                            <input name="sectionTitle" *ngIf="instanceValue.section"
+                                   [(ngModel)]="instanceValue.section.title" nz-input placeholder="Section title"/>
+                        </div>
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+    </div>
+</form>

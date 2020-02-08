@@ -1,0 +1,41 @@
+<div class="qui-widget qui-side-menu">
+    <ul class="side-menu" nz-menu nzMode="inline" nzTheme="dark">
+        <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu, level: 1 }"></ng-container>
+        <ng-template #menuTpl let-menus let-level="level">
+            <ng-container *ngFor="let item of menus">
+                <!--<ng-container *quiPermission="item.permissions">-->
+                <ng-container>
+                    <li nz-menu-item
+                        *ngIf="!item.children"
+                        [nzPaddingLeft]="level * 24"
+                        [quiAction]="item.action">
+                        <span title>
+                          <i nz-icon [nzType]="item.icon" *ngIf="item.icon"></i>
+                          <span>{{ item.name }}</span>
+                        </span>
+                    </li>
+                    <li nz-submenu *ngIf="item.children && item.type!=='group'" [nzPaddingLeft]="level * 24" [nzOpen]="true">
+                        <span title>
+                          <i nz-icon [nzType]="item.icon" *ngIf="item.icon"></i>
+                          <span>{{ item.name }}</span>
+                        </span>
+                        <ul>
+                            <ng-container
+                                *ngTemplateOutlet="menuTpl; context: { $implicit: item.children, level: level + 1 }"></ng-container>
+                        </ul>
+                    </li>
+                    <li nz-menu-group *ngIf="item.children && item.type==='group'">
+                        <span title>
+                          <i nz-icon [nzType]="item.icon" *ngIf="item.icon"></i>
+                          <span>{{ item.name }}</span>
+                        </span>
+                        <ul>
+                            <ng-container
+                                *ngTemplateOutlet="menuTpl; context: { $implicit: item.children, level: item.type=== 'group'? level : level + 1 }"></ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ng-container>
+        </ng-template>
+    </ul>
+</div>

@@ -1,0 +1,61 @@
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #FFF;
+    overflow: hidden;
+}
+
+.preview {
+    //background: #EFF2F7;
+    //box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.14);
+}
+
+.properties {
+    padding: 8px;
+}
+.view-item {
+    padding: 0.3rem 1rem;
+    border-bottom: 1px solid #EFEFEF;
+    .name {
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #CCC;
+        }
+    }
+}
+.active {
+    background: rgba(1, 164, 239, 0.18);
+}
+
+.additional-tabset {
+    position: relative;
+    height: 100%;
+
+    &::ng-deep {
+        .ant-tabs-content {
+            position: absolute;
+            top: 44px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .ant-tabs-tabpane {
+            position: relative;
+        }
+
+        .ant-tabs-bar {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.toggle, .settings{
+    display: inline-block;
+    &.active {
+        fill: #016a9c;
+        background: none;
+    }
+}

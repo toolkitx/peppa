@@ -1,0 +1,19 @@
+<nz-input-group nz-row nzCompact nzGutter="0">
+    <div nz-col nzSpan="20">
+        <nz-select style="width: 100%;"
+                   nzShowSearch
+                   nzPlaceHolder="Select a command"
+                   name="command"
+                   [nzAllowClear]="allowClear"
+                   [ngModel]="commandName" (ngModelChange)="commandChange($event)">
+            <nz-option *ngFor="let cmd of commandDefs" [nzLabel]="cmd.name" [nzValue]="cmd.name"></nz-option>
+        </nz-select>
+    </div>
+    <div nz-col nzSpan="4">
+        <button nz-button style="width: 100%;" (click)="toggleVisible()"
+                [disabled]="!instanceValue"
+                nzTitle="Payload settings" nzPlacement="topLeft" nz-tooltip>
+            <i nz-icon nzType="setting" nzTheme="outline"></i>
+        </button>
+    </div>
+</nz-input-group>

@@ -1,0 +1,26 @@
+<ng-container *ngIf="!renderError">
+    <qui-view [menu]="sideMenu">
+        <ng-container *ngFor="let conf of widgets">
+            <!--<ng-container [ngSwitch]="conf.wrapper?.type">-->
+                <!--<div *ngSwitchCase="'None'">-->
+                    <!--<div quiSlot [data]="conf"></div>-->
+                <!--</div>-->
+                <!--<div class="widget-wrapper widget-wrapper-card" *ngSwitchDefault>-->
+                    <!--<div quiSlot [data]="conf"></div>-->
+                <!--</div>-->
+            <!--</ng-container>-->
+            <div class="widget-wrapper">
+                <div quiSlot [data]="conf"></div>
+            </div>
+        </ng-container>
+    </qui-view>
+</ng-container>
+
+<!--Fail to render view-->
+<div class="error" *ngIf="renderError">
+    <qui-empty [notFoundImage]="img" [notFoundContent]="renderError.message">
+        <ng-template #img>
+            <i class="error-sign" nz-icon nzType="status-error" nzTheme="outline"></i>
+        </ng-template>
+    </qui-empty>
+</div>

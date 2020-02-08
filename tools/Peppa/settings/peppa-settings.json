@@ -1,0 +1,8 @@
+{
+    "feature": {
+        "default": "common",
+        "available": [
+            "common"
+        ]
+    }
+}

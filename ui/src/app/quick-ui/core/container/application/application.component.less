@@ -1,0 +1,27 @@
+@import "../../../../../styles";
+
+.qui-application {
+
+}
+
+.qui-header {
+    display: none;
+    position: relative;
+    z-index: 2;
+}
+
+.qui-main {
+    height: calc(100vh);
+    overflow: auto;
+}
+
+.has-header {
+    .qui-header {
+        display: block;
+        width: 100%;
+    }
+
+    .qui-main {
+        height: calc(100vh - @layout-header-height);
+    }
+}

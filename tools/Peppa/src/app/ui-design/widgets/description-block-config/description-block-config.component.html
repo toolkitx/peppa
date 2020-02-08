@@ -1,0 +1,44 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label nzRequired>Title</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" formControlName="title">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" formControlName="description">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Column</nz-form-label>
+        <nz-form-control>
+            <nz-input-number formControlName="column"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Data Command</nz-form-label>
+        <nz-form-control>
+            <app-command-def-control formControlName="command" allowClear="true"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item [hidden]="!form.get('command').value">
+        <nz-form-label>Fields to display</nz-form-label>
+        <nz-form-control>
+            <app-table-field-def-control formControlName="fields" [command]="form.get('command').value?.command"></app-table-field-def-control>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Extend Actions</nz-form-label>
+        <nz-form-control>
+            <app-menu-def-control formControlName="actions" allowGroup="false"></app-menu-def-control>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Styles</nz-form-label>
+        <nz-form-control>
+            <app-key-value-def-control formControlName="styles"></app-key-value-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>

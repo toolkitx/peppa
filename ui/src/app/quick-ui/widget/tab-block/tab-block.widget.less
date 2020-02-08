@@ -1,0 +1,39 @@
+:host {
+    & ::ng-deep {
+        .ant-card-head {
+            border-bottom: none;
+            padding-top: 12px;
+        }
+
+        .ant-card-meta-description {
+            font-weight: normal;
+            font-size: 0.875rem;
+        }
+
+        .ant-card-body {
+            padding-top: 0;
+        }
+
+        .hide-title {
+            .ant-card-head {
+                min-height: 1.2rem;
+            }
+            .ant-card-head-wrapper {
+                display: none;
+            }
+        }
+
+    }
+}
+
+.block-operations {
+    button {
+        margin-right: 8px;
+        font-weight: 500;
+        box-shadow: none !important;
+    }
+
+    .no-border {
+        border: none;
+    }
+}

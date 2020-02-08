@@ -1,0 +1,34 @@
+<nz-form-item>
+    <nz-form-label [nzSm]="6">
+        Template:
+    </nz-form-label>
+    <nz-form-control [nzSm]="18">
+        <nz-select style="width: 100%" [(ngModel)]="initTemplate">
+            <nz-option [nzValue]="sc.name" [nzLabel]="sc.name" *ngFor="let sc of schemaTemplates"></nz-option>
+        </nz-select>
+    </nz-form-control>
+</nz-form-item>
+<ng-container *ngIf="initTemplate==='Custom'">
+    <nz-form-item>
+        <nz-form-label [nzSm]="6">
+            Data type:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <nz-select style="width: 100%" [(ngModel)]="initType">
+                <nz-option [nzValue]="t" [nzLabel]="t" *ngFor="let t of types"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="initType==='array'">
+        <nz-form-label [nzSm]="6">
+            Item data type:
+        </nz-form-label>
+        <nz-form-control [nzSm]="18">
+            <nz-select style="width: 100%" [(ngModel)]="initItemType">
+                <ng-container *ngFor="let t of types">
+                    <nz-option [nzValue]="t" [nzLabel]="t" *ngIf="t!=='array'"></nz-option>
+                </ng-container>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+</ng-container>

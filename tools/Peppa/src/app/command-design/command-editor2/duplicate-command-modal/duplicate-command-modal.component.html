@@ -1,0 +1,14 @@
+<nz-form-item>
+    <nz-form-control [nzSm]="24" [nzValidateStatus]="isValid ? 'success' : 'error'">
+        You are duplicating command <strong>{{data.name}}</strong>, please enter a new name for it.
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-control [nzSm]="24" [nzValidateStatus]="isValid ? 'success' : 'error'">
+        <nz-input-group [nzAddOnBefore]="moduleName + '_'" nzAddOnAfter="Command">
+            <input nz-input placeholder="Command name" [(ngModel)]="duplicateName" name="commandName"
+                   (keyup)="checkFirstCommandChar()"
+                   required/>
+        </nz-input-group>
+    </nz-form-control>
+</nz-form-item>

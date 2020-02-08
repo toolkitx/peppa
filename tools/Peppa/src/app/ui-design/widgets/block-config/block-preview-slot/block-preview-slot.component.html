@@ -1,0 +1,6 @@
+<nz-card [nzBordered]="false" nzSize="small">
+    <nz-card-meta
+        [nzTitle]="conf?.config?.title || 'Block'"
+        [nzDescription]="conf?.config?.description || 'This is the description'" style="margin-bottom: 12px;"></nz-card-meta>
+    <app-widget-preview-list [widgets]="conf?.config?.widgets" (valueChange)="conf.config.widgets=$event"></app-widget-preview-list>
+</nz-card>

@@ -1,0 +1,35 @@
+<nz-card [nzBordered]="false" nzSize="small">
+    <nz-card-meta
+        [nzTitle]="conf?.config?.title || 'Tab Block'"
+        [nzDescription]="conf?.config?.description || 'This is the description'" style="margin-bottom: 12px;">
+    </nz-card-meta>
+    <nz-tabset [nzType]="'card'" [nzTabBarExtraContent]="extraTemplate">
+        <nz-tab *ngFor="let tab of conf?.config.tabs; let i = index;" [nzTitle]="titleTemplate" (nzSelect)="selectTab(tab)">
+            <ng-template #titleTemplate>
+                <div>
+                    {{ tab.name }}
+                    <i nz-icon nzType="down" nzTheme="outline" [hidden]="tab.name!==selectedTab?.name"
+                       nz-dropdown [nzDropdownMenu]="tabMenu"></i>
+                </div>
+            </ng-template>
+            <nz-dropdown-menu #tabMenu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item (click)="rename(i)">
+                        <i nz-icon nzType="edit"></i> Edit tab name
+                    </li>
+                    <li nz-menu-item
+                        nz-popconfirm
+                        nzPopconfirmTitle="Are you sure you want to remove this tab?"
+                        (nzOnConfirm)="closeTab(i)">
+                        <i nz-icon nzType="close"></i> Remove tab
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+            <app-widget-preview-list [widgets]="tab.widgets"
+                                     (valueChange)="tab.widgets=$event"></app-widget-preview-list>
+        </nz-tab>
+    </nz-tabset>
+    <ng-template #extraTemplate>
+        <i class="ant-tabs-new-tab" nz-icon nzType="plus" (click)="newTab()"></i>
+    </ng-template>
+</nz-card>

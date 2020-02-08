@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Loading...</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js"
+            integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI"
+            crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+<qui-root>
+    <style>
+        qui-root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            background: #F2F2F2;
+            font-family: Arial, sans-serif;
+        }
+
+        .spinner {
+            text-align: center;
+        }
+
+        .spinner:before {
+            content: '';
+            box-sizing: border-box;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 4px solid #fb4e14;
+            border-top-color: #d9d9d9;
+            animation: spinner .6s linear infinite;
+        }
+
+        small {
+            font-size: 14px;
+            display: none;
+        }
+
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <div style="text-align: center;">
+        <div class="spinner"></div>
+        <small>Please wait – we’re getting things ready for you…</small>
+    </div>
+</qui-root>
+</body>
+</html>

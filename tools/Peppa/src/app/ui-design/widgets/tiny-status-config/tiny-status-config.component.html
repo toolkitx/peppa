@@ -1,0 +1,15 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label nzRequire="true">State Name</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="text" formControlName="name">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>State Defs</nz-form-label>
+        <nz-form-control>
+            <app-tiny-status-state-def-control formControlName="defs"></app-tiny-status-state-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+

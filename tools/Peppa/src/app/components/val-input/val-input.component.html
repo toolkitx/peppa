@@ -1,0 +1,17 @@
+<ng-container [ngSwitch]="dataType">
+    <ng-container *ngSwitchCase="'object'">
+        <textarea nz-input [ngModel]="instanceValue" [style.height]="height" (ngModelChange)="inputChange($event)"></textarea>
+    </ng-container>
+    <ng-container *ngSwitchCase="'array'">
+        <textarea nz-input [ngModel]="instanceValue" [style.height]="height" (ngModelChange)="inputChange($event)"></textarea>
+    </ng-container>
+    <ng-container *ngSwitchCase="'boolean'">
+        <nz-switch [ngModel]="instanceValue" (ngModelChange)="inputChange($event)"></nz-switch>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <input nz-input [ngModel]="instanceValue" (ngModelChange)="inputChange($event)"/>
+    </ng-container>
+</ng-container>
+<span class="error">{{error || ''}}</span>
+
+

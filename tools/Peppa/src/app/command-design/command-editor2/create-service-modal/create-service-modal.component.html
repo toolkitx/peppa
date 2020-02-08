@@ -1,0 +1,12 @@
+<nz-form-item>
+    <nz-form-control [nzSm]="24">
+        Service Name:
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-control [nzSm]="24" [nzValidateStatus]="isValid ? 'success' : 'error'">
+        <input nz-input placeholder="Service name, eg: PolicyManagement" [(ngModel)]="name"
+               (keyup)="checkFirstServiceChar()"/>
+        <p>The service name should be Unique.</p>
+    </nz-form-control>
+</nz-form-item>

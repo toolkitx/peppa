@@ -1,0 +1,41 @@
+<ng-container [ngSwitch]="conf?.dataType">
+    <ng-container *ngSwitchCase="'Date'">
+        <span class="table-cell-date">{{content | date}}</span>
+    </ng-container>
+    <ng-container *ngSwitchCase="'Widget'">
+        <div class="table-cell-widget" [attr.tag]="content" quiSlot [data]="conf?.action" [context]="data"></div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'Action'">
+        <a class="table-cell-action" [quiAction]="conf?.action" [params]="data"
+           (afterAction)="afterAction.emit($event)">{{content}}</a>
+    </ng-container>
+    <ng-container *ngSwitchCase="'Menu'">
+        <ng-container *ngIf="conf?.action.length">
+            <ng-container *ngIf="conf?.action.length === 1">
+                <ng-container *ngTemplateOutlet="actionTemplate; context: {$implicit: conf.action[0]}"></ng-container>
+            </ng-container>
+            <ng-container *ngIf="conf?.action.length > 1">
+                <a class="table-cell-action-dropdown" nz-dropdown [nzDropdownMenu]="menu" style="font-size: 1rem;">
+                    <i nz-icon nzType="more-vertical"></i>
+                </a>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item *ngFor="let act of conf?.action;">
+                            <ng-container *ngTemplateOutlet="actionTemplate; context: {$implicit: act}"></ng-container>
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <span class="table-cell-text">{{content}}</span>
+    </ng-container>
+    <ng-template #actionTemplate let-act>
+        <a class="table-cell-action" [quiAction]="act.action" [params]="data" (afterAction)="afterAction.emit($event)" [ngStyle]="act.styles"
+           [attr.id]="act.id + '-' + rowIndex + '-' + columnIndex">
+            <i nz-icon [nzType]="act.icon" *ngIf="act.icon"></i>
+            {{act.name}}
+        </a>
+    </ng-template>
+</ng-container>

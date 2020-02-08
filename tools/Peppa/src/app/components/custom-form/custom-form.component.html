@@ -1,0 +1,76 @@
+<div class="actions">
+    <!--<nz-dropdown  [nzTrigger]="'click'" [nzDisabled]="!data || !keywords.length">-->
+
+
+    <!--</nz-dropdown>-->
+    <a nz-dropdown [nzDropdownMenu]="keywordMenu" [nzDisabled]="!data || !keywords.length"><i nz-icon type="plus"></i> Add keyword</a>
+    <button nz-button nzSize="small" nzType="primary" [disabled]="!form || !form?.valid" *ngIf="!autoUpdate"
+            (click)="apply.emit(form.instance.value)" nz-tooltip nzTitle="Apply changes to Property">Update
+    </button>
+</div>
+<nz-dropdown-menu #keywordMenu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+        <li nz-menu-item *ngFor="let k of keywords" (click)="addProp(k)">{{k}}</li>
+    </ul>
+</nz-dropdown-menu>
+<div class="form" *ngIf="form">
+    <form nz-form [formGroup]="form?.instance">
+        <ng-container *ngFor="let k of form.keys">
+            <ng-container *ngTemplateOutlet="itemTpl, context: {$implicit: {key: k, value: form.controls[k]}}">
+            </ng-container>
+            <ng-template #itemTpl let-item>
+                <nz-form-item [class.qui-hide]="item.value?.hidden">
+                    <nz-form-label [nzSpan]="5" style="text-align: left; padding-left: 1rem;">
+                        {{item.key}}
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="19" [nzValidateStatus]="item.value.error ? 'error' : 'success'">
+                        <div class="control">
+                            <div class="ctrl" [ngSwitch]="item.value?.dataType">
+                                <nz-select [nzDisabled]="true" *ngSwitchCase="'typeSelect'"
+                                           [formControlName]="item.key">
+                                    <nz-option [nzValue]="t" [nzLabel]="t" *ngFor="let t of types"></nz-option>
+                                </nz-select>
+
+                                <nz-input-number *ngSwitchCase="'number'"
+                                                 [formControlName]="item.key"></nz-input-number>
+
+                                <nz-switch *ngSwitchCase="'boolean'" [formControlName]="item.key"></nz-switch>
+
+                                <ng-container *ngSwitchDefault>
+                                    <ng-container
+                                        *ngTemplateOutlet="defaultTpl, context: {$implicit: item.value, key: item.key, type: form?.controls['type'].value}">
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                            <div class="remove-action">
+                                <i nz-icon
+                                   nzType="minus-circle"
+                                   nzTheme="outline"
+                                   nz-popconfirm nzTitle="Are you sure to remove this keyword?"
+                                   (nzOnConfirm)="removeProp(item.key)"
+                                   *ngIf="!isRequired(item.key)"></i>
+                            </div>
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+            </ng-template>
+            <ng-template #defaultTpl let-ctrl let-key="key" let-type="type">
+                <ng-container [ngSwitch]="key">
+                    <ng-container *ngSwitchCase="'default'">
+                        <app-val-input [dataType]="type" [formControlName]="key"></app-val-input>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'enum'">
+                        <app-val-input [dataType]="'object'" [formControlName]="key"></app-val-input>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'required'">
+                        <nz-select nzMode="multiple" [formControlName]="key">
+                            <nz-option *ngFor="let option of requiredOptions" [nzLabel]="option"
+                                       [nzValue]="option"></nz-option>
+                        </nz-select>
+                    </ng-container>
+                    <input *ngSwitchDefault type="text" nz-input [formControlName]="key">
+                </ng-container>
+            </ng-template>
+        </ng-container>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+@import "../../../../styles";
+
+:host {
+    & ::ng-deep {
+        .ant-menu-dark .ant-menu-item {
+            border-color: transparent;
+            &.ant-menu-item-selected {
+                background-color: #444!important;
+                border-left: 3px solid @brand-color;
+                text-indent: -3px;
+            }
+        }
+
+        .ant-menu-item-group-title {
+            text-indent: 3px;
+            color: #AAA;
+            font-size: 0.75rem;
+        }
+    }
+
+    .side-menu {
+        margin-top: 2rem;
+    }
+}

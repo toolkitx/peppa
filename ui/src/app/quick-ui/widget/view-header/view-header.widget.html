@@ -1,0 +1,25 @@
+<div class="qui-view-header-widget widget default-box-shadow">
+    <nz-page-header [nzBackIcon]="conf?.config?.backIcon ? backIconTpl: null" style="display: flex; align-items: flex-start;">
+        <nz-page-header-extra>
+            <div class="header-operations" *ngIf="conf?.config?.actions">
+                <button class="no-border" nz-button *ngFor="let m of conf?.config?.actions"
+                        [quiAction]="m.action" nzGhost nzSize="small" [ngStyle]="m.styles"
+                        nzType="primary">
+                    <i nz-icon [nzType]="m.icon" *ngIf="m.icon"></i> {{m.name}}
+                </button>
+            </div>
+        </nz-page-header-extra>
+        <nz-page-header-title>
+            <div class="qui-view-header-title">
+                {{conf?.config?.title}}
+            </div>
+            <div class="qui-view-header-subtitle" *ngIf="conf?.config?.description">
+                {{conf?.config?.description}}
+            </div>
+        </nz-page-header-title>
+    </nz-page-header>
+</div>
+
+<ng-template #backIconTpl>
+    <i nz-icon nzType="chevron-left" style="font-size: 32px;"></i>
+</ng-template>

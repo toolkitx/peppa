@@ -1,0 +1,54 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label>Data Source</nz-form-label>
+        <nz-form-control>
+            <app-command-select-control formControlName="command" (valueChange)="commandChange($event)"></app-command-select-control>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Refresh</nz-form-label>
+        <nz-form-control>
+            <nz-switch formControlName="refresh"></nz-switch>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Select Mode</nz-form-label>
+        <nz-form-control>
+            <nz-select formControlName="selectMode" name="selectMode">
+                <nz-option *ngFor="let t of selectModes" [nzLabel]="t" [nzValue]="t"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item [hidden]="form.get('selectMode').value === 'None'">
+        <nz-form-label>Id Field Key</nz-form-label>
+        <nz-form-control>
+            <nz-select formControlName="idFieldKey" name="idFieldKey">
+                <nz-option *ngFor="let t of commandOutputKeys" [nzLabel]="t" [nzValue]="t"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item [hidden]="!form.get('command').value">
+        <nz-form-label>Table Column</nz-form-label>
+        <nz-form-control>
+            <app-table-field-def-control formControlName="fields" [command]="form.get('command').value" [allowMenu]="true"></app-table-field-def-control>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item [hidden]="!form.get('fields').value?.length">
+        <nz-form-label>Table Filters</nz-form-label>
+        <nz-form-control>
+            <app-table-filter-def-control formControlName="filters" [fieldConf]="form.get('fields').value"></app-table-filter-def-control>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Table Action</nz-form-label>
+        <nz-form-control>
+            <app-menu-def-control formControlName="actions"></app-menu-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>

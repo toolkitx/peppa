@@ -1,0 +1,161 @@
+<nz-spin [nzSpinning]="submitting">
+    <div class="form-wrapper" *ngIf="!loadingData && form">
+        <header>
+            <h1>{{(conf?.config?.ui?.title || form.title) | sentence: null: contextData}}</h1>
+            <p>{{(conf?.config?.ui?.description || form.description) | sentence: null: contextData}}</p>
+        </header>
+        <form [formGroup]="form?.instance" nz-form nzLayout="vertical">
+            <ng-template #itemTemplate let-raw let-ui="ui" let-key="key" let-formGroup="formGroup" let-ctrl="ctrl">
+                <div class="section" *ngIf="ui?.section?.title">
+                    <h2>{{ui?.section?.title}}</h2>
+                </div>
+                <qui-custom-form-item-wrapper [form]="form" [def]="ui?.visible" [key]="key" [ctrl]="ctrl">
+                    <nz-form-item [attr.data-form-key]="key">
+                        <nz-form-label>
+                            {{raw.title || key}}
+                            <ng-container *ngIf="!form.isRequired(key)">(optional)</ng-container>
+                        </nz-form-label>
+                        <nz-form-control [nzValidateStatus]="ctrl | nzValidateStatus"
+                                         [nzHasFeedback]="ui?.validator"
+                                         [nzErrorTip]="controlErrorTpl"
+                                         [nzExtra]="controlExtraTpl">
+                            <ng-container [ngSwitch]="raw | formControlType: ui">
+                                <!--Textarea-->
+                                <textarea *ngSwitchCase="'Textarea'" nz-input [formControlName]="key"
+                                          [attr.id]="'custom-form-control-' + key"
+                                          style="height: 100px;"
+                                          [placeholder]="ui?.placeholder"></textarea>
+                                <!--Number-->
+                                <nz-input-number *ngSwitchCase="'Number'" [formControlName]="key"
+                                                 [nzPlaceHolder]="ui?.placeholder"
+                                                 [attr.id]="'custom-form-control-' + key"></nz-input-number>
+                                <!--Switch-->
+                                <nz-switch *ngSwitchCase="'Switch'" [formControlName]="key"
+                                           [attr.id]="'custom-form-control-' + key"></nz-switch>
+
+                                <!--Time-->
+                                <nz-time-picker *ngSwitchCase="'Time'" [formControlName]="key"
+                                                [attr.id]="'custom-form-control-' + key"></nz-time-picker>
+
+                                <!--Date-->
+                                <nz-date-picker *ngSwitchCase="'Date'" [formControlName]="key"
+                                                [attr.id]="'custom-form-control-' + key"></nz-date-picker>
+
+                                <!--DateTime-->
+                                <nz-date-picker *ngSwitchCase="'DateTime'" nzShowTime
+                                                [formControlName]="key"
+                                                [attr.id]="'custom-form-control-' + key"></nz-date-picker>
+
+                                <!--DateRange-->
+                                <nz-range-picker *ngSwitchCase="'DateRange'" [formControlName]="key"
+                                                 [attr.id]="'custom-form-control-' + key"></nz-range-picker>
+
+                                <!--Rate-->
+                                <nz-rate *ngSwitchCase="'Rate'" [formControlName]="key" nzAllowHalf
+                                         [attr.id]="'custom-form-control-' + key"></nz-rate>
+
+                                <!--Checkbox-->
+                                <label *ngSwitchCase="'Checkbox'" nz-checkbox
+                                       [formControlName]="key"
+                                       [attr.id]="'custom-form-control-' + key">{{ui?.label}}</label>
+
+                                <qui-checkbox-group *ngSwitchCase="'CheckboxGroup'" [schema]="raw" [ui]="ui"
+                                                    [formControlName]="key"
+                                                    [attr.id]="'custom-form-control-' + key"></qui-checkbox-group>
+
+                                <qui-select *ngSwitchCase="'Select'" [schema]="raw" [ui]="ui"
+                                            [formControlName]="key"
+                                            [form]="formGroup"
+                                            [attr.id]="'custom-form-control-' + key"></qui-select>
+
+                                <!--RadioGroup-->
+                                <nz-radio-group *ngSwitchCase="'RadioGroup'" [formControlName]="key"
+                                                [attr.id]="'custom-form-control-' + key">
+                                    <ng-container *ngIf="raw.enum?.length">
+                                        <label nz-radio [nzValue]="rItem.value"
+                                               *ngFor="let rItem of raw.enum | labelValue">{{rItem.label}}</label>
+                                    </ng-container>
+                                </nz-radio-group>
+
+                                <!--Text-->
+                                <input *ngSwitchCase="'Text'" nz-input [formControlName]="key"
+                                       [attr.id]="'custom-form-control-' + key"
+                                       [placeholder]="ui?.placeholder"/>
+
+                                <!--biz controls-->
+                                <qui-policy-input *ngSwitchCase="'PolicyInput'" [schema]="raw" [ui]="ui"
+                                                  [formControlName]="key"
+                                                  [form]="formGroup"
+                                                  [attr.id]="'custom-form-control-' + key"></qui-policy-input>
+
+                                <qui-approval-process-input *ngSwitchCase="'ApprovalProcessInput'"
+                                                            [schema]="raw"
+                                                            [form]="formGroup"
+                                                            [ui]="ui" [attr.id]="'custom-form-control-' + key"
+                                                            [formControlName]="key"></qui-approval-process-input>
+
+                                <qui-naming-rule-input *ngSwitchCase="'NamingRuleInput'"
+                                                       [schema]="raw"
+                                                       [form]="formGroup"
+                                                       [ui]="ui" [attr.id]="'custom-form-control-' + key"
+                                                       [formControlName]="key"></qui-naming-rule-input>
+
+                                <qui-team-rules-input *ngSwitchCase="'BizTeamRulesInput'"
+                                                      [schema]="raw"
+                                                      [form]="formGroup"
+                                                      [ui]="ui" [attr.id]="'custom-form-control-' + key"
+                                                      [formControlName]="key"></qui-team-rules-input>
+
+                                <qui-team-template-input *ngSwitchCase="'BizTeamTemplateInput'"
+                                                      [schema]="raw"
+                                                      [form]="formGroup"
+                                                      [ui]="ui" [attr.id]="'custom-form-control-' + key"
+                                                      [formControlName]="key"></qui-team-template-input>
+
+                                <!--End biz controls-->
+                                <!--Unknown-->
+                                <!--Default-->
+                                <span *ngSwitchDefault>
+                                    Unknown form control
+                                </span>
+                            </ng-container>
+
+                            <ng-template #controlExtraTpl>
+                                <ng-container *ngIf="raw.description && !ctrl.errors">
+                                    {{raw.description}}
+                                </ng-container>
+                            </ng-template>
+                            <ng-template #controlErrorTpl let-control>
+                                <qui-custom-form-error *ngIf="ctrl.errors && ctrl.touched" [data]="ctrl.errors"
+                                                       [def]="raw"></qui-custom-form-error>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </qui-custom-form-item-wrapper>
+            </ng-template>
+
+            <ng-container *ngFor="let item of form.controls | keys">
+                <ng-container
+                    *ngTemplateOutlet="itemTemplate; context: {$implicit: item.value?.rawSchema, ui: item.value?.rawUiDef, key: item.key, formGroup: form.instance, ctrl: item.value}">
+                </ng-container>
+            </ng-container>
+            <!--actions-->
+            <nz-form-item class="action-row">
+                <nz-form-label [nzSpan]="form.labelSpan" nzNoColon="true"></nz-form-label>
+                <nz-form-control [nzSpan]="form.controlSpan">
+                    <div class="form-actions">
+                        <button id="custom-form-ok-btn" nz-button nzType="primary" type="button"
+                                [disabled]="form.instance.invalid || form.instance.pending" (click)="submit()"
+                                [nzLoading]="submitting">
+                            {{conf?.config?.ui?.submitText || 'Submit'}}
+                        </button>
+                        <button id="custom-form-cancel-btn" nz-button nzType="default" type="button" (click)="cancel()">
+                            {{conf?.config?.ui?.cancelText || 'Cancel'}}
+                        </button>
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+</nz-spin>
+<qui-spinner *ngIf="loadingData"></qui-spinner>

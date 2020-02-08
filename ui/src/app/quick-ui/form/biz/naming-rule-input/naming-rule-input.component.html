@@ -1,0 +1,45 @@
+<nz-spin class="naming-rule-input-spin" [nzSpinning]="isRunningCommand" *ngIf="formArray">
+    <div class="qui-custom-form-control qui-custom-form-naming-rule-input">
+        <ng-template #itemTemplate let-raw let-ctrl="ctrl">
+            <nz-form-item class="naming-rule-section">
+                <nz-form-label class="naming-rule-section-description">
+                    {{raw.description}} <span *ngIf="raw.dataType === 'Connector'">&nbsp;</span>
+                </nz-form-label>
+                <nz-form-control class="naming-rule-section-control" [formGroup]="ctrl" [nzHasFeedback]="true"
+                                 (click)="onTouchedCallback()">
+                    <ng-container [ngSwitch]="raw.dataType">
+                        <ng-container *ngSwitchCase="'Enumeration'">
+                            <nz-select class="field-control enumeration-select" formControlName="value"
+                                       style="width: 100%;">
+                                <nz-option [nzValue]="v" [nzLabel]="v" *ngFor="let v of raw.value"></nz-option>
+                            </nz-select>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'UserAttribute'">
+                            <input type="hidden" formControlName="value">
+                            <input class="field-control user-attribute-select" formControlName="value" nz-input
+                                   style="width: 100%;"/>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'FlexibleText'">
+                            <input class="field-control flexible-text-input" formControlName="value" nz-input
+                                   style="width: 100%;"/>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'FixedField'">
+                            <input class="field-control fixed-input" formControlName="value" nz-input style="width: 100%;"/>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'Connector'">
+                            <input type="hidden" formControlName="value">
+                            <div class="connector-field">
+                                <span>{{raw.value}}</span>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </nz-form-control>
+            </nz-form-item>
+        </ng-template>
+        <ng-container *ngFor="let item of formArray?.controls;  let i = index;">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item.raw, ctrl: item}"></ng-container>
+        </ng-container>
+    </div>
+</nz-spin>
+<nz-alert nzType="warning" nzMessage="Please select a category." [nzShowIcon]="false" *ngIf="!formArray"></nz-alert>
+

@@ -1,0 +1,12 @@
+/*
+As the svg files from @ondemand/edc-icons include fill="none" attribute,
+so need to overwrite it to allow developer to change the color from higher level
+*/
+i {
+  svg {
+    fill: currentColor;
+    g {
+      fill: currentColor;
+    }
+  }
+}

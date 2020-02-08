@@ -1,0 +1,51 @@
+<nz-layout style="height: 100vh;">
+    <nz-header>
+        <div class="header">
+            <div class="primary-actions">
+                <div class="app-name" *ngIf="name">
+                    {{name}}
+                </div>
+                <div>
+                    <ng-content select="app-editor-primary-actions"></ng-content>
+                </div>
+            </div>
+            <div class="extend-actions">
+                <ng-content select="app-editor-secondary-actions"></ng-content>
+                <button routerLink="/" style="margin-left: 8px;" nz-button nzType="primary">Exit</button>
+            </div>
+        </div>
+    </nz-header>
+    <nz-layout>
+        <as-split unit="pixel" direction="horizontal" gutterSize="1">
+            <as-split-area size="320" minSize="200" maxSize="600">
+                <div class="content-wrapper">
+                    <div class="filter">
+                        <nz-input-group [nzPrefix]="prefixTemplate" [nzSuffix]="suffixTemplate">
+                            <input type="text" nz-input placeholder="Filter" [ngModel]="keyword"
+                                   (ngModelChange)="keywordChanged($event)"/>
+                        </nz-input-group>
+                        <ng-template #prefixTemplate><i nz-icon type="search"></i></ng-template>
+                        <ng-template #suffixTemplate><i
+                            nz-icon
+                            nz-tooltip
+                            class="ant-input-clear-icon"
+                            nzTheme="fill"
+                            nzType="close-circle"
+                            *ngIf="keyword"
+                            (click)="keywordChanged(null)"></i>
+                        </ng-template>
+                    </div>
+                    <ng-content select="app-editor-sider"></ng-content>
+                </div>
+            </as-split-area>
+            <as-split-area size="*">
+                <div class="content-wrapper">
+                    <ng-content select="app-editor-content"></ng-content>
+                </div>
+            </as-split-area>
+        </as-split>
+    </nz-layout>
+    <nz-footer class="footer">
+        <ng-content select="app-editor-footer"></ng-content>
+    </nz-footer>
+</nz-layout>

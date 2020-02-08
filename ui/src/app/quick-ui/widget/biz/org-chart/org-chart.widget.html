@@ -1,0 +1,72 @@
+<section class="parent">
+    <nz-card style="width:400px;" [nzActions]="[viewAction]">
+        <nz-card-meta
+            nzTitle="Sam Huang"
+            nzDescription="Software Engineer Sr. Manager"
+            [nzAvatar]="avatarTemplate"></nz-card-meta>
+    </nz-card>
+    <nz-divider nzType="vertical" style="height: 30px;"></nz-divider>
+</section>
+
+<section class="children">
+    <div nz-row [nzGutter]="8" style="margin-bottom: 18px;">
+        <div nz-col [nzSpan]="6">
+            <nz-card [nzActions]="[viewAction]">
+                <nz-card-meta
+                    nzTitle="Jason Nie"
+                    nzDescription="Software Dev Engineer"
+                    [nzAvatar]="avatarTemplate"></nz-card-meta>
+            </nz-card>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <nz-card [nzActions]="[viewAction]">
+                <nz-card-meta
+                    nzTitle="Shawn Huang"
+                    nzDescription="Software Dev Engineer"
+                    [nzAvatar]="avatarTemplate"></nz-card-meta>
+            </nz-card>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <nz-card [nzActions]="[viewAction]">
+                <nz-card-meta
+                    nzTitle="Summer Lu"
+                    nzDescription="Software Dev Engineer"
+                    [nzAvatar]="avatarTemplate"></nz-card-meta>
+            </nz-card>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <nz-card [nzActions]="[viewAction]">
+                <nz-card-meta
+                    nzTitle="Oscar Le"
+                    nzDescription="Software Dev Engineer"
+                    [nzAvatar]="avatarTemplate"></nz-card-meta>
+            </nz-card>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="6">
+            <nz-card [nzActions]="[viewAction]">
+                <nz-card-meta
+                    nzTitle="Alex Huang"
+                    nzDescription="Software Dev Engineer"
+                    [nzAvatar]="avatarTemplate"></nz-card-meta>
+            </nz-card>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <nz-card [nzActions]="[viewAction]">
+                <nz-card-meta
+                    nzTitle="Tina Nie"
+                    nzDescription="Software Dev Engineer"
+                    [nzAvatar]="avatarTemplate"></nz-card-meta>
+            </nz-card>
+        </div>
+    </div>
+</section>
+
+<ng-template #avatarTemplate>
+    <nz-avatar nzSize="large" nzIcon="user"></nz-avatar>
+</ng-template>
+
+<ng-template #viewAction>
+    <a (click)="open()">View Details</a>
+</ng-template>

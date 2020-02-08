@@ -1,0 +1,20 @@
+<div class="oauth2-login-widget widget">
+    <div class="content">
+        <img src="/assets/logo-placeholder.png">
+        <h2>Azure Active Directory User</h2>
+        <p>
+            You will be redirected to the Microsoft platform to securely sign in with your Microsoft account
+            credentials.
+        </p>
+        <div *ngIf="!isCallback">
+            <button id="login-button" nz-button nzType="default" nzSize="large" (click)="login()" [nzLoading]="runningCommand">
+                <i nz-icon nzType="active-directory"></i> Sign in with Azure AD
+            </button>
+            <nz-divider nzText="OR"></nz-divider>
+        </div>
+        <div *ngIf="isCallback && runningCommand">
+            <qui-spinner id="spinner"></qui-spinner>
+        </div>
+        <a id="register-link" routerLink="/register"  *ngIf="!isCallback">Connect to manage you tenant today</a>
+    </div>
+</div>

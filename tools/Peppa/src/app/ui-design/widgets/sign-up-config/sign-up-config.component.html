@@ -1,0 +1,24 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+    <nz-form-item>
+        <nz-form-label>Consent Url Command</nz-form-label>
+        <nz-form-control nzExtra="Command to get admin consent url">
+            <app-command-def-control formControlName="authorize" (valueChange)="tokenCommandChange($event, true, 'redirectUrlPropName')"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Redirect Url Property</nz-form-label>
+        <nz-form-control nzExtra="The property name of response to be used to redirect to Office 365">
+            <nz-select formControlName="redirectUrlPropName" name="redirectUrlPropName">
+                <nz-option *ngFor="let t of authProperties" [nzLabel]="t" [nzValue]="t"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Register Command</nz-form-label>
+        <nz-form-control nzExtra="Command to register">
+            <app-command-def-control formControlName="register"></app-command-def-control>
+        </nz-form-control>
+    </nz-form-item>
+</form>

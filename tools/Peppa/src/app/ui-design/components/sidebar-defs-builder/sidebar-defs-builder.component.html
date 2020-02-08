@@ -1,0 +1,30 @@
+<div nz-row nzGutter="16" style="margin: 1rem 0;">
+    <div nz-col nzSpan="12">
+        Sidebars
+    </div>
+    <div nz-col nzSpan="12" style="text-align: right;">
+        <button nz-button (click)="appendItem()" nzSize="small">
+            <i nz-icon nzType="plus" nzTheme="outline"></i>
+        </button>
+    </div>
+</div>
+<nz-empty *ngIf="!form?.controls?.length"></nz-empty>
+
+<ng-container *ngIf="form?.controls?.length">
+    <div nz-row nzGutter="16" nzAlign="middle" style="margin-bottom: 0.5rem;"
+         *ngFor="let item of form.controls; let i = index;" [formGroup]="item" nzType="flex">
+        <div nz-col nzSpan="2">
+            #{{i + 1}}
+        </div>
+        <div nz-col nzSpan="12">
+            <input nz-input formControlName="name" pattern="^[a-z][a-z0-9_]+"/>
+        </div>
+        <div nz-col nzSpan="6">
+            <app-menu-def-control formControlName="items"
+                                  [preview]="false" [allowGroup]="true"></app-menu-def-control>
+        </div>
+        <div nz-col nzSpan="4">
+            <i nz-icon nzType="close-circle" nzTheme="outline" (click)="removeItem(i)"></i>
+        </div>
+    </div>
+</ng-container>

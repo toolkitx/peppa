@@ -1,0 +1,12 @@
+<nz-form-item>
+    <nz-form-control [nzSm]="24">
+        You are duplicating property <strong>{{node?.title}}</strong>, please enter a new name for it.
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-control [nzSm]="24" [nzValidateStatus]="isValid ? 'success' : 'error'">
+        <input nz-input
+               placeholder="New name, should be start with lower case character."
+               [(ngModel)]="newName" pattern="^[a-z][A-Za-z0-9]+$"/>
+    </nz-form-control>
+</nz-form-item>

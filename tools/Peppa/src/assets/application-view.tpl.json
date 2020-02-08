@@ -1,0 +1,161 @@
+[
+    {
+        "name": "Custom",
+        "displayName": "Custom",
+        "description": "Empty view, customize it yourself.",
+        "data": {
+            "name": null,
+            "title": null,
+            "default": false,
+            "sidebar": null,
+            "widgets": [],
+            "permissions": ["GeneralUser"]
+        }
+    },
+    {
+        "name": "app-form",
+        "displayName": "Form",
+        "description": "Custom form view",
+        "data": {
+            "name": null,
+            "title": "Form",
+            "default": false,
+            "sidebar": null,
+            "widgets": [
+                {
+                    "type": "CustomForm",
+                    "wrapper": "Card",
+                    "config": {
+                        "command": null,
+                        "data": null,
+                        "ui": null
+                    }
+                }
+            ],
+            "permissions": [
+                "GeneralUser"
+            ]
+        }
+    },
+    {
+        "name": "app-login",
+        "displayName": "Login",
+        "description": "login view",
+        "data": {
+            "name": null,
+            "title": "List View",
+            "default": false,
+            "sidebar": null,
+            "widgets": [
+                {
+                    "id": "loginForm",
+                    "type": "Oauth2Login",
+                    "wrapper": "None",
+                    "config": {
+                        "authorize": {
+                            "command": "GetOauth2LoginUrl",
+                            "payload": {
+                                "redirectUrl": "$location(login)"
+                            }
+                        },
+                        "token": {
+                            "command": "ExchangeOauth2AccessToken",
+                            "payload": {
+                                "code": "$query(code)",
+                                "redirectUrl": "$location(login)"
+                            }
+                        },
+                        "redirectUrlPropName": "authorizationUrl",
+                        "tokenPropName": "id_token"
+                    }
+                }
+            ],
+            "permissions": [
+                "Anonymous"
+            ]
+        }
+    },
+    {
+        "name": "app-list",
+        "displayName": "List",
+        "description": "ist view",
+        "data": {
+            "name": null,
+            "title": "List View",
+            "default": false,
+            "sidebar": null,
+            "widgets": [
+                {
+                    "type": "Table",
+                    "wrapper": "Card",
+                    "config": {
+                        "command": "Users",
+                        "fields": [
+                            {
+                                "key": "key",
+                                "displayName": "KEY"
+                            },
+                            {
+                                "key": "name",
+                                "displayName": "Name"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "permissions": [
+                "GeneralUser"
+            ]
+        }
+    },
+    {
+        "name": "app-detail",
+        "displayName": "Detail",
+        "description": "Detail view",
+        "data": {
+            "name": null,
+            "title": "List View",
+            "default": false,
+            "sidebar": null,
+            "widgets": [
+                {
+                    "type": "Table",
+                    "wrapper": "Card",
+                    "config": {
+                        "command": "Users",
+                        "fields": [
+                            {
+                                "key": "key",
+                                "displayName": "KEY"
+                            },
+                            {
+                                "key": "name",
+                                "displayName": "Name"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Table",
+                    "wrapper": "Card",
+                    "config": {
+                        "command": "Users",
+                        "fields": [
+                            {
+                                "key": "key",
+                                "displayName": "KEY"
+                            },
+                            {
+                                "key": "name",
+                                "displayName": "Name"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "permissions": [
+                "GeneralUser"
+            ]
+        }
+    }
+]
