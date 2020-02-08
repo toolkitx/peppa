@@ -1,0 +1,296 @@
+{
+    "instanceId": "86716010-4195-4a18-8db2-3efd60a5cac7",
+    "state": "Completed",
+    "output": {
+        "results": [
+            {
+                "name": "Team Naming Rule",
+                "description": "The naming conventions for teams.",
+                "coverage": "All",
+                "id": "1b8cd8a8-25c9-41a0-83f9-449c6536260f",
+                "code": "P001",
+                "targetAttributeType": "TargetNamingRule",
+                "targetAttributeDefaultValue": "",
+                "targetAttributeOption": [],
+                "codeName": "Naming Rule"
+            },
+            {
+                "name": "Block visibility in the team gallery",
+                "description": "Teams can not be viewed in the team gallery (self-service portal) if enable this policy.",
+                "coverage": "All",
+                "id": "d2cf18d0-9620-439d-9c6f-fb125e31b8ca",
+                "code": "P005",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Block visibility in the team gallery"
+            },
+            {
+                "name": "Team lifetime",
+                "description": "team lifetime",
+                "coverage": "All",
+                "id": "a24f93eb-91d0-412e-b28b-546d54f0d48c",
+                "code": "P004",
+                "targetAttributeType": "TargetEnum",
+                "targetAttributeDefaultValue": "All",
+                "targetAttributeOption": [
+                    "Permanent",
+                    "Temporary",
+                    "All"
+                ],
+                "codeName": "Team lifetime"
+            },
+            {
+                "name": "Team minimum owner count",
+                "description": "The minimum number of owners that a team must have.",
+                "coverage": "Static",
+                "id": "f5db49d0-c424-4a8b-8fff-bb6915fcf481",
+                "code": "P103",
+                "targetAttributeType": "TargetInteger",
+                "targetAttributeDefaultValue": "0",
+                "targetAttributeOption": [],
+                "codeName": "Team minimum owner count"
+            },
+            {
+                "name": "Team maximum member count",
+                "description": "The maximum number of members that a team must have.",
+                "coverage": "Static",
+                "id": "e246a982-a4cb-4624-9efb-0947a5ca50cc",
+                "code": "P106",
+                "targetAttributeType": "TargetInteger",
+                "targetAttributeDefaultValue": "0",
+                "targetAttributeOption": [],
+                "codeName": "Team maximum member count"
+            },
+            {
+                "name": "Team minimum member count",
+                "description": "The minimum number of members that a team must have.",
+                "coverage": "Static",
+                "id": "a270dd42-8d63-48a7-a334-f4d5cdda6023",
+                "code": "P105",
+                "targetAttributeType": "TargetInteger",
+                "targetAttributeDefaultValue": "0",
+                "targetAttributeOption": [],
+                "codeName": "Team minimum member count"
+            },
+            {
+                "name": "Team maximum owner count",
+                "description": "The maximum number of owners that a team must have.",
+                "coverage": "Static",
+                "id": "c4ab218f-06c2-478f-a70d-52fb3d0d4620",
+                "code": "P104",
+                "targetAttributeType": "TargetInteger",
+                "targetAttributeDefaultValue": "0",
+                "targetAttributeOption": [],
+                "codeName": "Team maximum owner count"
+            },
+            {
+                "name": "Team member lifetime",
+                "description": "Team member lifetime",
+                "coverage": "All",
+                "id": "3bf8caab-3b27-4afc-8ab1-b79be4d210e6",
+                "code": "P102",
+                "targetAttributeType": "TargetEnum",
+                "targetAttributeDefaultValue": "Permanent",
+                "targetAttributeOption": [
+                    "Permanent",
+                    "Temporary",
+                    "All"
+                ],
+                "codeName": "Team member lifetime"
+            },
+            {
+                "name": "Allow custom memes",
+                "description": "Allow custom memes",
+                "coverage": "All",
+                "id": "81bb769b-18dc-462c-be1d-e761b9482a76",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Fun settings"
+            },
+            {
+                "name": "Team Privacy",
+                "description": "The public privacy of teams.",
+                "coverage": "All",
+                "id": "1b8cd8a8-25c9-41a0-83f9-449c6536260f",
+                "code": "P002",
+                "targetAttributeType": "TargetEnum",
+                "targetAttributeDefaultValue": "Public",
+                "targetAttributeOption": [
+                    "All",
+                    "Public",
+                    "Private"
+                ],
+                "codeName": "Team Privacy"
+            },
+            {
+                "name": "Member Allow creating & updating channels",
+                "description": "Allow creating & updating channels",
+                "coverage": "All",
+                "id": "e2217460-f69b-48e2-9191-624d190c13f6",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Member settings"
+            },
+            {
+                "name": "Giphy content rating",
+                "description": "Giphy content rating",
+                "coverage": "All",
+                "id": "faeb3735-e159-4bc0-87b6-13f3046a96aa",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Fun settings"
+            },
+            {
+                "name": "Member Allow deleting channels",
+                "description": "Allow deleting channels.",
+                "coverage": "All",
+                "id": "149e3aca-2be7-4291-abad-22f4a16b3b85",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Member settings"
+            },
+            {
+                "name": "Allow creating & updating & removing tabs",
+                "description": "Allow creating & updating & removing tabs",
+                "coverage": "All",
+                "id": "c93216f0-1f70-4713-9e15-af924b3ecb1b",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings"
+            },
+            {
+                "name": "Allow creating & updating & removing connectors",
+                "description": "Allow creating & updating & removing connectors",
+                "coverage": "All",
+                "id": "785447c6-a07f-410f-be52-95db82c52f05",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Member settings"
+            },
+            {
+                "name": "Guest Allow creating & updating channels",
+                "description": "Allow creating & updating & removing connectors",
+                "coverage": "All",
+                "id": "35d19612-6ebf-4e93-8f69-4349aca82743",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Guest settings"
+            },
+            {
+                "name": "Guest allow deleting channels",
+                "description": "Guest allow deleting channels",
+                "coverage": "All",
+                "id": "7159ca09-078b-44cb-90da-0c8260a06f93",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Guest settings"
+            },
+            {
+                "name": "Allow user to edit messages",
+                "description": "Allow user to edit messages",
+                "coverage": "All",
+                "id": "6b84d2d9-7894-40ae-bec5-b2158869ef47",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Messaging settings"
+            },
+            {
+                "name": "Allow user to delete messages",
+                "description": "Allow user to delete messages",
+                "coverage": "All",
+                "id": "7f616fec-13be-49e3-8448-df23dece876c",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Messaging settings"
+            },
+            {
+                "name": "Allow owner to delete messages",
+                "description": "Allow owner to delete messages",
+                "coverage": "All",
+                "id": "0d155a40-2ad0-40e9-8e57-c9f5e59c31bc",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Messaging settings"
+            },
+            {
+                "name": "Allow team mentions",
+                "description": "Allow team mentions",
+                "coverage": "All",
+                "id": "d9c3843d-ba13-43b6-bfc0-b69c9da725c9",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Messaging settings"
+            },
+            {
+                "name": "Allow channel mentions",
+                "description": "Allow channel mentions",
+                "coverage": "All",
+                "id": "98304e23-23a6-4d71-974e-c5fad1aae3eb",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Messaging settings"
+            },
+            {
+                "name": "Allow giphy",
+                "description": "Allow giphy",
+                "coverage": "All",
+                "id": "98304e23-23a6-4d71-974e-c5fad1aae3eb",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Fun settings"
+            },
+            {
+                "name": "Allow stickers & memes",
+                "description": "Allow stickers & memes",
+                "coverage": "All",
+                "id": "81bb769b-18dc-462c-be1d-e761b9482a76",
+                "code": "P003",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Team settings - Fun settings"
+            },
+            {
+                "name": "Allow guest member",
+                "description": "Team can have guest members if enable this policy.",
+                "coverage": "Static",
+                "id": "8c4ab3cc-9363-4f1e-95fa-02c5f1a628b3",
+                "code": "P101",
+                "targetAttributeType": "TargetBoolean",
+                "targetAttributeDefaultValue": "False",
+                "targetAttributeOption": [],
+                "codeName": "Block visibility in the team gallery"
+            }
+        ],
+        "total": 25
+    }
+}

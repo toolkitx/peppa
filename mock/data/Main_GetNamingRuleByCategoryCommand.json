@@ -1,0 +1,12 @@
+{
+    "state": "Completed",
+    "output": {
+        "total": 1,
+        "results": [
+            {
+                "name": "Team Naming Rule",
+                "value": "[{\"description\":\"Enum\",\"dataType\":\"Enumeration\",\"value\":[\"Quest\",\"OneIdentity\"]},{\"dataType\":\"Connector\",\"value\":\".\"},{\"description\":\"Type\",\"dataType\":\"Enumeration\",\"value\":[\"EXT\",\"INT\",\"CON\"]},{\"dataType\":\"Connector\",\"value\":\".\"},{\"description\":\"Flexible\",\"dataType\":\"FlexibleText\",\"value\":null},{\"dataType\":\"Connector\",\"value\":\".\"},{\"description\":\"Fixed\",\"dataType\":\"FixedField\",\"value\":\"Test\"}]"
+            }
+        ]
+    }
+}

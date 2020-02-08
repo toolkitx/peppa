@@ -1,0 +1,12 @@
+{
+    "state": "Completed",
+    "output": {
+        "total": 4,
+        "results": [
+            {"displayName": "Quest.EXT.Team1", "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "privacy": "Public", "email":"team1@test.com", "id":"1", "categoryName": "External", "people": 34, "memberType": "Member"},
+            {"displayName": "Quest.INT.Team2", "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "privacy": "Public", "email":"team2@test.com", "id":"2", "categoryName": "Internal", "people": 52, "memberType": "Member"},
+            {"displayName": "Quest.CON.Team3", "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "privacy": "Private", "email":"team3@test.com", "id":"3", "categoryName": "Confidential", "people": 2, "memberType": "Member"},
+            {"displayName": "Quest.EXT.Team4", "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "privacy": "Public", "email":"team1@test.com", "id":"1", "categoryName": "External", "people": 34, "memberType": "Member"}
+    ]
+    }
+}

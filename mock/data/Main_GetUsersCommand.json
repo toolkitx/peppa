@@ -1,0 +1,12 @@
+{
+	"state": "Completed",
+	"output": {
+		"total": 4,
+		"results": [
+			{"id": "1", "userName": "User 1", "displayName": "Sandra Maurer"},
+			{"id": "2", "userName": "User 2", "displayName": "Amy Wolf"},
+			{"id": "3", "userName": "User 3", "displayName": "Stephen Mason"},
+			{"id": "4", "userName": "User 4", "displayName": "Sandra Broadway"}
+		]
+	}
+}

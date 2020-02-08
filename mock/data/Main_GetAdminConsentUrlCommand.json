@@ -1,0 +1,6 @@
+{
+    "state": "Completed",
+    "output": {
+        "consentUrl": "http://localhost:9000/register?code=mock-code"
+    }
+}

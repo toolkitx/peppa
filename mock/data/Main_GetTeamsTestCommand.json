@@ -1,0 +1,18 @@
+{
+    "state": "Completed",
+    "output": {
+       "total": 30,
+       "results": [
+         {"name": "Team 1", "description": "This is team 1", "email":"team1@test.com","id":"1", "private":false, "created": 1566437927050},
+         {"name": "Team 2", "description": "This is team 2", "email":"team2@test.com","id":"2", "private":false, "created": 1566437927050},
+         {"name": "Team 3", "description": "This is team 3", "email":"team3@test.com","id":"3", "private":false, "created": 1566437927050},
+         {"name": "Team 4", "description": "This is team 4", "email":"team4@test.com","id":"4", "private":false, "created": 1566437927050},
+         {"name": "Team 5", "description": "This is team 5", "email":"team5@test.com","id":"5", "private":true, "created": 1566437927050},
+         {"name": "Team 6", "description": "This is team 1", "email":"team1@test.com","id":"1", "private":false, "created": 1566437927050},
+         {"name": "Team 7", "description": "This is team 2", "email":"team2@test.com","id":"2", "private":false, "created": 1566437927050},
+         {"name": "Team 8", "description": "This is team 3", "email":"team3@test.com","id":"3", "private":false, "created": 1566437927050},
+         {"name": "Team 9", "description": "This is team 4", "email":"team4@test.com","id":"4", "private":false, "created": 1566437927050},
+         {"name": "Team 10", "description": "This is team 5", "email":"team5@test.com","id":"5", "private":true, "created": 1566437927050}
+      ]
+    }
+  }

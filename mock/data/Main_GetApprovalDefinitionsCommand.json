@@ -1,0 +1,39 @@
+{
+  "instanceId": "33db8c53-c3d8-4282-85fa-2f4de40b0fca",
+  "state": "Completed",
+  "output": {
+      "results": [
+          {
+              "id": "6255f8b1-9fbf-4469-9305-77ee8692453b",
+              "approvedBy": "Manager",
+              "description": "The direct manager of the requester",
+              "dataSource": ""
+          },
+          {
+              "id": "3d2c481d-dd93-488f-8b87-a7cd8589e957",
+              "approvedBy": "2nd manager",
+              "description": "The manager of requester's direct manager",
+              "dataSource": ""
+          },
+          {
+              "id": "835f31a2-78c4-44db-99bc-df5ecd779cab",
+              "approvedBy": "Owners",
+              "description": "The owner of the team. Anyone of the owners approved/rejected, then this step is approved/rejected",
+              "dataSource": ""
+          },
+          {
+              "id": "97dbb224-b994-4203-8380-a0f51397beee",
+              "approvedBy": "Specific User",
+              "description": "Need assign a user as approver manually",
+              "dataSource": "Main_GetUserCommand"
+          },
+          {
+              "id": "4d74e683-6699-4202-987f-05d972dcf964",
+              "approvedBy": "Specific Group",
+              "description": "Need assign a group as approver manually. Anyone of the group approved/rejected, then this step is approved/rejected",
+              "dataSource": "Main_GetUserCommand"
+          }
+      ],
+      "total": 5
+  }
+}

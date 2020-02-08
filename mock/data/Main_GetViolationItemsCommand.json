@@ -1,0 +1,14 @@
+{
+    "state": "Completed",
+    "output": {
+       "total": 6,
+       "results": [
+         {"id": "req-1","teamId": "mock-id","teamDisplayName": "Quest.EXT.Team1","categoryId": "mock-cat-id","categoryName": "External","policyName": "Team maximum owner count","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180},
+         {"id": "req-2","teamId": "mock-id","teamDisplayName": "Quest.INT.Team2","categoryId": "mock-cat-id","categoryName": "Internal","policyName": "Allow team mentions","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180},
+         {"id": "req-3","teamId": "mock-id","teamDisplayName": "Quest.CON.Team3","categoryId": "mock-cat-id","categoryName": "Confidential","policyName": "Allow user to delete messages","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180},
+         {"id": "req-4","teamId": "mock-id","teamDisplayName": "Quest.EXT.Team4","categoryId": "mock-cat-id","categoryName": "External","policyName": "Team minimum owner count","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180},
+         {"id": "req-5","teamId": "mock-id","teamDisplayName": "Quest.INT.Team5","categoryId": "mock-cat-id","categoryName": "Internal","policyName": " Team maximum member count","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180},
+         {"id": "req-6","teamId": "mock-id","teamDisplayName": "Quest.CON.Team6","categoryId": "mock-cat-id","categoryName": "Confidential","policyName": "Team maximum owner count","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180}
+      ]
+    }
+  }

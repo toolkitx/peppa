@@ -1,0 +1,31 @@
+{
+    "state": "Completed",
+    "output": {
+        "total": 30,
+        "results": [
+            {
+                "name": "Create team",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "id": "c4423fbd-0299-462b-a701-ad9fe1b1bc72",
+                "needEscalation": false,
+                "approvalSteps": [
+                    {
+                        "stepName": "Owner",
+                        "approvalId": "835f31a2-78c4-44db-99bc-df5ecd779cab",
+                        "approverId": "",
+                        "approverName": ""
+                    }
+                ]
+            },
+            {
+                "name": "Join team",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "needEscalation": true,
+                "approvalSteps": null,
+                "id": "c4423fbd-0299-462b-a701-ad9fe1b1bc74",
+                "updatedTime": 1566437927050,
+                "createdTime": 1566437927050
+            }
+        ]
+    }
+}

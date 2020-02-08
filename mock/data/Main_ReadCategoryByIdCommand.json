@@ -1,0 +1,180 @@
+{
+  "instanceId": "cc22a017-eacb-4a6c-b895-31f7622cded6",
+  "state": "Completed",
+  "output": {
+    "name": "TestCat",
+    "description": "45646et643643",
+    "id": "9ea567e4-7698-42ed-ab22-2e0fff2d616a",
+    "policies": [
+      {
+        "name": "Team Naming Rule",
+        "type": "Object",
+        "description": "The naming conventions for teams.",
+        "coverage": "All",
+        "value": "[{\"description\":\"11\",\"dataType\":\"FlexibleText\",\"value\":null},{\"description\":\"fdg\",\"dataType\":\"Enumeration\",\"value\":[\"df\",\"dff\"]},{\"description\":\"3343\",\"dataType\":\"UserAttribute\",\"value\":\"lastName\"}]",
+        "id": "1b8cd8a8-25c9-41a0-83f9-449c6536260f",
+        "code": "P001",
+        "isAutoCorrect": "false",
+        "targetAttributeType": "TargetNamingRule",
+        "targetAttributeDefaultValue": "",
+        "targetAttributeOption": [],
+        "codeName": "Naming Rule",
+        "isMonitoring": false,
+        "correctCommand": null,
+        "checkingType": [
+          "Create"
+        ],
+        "targetAttribute": "NamingRule",
+        "relationOperator": null
+      },
+      {
+        "name": "Team Privacy",
+        "type": "Object",
+        "description": "The public privacy of teams.",
+        "coverage": "All",
+        "value": "All",
+        "id": "1b8cd8a8-25c9-41a0-83f9-449c6536260f",
+        "code": "P002",
+        "isAutoCorrect": "false",
+        "targetAttributeType": "TargetEnum",
+        "targetAttributeDefaultValue": "0",
+        "targetAttributeOption": [
+          "All",
+          "Public",
+          "Private"
+        ],
+        "codeName": "Team Privacy",
+        "isMonitoring": false,
+        "correctCommand": null,
+        "checkingType": [
+          "Create",
+          "UpdateBasicInfo",
+          "AssignCategory"
+        ],
+        "targetAttribute": "TeamPrivacy",
+        "relationOperator": null
+      },
+      {
+        "name": "Member Allow deleting channels",
+        "type": "Object",
+        "description": "Allow deleting channels.",
+        "coverage": "All",
+        "value": "true",
+        "id": "149e3aca-2be7-4291-abad-22f4a16b3b85",
+        "code": "P003",
+        "isAutoCorrect": "true",
+        "targetAttributeType": "TargetBoolean",
+        "targetAttributeDefaultValue": "false",
+        "targetAttributeOption": [],
+        "codeName": "Team settings - Member settings",
+        "isMonitoring": true,
+        "correctCommand": null,
+        "checkingType": [
+          "Create",
+          "AssignCategory"
+        ],
+        "targetAttribute": "MemberAllowDeletingChannels",
+        "relationOperator": null
+      },
+      {
+        "name": "Allow creating & updating & removing tabs",
+        "type": "Object",
+        "description": "Allow creating & updating & removing tabs",
+        "coverage": "All",
+        "value": "true",
+        "id": "c93216f0-1f70-4713-9e15-af924b3ecb1b",
+        "code": "P003",
+        "isAutoCorrect": "true",
+        "targetAttributeType": "TargetBoolean",
+        "targetAttributeDefaultValue": "false",
+        "targetAttributeOption": [],
+        "codeName": "Team settings",
+        "isMonitoring": true,
+        "correctCommand": null,
+        "checkingType": [
+          "Create",
+          "AssignCategory"
+        ],
+        "targetAttribute": "MemberAllowCreatingUpdatingRemovingTabs",
+        "relationOperator": null
+      },
+      {
+        "name": "Allow creating & updating & removing connectors",
+        "type": "Object",
+        "description": "Allow creating & updating & removing connectors",
+        "coverage": "All",
+        "value": "true",
+        "id": "785447c6-a07f-410f-be52-95db82c52f05",
+        "code": "P003",
+        "isAutoCorrect": "true",
+        "targetAttributeType": "TargetBoolean",
+        "targetAttributeDefaultValue": "false",
+        "targetAttributeOption": [],
+        "codeName": "Team settings - Member settings",
+        "isMonitoring": true,
+        "correctCommand": null,
+        "checkingType": [
+          "Create",
+          "AssignCategory"
+        ],
+        "targetAttribute": "MemberAllowCreateUpdateRemoveConnectors",
+        "relationOperator": null
+      },
+      {
+        "name": "Guest Allow creating & updating channels",
+        "type": "Object",
+        "description": "Allow creating & updating & removing connectors",
+        "coverage": "All",
+        "value": "true",
+        "id": "35d19612-6ebf-4e93-8f69-4349aca82743",
+        "code": "P003",
+        "isAutoCorrect": "true",
+        "targetAttributeType": "TargetBoolean",
+        "targetAttributeDefaultValue": "false",
+        "targetAttributeOption": [],
+        "codeName": "Team settings - Guest settings",
+        "isMonitoring": true,
+        "correctCommand": null,
+        "checkingType": [
+          "Create",
+          "AssignCategory"
+        ],
+        "targetAttribute": "GuestAllowCrateUpdateChannels",
+        "relationOperator": null
+      },
+      {
+        "name": "Team minimum member count",
+        "type": "Member",
+        "description": "The minimum number of members that a team must have.",
+        "coverage": "Static",
+        "value": "0",
+        "id": "a270dd42-8d63-48a7-a334-f4d5cdda6023",
+        "code": "P105",
+        "isAutoCorrect": "false",
+        "targetAttributeType": "TargetInteger",
+        "targetAttributeDefaultValue": "0",
+        "targetAttributeOption": [],
+        "codeName": "Team minimum member count",
+        "isMonitoring": true,
+        "correctCommand": null,
+        "checkingType": [
+          "UpdateMember",
+          "AssignCategory"
+        ],
+        "targetAttribute": "TeamMinimumMemberCount",
+        "relationOperator": null
+      }
+    ],
+    "securityGrade": "Low",
+    "createdTime": 1567133691307,
+    "automaticAttestations": [],
+    "typeName": "CategoryModel",
+    "directoryId": "25f72600-a98a-4697-b2c0-c6a167e6b4e5",
+    "organizationId": "7128b8be-0f87-4e4d-bd5e-ac252197524b",
+    "isDeleted": false,
+    "_rid": "jth+ALJwr5sDAAAAAAAAAA==",
+    "_self": "dbs/jth+AA==/colls/jth+ALJwr5s=/docs/jth+ALJwr5sDAAAAAAAAAA==/",
+    "_ts": 1567155081,
+    "_etag": "\"3f00ce05-0000-0300-0000-5d68e3890000\""
+  }
+}

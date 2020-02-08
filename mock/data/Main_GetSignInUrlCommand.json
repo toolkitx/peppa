@@ -1,0 +1,6 @@
+{
+    "state": "Completed",
+    "output": {
+        "signInUrl": "http://localhost:9000/login#id_token=mock-code"
+    }
+}

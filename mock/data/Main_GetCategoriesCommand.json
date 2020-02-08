@@ -1,0 +1,40 @@
+{
+    "state": "Completed",
+    "output": {
+        "total": 4,
+        "results": [
+            {
+                "name": "External",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+                "securityGrade": "Low",
+                "id": "c1",
+                "updatedTime": 1566437927050,
+                "createdTime": 1566437927050
+            },
+            {
+                "name": "Internal",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+                "securityGrade": "Medium",
+                "id": "c2",
+                "updatedTime": 1566437927050,
+                "createdTime": 1566437927050
+            },
+            {
+                "name": "Confidential",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "securityGrade": "High",
+                "id": "c3",
+                "updatedTime": 1566437927050,
+                "createdTime": 1566437927050
+            },
+            {
+                "name": "Others",
+                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "securityGrade": "Low",
+                "id": "c4",
+                "updatedTime": 1566437927050,
+                "createdTime": 1566437927050
+            }
+        ]
+    }
+}

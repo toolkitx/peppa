@@ -1,0 +1,10 @@
+{
+	"state": "Completed",
+	"output": {
+		"total": 2,
+		"results": [
+			{"label": "Public", "value": "Public"},
+			{"label": "Private", "value": "Private"}
+		]
+	}
+}

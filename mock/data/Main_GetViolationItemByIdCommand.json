@@ -1,0 +1,15 @@
+{
+    "state": "Completed",
+    "output": {
+        "id": "req-1",
+        "teamId": "mock-id",
+        "teamDisplayName": "Team 1",
+        "categoryId": "mock-cat-id",
+        "categoryName": "Cat 1",
+        "policyName": "Team Privacy",
+        "policyValue": "Private",
+        "state": "Pending",
+        "createdTime": 1568964557180,
+        "updatedTime": 1568964557180
+    }
+}

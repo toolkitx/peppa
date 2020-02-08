@@ -1,0 +1,41 @@
+{
+    "state": "Completed",
+    "output": [
+        {
+            "propertyName": "Team Privacy",
+            "originalValue": "Public",
+            "policyValue": "Private",
+            "correctType": "Auto"
+        },
+        {
+            "propertyName": "Allow user to edit messages",
+            "originalValue": "true",
+            "policyValue": "false",
+            "correctType": "Auto"
+        },
+        {
+            "propertyName": "Allow user to delete messages",
+            "originalValue": "true",
+            "policyValue": "false",
+            "correctType": "Auto"
+        },
+        {
+            "propertyName": "Allow owner to delete  messages",
+            "originalValue": "true",
+            "policyValue": "false",
+            "correctType": "Auto"
+        },
+        {
+            "propertyName": "Allow team mentions",
+            "originalValue": "true",
+            "policyValue": "false",
+            "correctType": "Auto"
+        },
+        {
+            "propertyName": "Allow channel mentions",
+            "originalValue": "true",
+            "policyValue": "false",
+            "correctType": "Auto"
+        }
+    ]
+}

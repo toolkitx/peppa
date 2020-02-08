@@ -1,0 +1,7 @@
+{
+    "state": "Completed",
+    "output": [
+        {"code": "AttestOwner", "question": "Do you want to keep or delete this team?"},
+        {"code": "AttestMember", "question": "Do you want to stay or leave this team?"}
+    ]
+  }

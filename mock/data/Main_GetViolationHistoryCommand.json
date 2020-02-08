@@ -1,0 +1,14 @@
+{
+    "state": "Completed",
+    "output": {
+       "total": 6,
+       "results": [
+         {"id": "req-1","teamId": "mock-id","teamDisplayName": "Team 1","categoryId": "mock-cat-id","categoryName": "Cat 1","policyName": "Team Privacy","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180, "operatorName": "Admin"},
+         {"id": "req-2","teamId": "mock-id","teamDisplayName": "Team 1","categoryId": "mock-cat-id","categoryName": "Cat 1","policyName": "Team Privacy","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180, "operatorName": "Admin"},
+         {"id": "req-3","teamId": "mock-id","teamDisplayName": "Team 1","categoryId": "mock-cat-id","categoryName": "Cat 1","policyName": "Team Privacy","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180, "operatorName": "Admin"},
+         {"id": "req-4","teamId": "mock-id","teamDisplayName": "Team 1","categoryId": "mock-cat-id","categoryName": "Cat 1","policyName": "Team Privacy","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180, "operatorName": "Admin"},
+         {"id": "req-5","teamId": "mock-id","teamDisplayName": "Team 1","categoryId": "mock-cat-id","categoryName": "Cat 1","policyName": "Team Privacy","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180, "operatorName": "Admin"},
+         {"id": "req-6","teamId": "mock-id","teamDisplayName": "Team 1","categoryId": "mock-cat-id","categoryName": "Cat 1","policyName": "Team Privacy","policyValue": "Private","state": "Pending", "createdTime": 1568964557180, "updatedTime": 1568964557180, "operatorName": "Admin"}
+      ]
+    }
+  }

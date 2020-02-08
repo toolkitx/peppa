@@ -1,0 +1,8 @@
+{
+  "state": "Fail",
+  "output": {
+    "instanceId": "test-id",
+    "commandName": "Main_GetRegionsCommand",
+    "errorMessageId": "FailedToGetOrganization"
+  }
+}

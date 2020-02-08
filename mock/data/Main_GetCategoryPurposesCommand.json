@@ -1,0 +1,32 @@
+{
+    "state": "Completed",
+    "output": {
+        "total": 4,
+        "results": [
+            {
+                "categoryName": "External",
+                "purpose": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+                "userDisplayName": "Sam Huang",
+                "id": "c1"
+            },
+            {
+                "categoryName": "Internal",
+                "purpose": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+                "userDisplayName": "Robert Gong",
+                "id": "c2"
+            },
+            {
+                "categoryName": "Confidential",
+                "purpose": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "userDisplayName": "Tom Wu",
+                "id": "c3"
+            },
+            {
+                "categoryName": "Others",
+                "purpose": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "userDisplayName": "Chandler Qian",
+                "id": "c4"
+            }
+        ]
+    }
+}

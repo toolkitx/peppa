@@ -1,0 +1,8 @@
+{
+    "state": "Completed",
+    "output": {
+        "status": "Pending",
+        "validNumberOfReads": 50,
+        "totalNumberOfReads": 120
+    }
+}

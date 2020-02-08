@@ -1,0 +1,83 @@
+{
+	"state": "Completed",
+	"output": {
+		"commandInfo": [
+			{
+				"commandName": "Main_GenerateAccessTokenCommand",
+				"commandDefinition": "{\"name\":\"Main_GenerateAccessTokenCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"aadToken\":{\"type\":\"string\"},\"region\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"accessToken\":{\"type\":\"string\"},\"refreshToken\":{\"type\":\"string\"}}}}"
+			},
+			{
+				"commandName": "Main_GetSignInUrlCommand",
+				"commandDefinition": "{\"name\":\"Main_GetSignInUrlCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"redirectUrl\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"signInUrl\":{\"type\":\"string\"}}}}"
+			},
+			{
+				"commandName": "Main_SignalRGenerateTokenCommand",
+				"commandDefinition": "{\"name\":\"Main_SignalRGenerateTokenCommand\",\"type\":\"Public\",\"securityRole\":\"GeneralUser\",\"outputSchema\":{\"type\":\"object\",\"properties\":{\"url\":{\"type\":\"string\"},\"accessToken\":{\"type\":\"string\"}}},\"feature\":\"common\",\"inputSchema\":null}"
+			},
+			{
+				"commandName": "Main_CreateCategoryCommand",
+				"commandDefinition": "{\"name\":\"Main_CreateCategoryCommand\",\"type\":\"Public\",\"securityRole\":\"Admin\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\",\"title\":\"Name\"},\"securityGrade\":{\"type\":\"string\",\"title\":\"Security Grade\",\"enum\":[\"High\",\"Medium\",\"Low\"]},\"automaticAttestations\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}},\"title\":\"Automatic Attestations\",\"default\":[]},\"policies\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}},\"title\":\"Policies\"},\"description\":{\"type\":\"string\",\"title\":\"Description\"}},\"title\":\"Create Category\",\"required\":[\"securityGrade\",\"name\",\"policies\",\"description\"]},\"outputSchema\":null}"
+			},
+			{
+				"commandName": "Main_DeleteCategoryByIdCommand",
+				"commandDefinition": "{\"name\":\"Main_DeleteCategoryByIdCommand\",\"type\":\"Public\",\"securityRole\":\"Admin\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"}}},\"outputSchema\":null}"
+			},
+			{
+				"commandName": "Main_DeleteCategoryCommand",
+				"commandDefinition": "{\"name\":\"Main_DeleteCategoryCommand\",\"type\":\"Public\",\"securityRole\":\"Admin\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"ids\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}},\"outputSchema\":null}"
+			},
+			{
+				"commandName": "Main_GetCategoriesCommand",
+				"commandDefinition": "{\"name\":\"Main_GetCategoriesCommand\",\"type\":\"Public\",\"securityRole\":\"GeneralUser\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"filter\":{\"type\":\"string\"},\"skip\":{\"type\":\"integer\"},\"take\":{\"type\":\"integer\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"results\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"createdTime\":{\"type\":\"string\"},\"updatedTime\":{\"type\":\"string\"},\"policies\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"coverage\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"isAutoCorrect\":{\"type\":\"string\"},\"targetAttributeType\":{\"type\":\"string\"},\"targetAttributeDefaultValue\":{\"type\":\"string\"},\"targetAttributeOption\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"codeName\":{\"type\":\"string\"},\"checkingTypes\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}},\"automaticAttestations\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}},\"securityGrade\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"}}}},\"total\":{\"type\":\"integer\"}}}}"
+			},
+			{
+				"commandName": "Main_ReadCategoryByIdCommand",
+				"commandDefinition": "{\"name\":\"Main_ReadCategoryByIdCommand\",\"type\":\"Public\",\"securityRole\":\"GeneralUser\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"targetAttributeOption\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"policies\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"coverage\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"isAutoCorrect\":{\"type\":\"string\"},\"targetAttributeType\":{\"type\":\"string\"},\"targetAttributeDefaultValue\":{\"type\":\"string\"},\"targetAttributeOption\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"checkingTypes\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}},\"securityGrade\":{\"type\":\"string\"}}}}"
+			},
+			{
+				"commandName": "Main_UpdateCategoryCommand",
+				"commandDefinition": "{\"name\":\"Main_UpdateCategoryCommand\",\"type\":\"Public\",\"securityRole\":\"Admin\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\",\"title\":\"Name\"},\"securityGrade\":{\"type\":\"string\",\"enum\":[\"High\",\"Medium\",\"Low\"],\"title\":\"Security Grade\"},\"policies\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}},\"title\":\"Policies\"},\"automaticAttestations\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}},\"title\":\"Automatic Attestations\",\"default\":[]},\"id\":{\"type\":\"string\"},\"description\":{\"type\":\"string\",\"title\":\"Description\"}},\"title\":\"Update Category\",\"required\":[\"name\",\"securityGrade\",\"policies\",\"description\"]},\"outputSchema\":null}"
+			},
+			{
+				"commandName": "Main_GetAdminConsentUrlCommand",
+				"commandDefinition": "{\"name\":\"Main_GetAdminConsentUrlCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"redirectUrl\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"consentUrl\":{\"type\":\"string\"}}}}"
+			},
+			{
+				"commandName": "Main_GetRegionsCommand",
+				"commandDefinition": "{\"name\":\"Main_GetRegionsCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"aadToken\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"region\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}}"
+			},
+			{
+				"commandName": "Main_RegisterTenantCommand",
+				"commandDefinition": "{\"name\":\"Main_RegisterTenantCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"authorizationCode\":{\"type\":\"string\"},\"region\":{\"type\":\"string\"},\"redirectUrl\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"result\":{\"type\":\"string\"}}}}"
+			},
+			{
+				"commandName": "Main_GetPoliciesCommand",
+				"commandDefinition": "{\"name\":\"Main_GetPoliciesCommand\",\"type\":\"Public\",\"securityRole\":\"GeneralUser\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"filter\":{\"type\":\"string\"},\"skip\":{\"type\":\"integer\"},\"take\":{\"type\":\"integer\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"results\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"coverage\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"code\":{\"type\":\"string\"},\"isAutoCorrect\":{\"type\":\"string\"},\"targetAttributeType\":{\"type\":\"string\"},\"targetAttributeDefaultValue\":{\"type\":\"string\"},\"targetAttributeOption\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"codeName\":{\"type\":\"string\"},\"targetAttribute\":{\"type\":\"string\"},\"checkTypes\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}},\"total\":{\"type\":\"integer\"}}}}"
+			},
+			{
+				"commandName": "Main_GetModuleInfoCommand",
+				"commandDefinition": "{\"name\":\"Main_GetModuleInfoCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"type\":{\"type\":\"string\"}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"moduleInfo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"moduleName\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"},\"feature\":{\"type\":\"string\"},\"uiDefinition\":{\"type\":\"string\"},\"version\":{\"type\":\"string\"}}}}}}}"
+			},
+			{
+				"commandName": "Main_GetPublicCommandInfosCommand",
+				"commandDefinition": "{\"name\":\"Main_GetPublicCommandInfosCommand\",\"type\":\"Public\",\"securityRole\":\"Anonymous\",\"inputSchema\":null,\"outputSchema\":{\"type\":\"object\",\"properties\":{\"commandInfo\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"commandName\":{\"type\":\"string\"},\"commandType\":{\"type\":\"string\"},\"securityRole\":{\"type\":\"string\"},\"commandDefinition\":{\"type\":\"string\"}}}}}},\"feature\":\"common\"}"
+			},
+			{
+				"commandName": "Main_GetApprovalDefinitionsCommand",
+				"commandDefinition": "{\"name\":\"Main_GetApprovalDefinitionsCommand\",\"type\":\"Public\",\"securityRole\":\"Admin\",\"feature\":\"common\",\"inputSchema\":null,\"outputSchema\":{\"type\":\"object\",\"properties\":{\"results\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"approvedBy\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"dataSource\":{\"type\":\"string\"}}}},\"total\":{\"type\":\"integer\"}}}}"
+			},
+			{
+				"commandName": "Main_UpdateSelfServiceCommand",
+				"commandDefinition": "{\"name\":\"Main_UpdateSelfServiceCommand\",\"type\":\"Public\",\"securityRole\":\"Admin\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":255},\"needEscalation\":{\"type\":\"boolean\",\"title\":\"Escalation\"},\"approvalSteps\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"stepName\":{\"type\":\"string\"},\"approvalId\":{\"type\":\"string\"},\"approverId\":{\"type\":\"string\"},\"approverName\":{\"type\":\"string\"}}},\"title\":\"Approval Steps\"}},\"required\":[\"id\",\"needEscalation\"],\"title\":\"$context(name) Self-Sevice Settings\"},\"outputSchema\":null}"
+			},
+			{
+				"commandName": "Main_GetSelfServiceCommand",
+				"commandDefinition": "{\"name\":\"Main_GetSelfServiceCommand\",\"type\":\"Public\",\"securityRole\":\"GeneralUser\",\"feature\":\"common\",\"inputSchema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":255}}},\"outputSchema\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"approvalSteps\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"stepName\":{\"type\":\"string\"},\"approvalId\":{\"type\":\"string\"},\"approverId\":{\"type\":\"string\"},\"approverName\":{\"type\":\"string\"}}}},\"needEscalation\":{\"type\":\"boolean\"}}}}"
+			},
+			{
+				"commandName": "Main_GetSelfServicesCommand",
+				"commandDefinition": "{\"name\":\"Main_GetSelfServicesCommand\",\"type\":\"Public\",\"securityRole\":\"GeneralUser\",\"feature\":\"common\",\"inputSchema\":null,\"outputSchema\":{\"type\":\"object\",\"properties\":{\"results\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"approvalSteps\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"stepName\":{\"type\":\"string\"},\"approvalId\":{\"type\":\"string\"},\"approverId\":{\"type\":\"string\"},\"approverName\":{\"type\":\"string\"}}}},\"needEscalation\":{\"type\":\"boolean\"}}}},\"total\":{\"type\":\"integer\"}}}}"
+			}
+		]
+	}
+}
