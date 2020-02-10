@@ -14,7 +14,8 @@
         "electron:start:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
         "electron:start": "npm run ng:build && electron .",
         "electron:build": "npm run ng:build && build -p always",
-        "update:version": "npm version patch"
+        "update:version": "npm version patch",
+        "postinstall": "node ./icon-helper.js"
     },
     "private": true,
     "main": "index.js",
@@ -61,7 +62,6 @@
         "@angular/platform-browser": "~8.1.0",
         "@angular/platform-browser-dynamic": "~8.1.0",
         "@angular/router": "~8.1.0",
-        "@ondemand/edc-icons": "^0.1.32",
         "ace-builds": "^1.4.6",
         "angular-split": "^3.0.2",
         "electron-squirrel-startup": "^1.0.0",

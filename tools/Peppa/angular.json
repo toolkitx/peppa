@@ -33,11 +33,6 @@
                             },
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/@ondemand/edc-icons/dist/prod/data",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
                                 "input": "./node_modules/ace-builds/src-min-noconflict",
                                 "output": "/assets/ace"
                             }

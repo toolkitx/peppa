@@ -12,7 +12,7 @@
             <div nz-row nzGutter="8" class="row" [formGroup]="item">
                 <div nz-col nzSpan="2">
                     <div cdkDragHandle style="cursor: move; color: inherit; margin-top: 9px;">
-                        <i nz-icon nzType="more-vertical" style="color: #CCC; fill: #CCC;"></i>
+                        <i nz-icon nzType="more" style="color: #CCC; fill: #CCC;"></i>
                         {{i+1}}
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div nz-col nzSpan="2">
                     <button nz-button nzType="link" (click)="removeItem(i)" class="remove-field-button"
                             [attr.id]="'remove-field-' + i">
-                        <i nz-icon nzType="remove"></i>
+                        <i nz-icon nzType="minus-circle"></i>
                     </button>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <i nz-icon nzType="save"></i> Save
             </button>
             <button nz-button nzSize="small" nzType="link" (click)="hide()" id="cancel-naming-rule-field-button">
-                <i nz-icon nzType="cross"></i> Cancel
+                <i nz-icon nzType="close"></i> Cancel
             </button>
         </div>
     </div>

@@ -22,7 +22,6 @@
         "@angular/platform-browser-dynamic": "~8.0.0",
         "@angular/router": "~8.0.0",
         "@microsoft/teams-js": "^1.5.1",
-        "@ondemand/edc-icons": "^0.1.32",
         "classlist.js": "^1.1.20150312",
         "core-js": "^2.5.4",
         "date-fns": "^1.30.1",

@@ -28,8 +28,8 @@
                             "src/assets",
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/@ondemand/edc-icons/dist/prod/svg/src",
-                                "output": "/assets/outline"
+                                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                                "output": "/assets/"
                             }
                         ],
                         "styles": [

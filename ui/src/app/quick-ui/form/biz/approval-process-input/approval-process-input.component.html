@@ -29,7 +29,7 @@
                 <div nz-row nzGutter="8" class="row" [formGroup]="item">
                     <div nz-col nzSpan="2">
                         <div cdkDragHandle style="cursor: move; color: inherit; margin-top: 9px;">
-                            <i nz-icon nzType="more-vertical" style="color: #CCC; fill: #CCC;"></i>
+                            <i nz-icon nzType="more" style="color: #CCC; fill: #CCC;"></i>
                             {{i+1}}
                         </div>
                     </div>
@@ -64,14 +64,14 @@
                                             [ui]="getUiDataSourceDef(item.get('approvalId').value)"></qui-select>
                                 <button nz-button nzType="link" nz-tooltip
                                         [nzTooltipTitle]="getApprovalDef(item.get('approvalId').value)?.description">
-                                    <i class="tooltip" nz-icon nzType="form-attention"></i>
+                                    <i class="tooltip" nz-icon nzType="info-circle"></i>
                                 </button>
                             </div>
                         </nz-form-control>
                     </div>
                     <div nz-col nzSpan="2">
                         <button nz-button nzType="link" (click)="removeItem(i)">
-                            <i nz-icon nzType="remove"></i>
+                            <i nz-icon nzType="minus-circle"></i>
                         </button>
                     </div>
                 </div>

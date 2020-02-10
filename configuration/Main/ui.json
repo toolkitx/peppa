@@ -544,7 +544,7 @@
 											{
 												"id": "admin-team-assign-category-menu",
 												"name": "Assign Category",
-												"icon": "category",
+												"icon": "folder",
 												"type": "Group",
 												"action": null,
 												"styles": null,
@@ -589,7 +589,7 @@
 											{
 												"id": "admin-team-attest-team-menu",
 												"name": "Attest",
-												"icon": "attestation-certificate",
+												"icon": "check",
 												"type": "Group",
 												"action": null,
 												"styles": null,
@@ -1058,7 +1058,7 @@
 															{
 																"id": "action_1568967673335",
 																"name": "Approve",
-																"icon": "checkmark",
+																"icon": "check",
 																"type": "Link",
 																"action": "$popup(approve-request, {ok: 'reload'})",
 																"styles": {
@@ -1071,7 +1071,7 @@
 															{
 																"id": "action_1568967714864",
 																"name": "Reject",
-																"icon": "cross",
+																"icon": "close",
 																"type": "Link",
 																"action": "$popup(reject-request, {ok: 'reload'})",
 																"styles": {
@@ -3253,7 +3253,7 @@
 					{
 						"id": "user-item-menu-link",
 						"name": "My Teams",
-						"icon": "teams",
+						"icon": "team",
 						"type": "Link",
 						"action": "$view(my-teams)",
 						"styles": null,
@@ -3264,7 +3264,7 @@
 					{
 						"id": "user-gallery-menu",
 						"name": "Gallery",
-						"icon": "library",
+						"icon": "block",
 						"type": "Link",
 						"action": "$view(team-gallery)",
 						"styles": null,
@@ -3312,7 +3312,7 @@
 							{
 								"id": "action_1568967373884",
 								"name": "Attestation",
-								"icon": "check-list",
+								"icon": "security-scan",
 								"type": "Link",
 								"action": "$view(admin-attestations)",
 								"styles": null,
@@ -3325,7 +3325,7 @@
 					{
 						"id": "admin-teams-link",
 						"name": "Teams",
-						"icon": "teams",
+						"icon": "team",
 						"type": "Link",
 						"action": "$view(admin-teams)",
 						"styles": null,
@@ -3336,7 +3336,7 @@
 					{
 						"id": "admin-policy-link",
 						"name": "Violations",
-						"icon": "rule",
+						"icon": "alert",
 						"type": "Link",
 						"action": "$view(admin-violations)",
 						"styles": null,
@@ -3357,7 +3357,7 @@
 							{
 								"id": "admin-category-link",
 								"name": "Team Category",
-								"icon": "mail-folder",
+								"icon": "folder",
 								"type": "Link",
 								"action": "$view(category-settings)",
 								"styles": null,

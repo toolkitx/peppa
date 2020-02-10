@@ -30,7 +30,7 @@ export class MenuDefControlComponent extends CustomDefControl<MenuDef[]> impleme
     }
 
     async ngOnInit() {
-        const iconPath = 'assets/edc-icons.json';
+        const iconPath = 'assets/icons.json';
         const icons = this.cacheService.get<string[]>(iconPath);
         if (!icons) {
             await this.jsonLoader.get(iconPath).subscribe((data: {icons: {[name: string]: string}[]}) => {

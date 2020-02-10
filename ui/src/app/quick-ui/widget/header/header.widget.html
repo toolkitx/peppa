@@ -2,7 +2,7 @@
     <div class="primary-actions">
         <div class="name">
             <div class="product-logo">
-                <i nz-icon nzType="teams"></i>
+                <i nz-icon nzType="team"></i>
             </div>
             <div class="product-name" [quiAction]="'$view('+nextViewName+')'">
                 {{conf?.config.title}}
@@ -25,7 +25,7 @@
             <ng-container *ngIf="session">
                 <a nz-dropdown [nzDropdownMenu]="primaryMenu">
                     <div class="session-info-wrapper">
-                        <i nz-icon nzType="profile"></i>
+                        <i nz-icon nzType="user"></i>
                         <div class="session-info">
                             <div id="session-name" class="session-name">{{session.name}}</div>
                             <small id="session-email" class="session-email">{{session.email}}</small>
@@ -41,10 +41,10 @@
                             <i nz-icon nzType="user"></i> User Panel
                         </li>
                         <li nz-menu-item [quiAction]="'$view(admin-home)'" *ngIf="session?.securityRole === 'Admin'">
-                            <i nz-icon nzType="cog"></i> Admin Panel
+                            <i nz-icon nzType="setting"></i> Admin Panel
                         </li>
                         <li nz-menu-item (click)="logout()">
-                            <i nz-icon nzType="on-off"></i> Logout
+                            <i nz-icon nzType="logout"></i> Logout
                         </li>
                     </ul>
                 </nz-dropdown-menu>
@@ -60,6 +60,6 @@
                 <!--</div>-->
             </ng-container>
         </ng-container>
-        <a><i nz-icon nzType="status-info"></i></a>
+        <a><i nz-icon nzType="info-circle"></i></a>
     </div>
 </div>
