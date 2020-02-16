@@ -4,6 +4,8 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve --open --port 9000",
+        "starts": "sudo ng serve --ssl true --host chelocal.com --port 443",
+        "startsw": "ng serve --ssl true --host chelocal.com --port 443",
         "build": "ng build --prod",
         "build:dev": "ng build --prod --optimization=false",
         "test": "ng test --code-coverage --no-watch --no-progress --browsers=ChromeHeadlessCI",

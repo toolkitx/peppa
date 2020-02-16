@@ -8,6 +8,7 @@ import { forkJoin, of } from 'rxjs';
 import { CommandService } from './command.service';
 import { switchMap } from 'rxjs/operators';
 import { NZ_I18N, NzI18nInterface } from 'ng-zorro-antd';
+import * as microsoftTeams from '@microsoft/teams-js';
 
 export function StartupServiceFactory(startupService: StartupService) {
     return () => startupService.load();
@@ -23,6 +24,7 @@ export class StartupService {
     }
 
     load(): Promise<any> {
+        microsoftTeams.initialize();
         return new Promise((resolve, reject) => {
             this.loadGlobalConfig().subscribe((gc: any) => {
                 this.cacheService.set(CONSTANT_GLOBAL_CONFIGURATION, gc);

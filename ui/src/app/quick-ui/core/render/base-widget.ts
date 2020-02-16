@@ -93,7 +93,11 @@ export class BaseWidget implements OnInit, OnDestroy {
     }
 
     protected navigateTo(viewName: string) {
-        this.router.navigate(['display', viewName]);
+        this.router.navigate(this.getViewPath(viewName));
+    }
+
+    protected getViewPath(viewName: string): string[] {
+        return ['display', viewName];
     }
 
     protected getCommandRequest(commandName: string, payloadDef: PayloadDef, currentValue?: any, context?: any): CommandRequest {

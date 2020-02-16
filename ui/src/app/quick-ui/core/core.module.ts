@@ -34,6 +34,7 @@ import { SentencePipe } from './render/sentence.pipe';
 import { PopupViewGeneratorComponent } from './render/popup-view-generator/popup-view-generator.component';
 import { ConditionPipe } from './pipe/condition.pipe';
 import { LocationRef } from './render/location-ref.service';
+import {AdalService} from './service/adal.service';
 
 const COMPONENTS = [
     ActionDirective,
@@ -63,6 +64,7 @@ const SERVICES = [
     TranslateService,
     CacheService,
     LocalStorageCacheService,
+    AdalService,
     LocationRef,
     ...QUI_PROVIDERS
 ];

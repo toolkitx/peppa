@@ -1,9 +1,7 @@
 import { CommandRequestDef, SlotConf } from '../../core/render/modals/ui-configuration';
 
 interface TeamLoginConf  {
-    region: CommandRequestDef;
-    token: CommandRequestDef;
-    tokenPropName: string;
+    redirectUrl: string;
 }
 
 export class TeamLoginSlotConf extends SlotConf {

@@ -1,0 +1,75 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.5",
+    "version": "1.0.0",
+    "id": "11b6bf3b-0488-441c-a8be-7e8cdd48514d",
+    "packageName": "smartteams.dev.admins",
+    "developer": {
+        "name": "Smart Teams",
+        "websiteUrl": "https://example.com",
+        "privacyUrl": "https://example.com",
+        "termsOfUseUrl": "https://example.com"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Smart Teams for Admins [dev]",
+        "full": "Smart Teams for Admins"
+    },
+    "description": {
+        "short": "Smart Teams for Admins",
+        "full": "Smart Teams App for Admins"
+    },
+    "accentColor": "#2E7AA2",
+    "staticTabs": [
+        {
+            "entityId": "smartteams.dev.admins.home",
+            "name": "Home",
+            "contentUrl": "https://chelocal.com/display/admin-tools?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "smartteams.dev.admins.requests",
+            "name": "Requests",
+            "contentUrl": "https://chelocal.com/display/admin-requests?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "smartteams.dev.admins.attestations",
+            "name": "Attestations",
+            "contentUrl": "https://chelocal.com/display/admin-attestations?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "smartteams.dev.admins.violations",
+            "name": "Violations",
+            "contentUrl": "https://chelocal.com/display/admin-violations?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "smartteams.dev.admins.settings",
+            "name": "Settings",
+            "contentUrl": "https://chelocal.com/display/settings?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "chelocal.com"
+    ]
+}

@@ -1,6 +1,6 @@
 {
     "state": "Completed",
     "output": {
-        "consentUrl": "http://localhost:9000/register?code=mock-code"
+        "consentUrl": "https://chelocal.com/display/do-admin-consent#id_token=mock-code&state=test"
     }
 }

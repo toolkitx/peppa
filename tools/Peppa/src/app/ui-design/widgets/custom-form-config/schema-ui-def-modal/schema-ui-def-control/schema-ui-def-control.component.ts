@@ -23,7 +23,7 @@ export class SchemaUiDefControlComponent extends CustomDefControl<SchemaUiDef> i
         SSP: [
             'Text', 'Textarea', 'Number', 'Switch', 'Time', 'Date', 'DateTime', 'DateRange', 'Rate', 'Checkbox',
             'CheckboxGroup', 'Select', 'RadioGroup', 'PolicyInput', 'ApprovalProcessInput', 'NamingRuleInput',
-            'BizTeamTemplateInput', 'BizTeamRulesInput'
+            'BizTeamTemplateInput', 'BizTeamRulesInput', 'BizGrantAdminConsentInput'
         ]
     };
 

@@ -18,6 +18,7 @@ import { ApprovalProcessInputComponent } from './biz/approval-process-input/appr
 import { NamingRuleInputComponent } from './biz/naming-rule-input/naming-rule-input.component';
 import { TeamRulesInputComponent } from './biz/team-rules-input/team-rules-input.component';
 import { TeamTemplateInputComponent } from './biz/team-template-input/team-template-input.component';
+import { GrantAdminConsentInputComponent } from './biz/grant-admin-consent-input/grant-admin-consent-input.component';
 
 const COMPONENTS = [
     SelectComponent,
@@ -29,7 +30,8 @@ const COMPONENTS = [
     NamingRulePreviewComponent,
     ApprovalProcessInputComponent,
     TeamRulesInputComponent,
-    TeamTemplateInputComponent
+    TeamTemplateInputComponent,
+    GrantAdminConsentInputComponent
 ];
 
 @NgModule({

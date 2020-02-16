@@ -15,7 +15,7 @@
 					"version": "0",
 					"application": {
 						"type": "Module",
-						"name": "Teams Management",
+						"name": null,
 						"nav": null,
 						"sidebar": null,
 						"views": [
@@ -27,29 +27,16 @@
 								"widgets": [
 									{
 										"id": "w-login",
-										"type": "Oauth2Login",
+										"type": "TeamSlientLogin",
 										"wrapper": "None",
 										"config": {
-											"authorize": {
-												"command": "Main_GetSignInUrlCommand",
-												"payload": {
-													"redirectUrl": "$location(login)"
-												}
-											},
-											"region": {
-												"command": "Main_GetRegionsCommand",
-												"payload": {
-													"aadToken": "$fragment(id_token)"
-												}
-											},
+											"doLoginUrl": "$location(display/do-login)",
 											"token": {
 												"command": "Main_GenerateAccessTokenCommand",
 												"payload": {
-													"aadToken": "$fragment(id_token)",
-													"region": "$context(region)"
+													"aadToken": "$context(token)"
 												}
 											},
-											"redirectUrlPropName": "signInUrl",
 											"tokenPropName": "accessToken"
 										}
 									}
@@ -59,28 +46,39 @@
 								]
 							},
 							{
-								"name": "register",
-								"title": "Sign Up",
+								"name": "do-login",
+								"title": "Sign In",
 								"default": false,
 								"sidebar": null,
 								"widgets": [
 									{
-										"id": "w-register",
-										"type": "SignUp",
+										"id": "w-do-login",
+										"type": "TeamLogin",
+										"wrapper": "None",
+										"config": {
+											"redirectUrl": "$href"
+										}
+									}
+								],
+								"permissions": [
+									"Anonymous"
+								]
+							},
+							{
+								"name": "do-admin-consent",
+								"title": "Grant admin consent",
+								"default": false,
+								"sidebar": null,
+								"widgets": [
+									{
+										"id": "w-do-grant-admin-consent",
+										"type": "TeamGrantAdminConsent",
 										"wrapper": "None",
 										"config": {
 											"authorize": {
 												"command": "Main_GetAdminConsentUrlCommand",
 												"payload": {
-													"redirectUrl": "$location(register)"
-												}
-											},
-											"register": {
-												"command": "Main_RegisterTenantCommand",
-												"payload": {
-													"authorizationCode": "$query(code)",
-													"region": "$context(region)",
-													"redirectUrl": "$location(register)"
+													"redirectUrl": "$href"
 												}
 											},
 											"redirectUrlPropName": "consentUrl"
@@ -92,40 +90,58 @@
 								]
 							},
 							{
-								"name": "home",
-								"title": "Home",
+								"name": "register",
+								"title": "Register",
 								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "admin-home",
-								"title": "Admin Home",
-								"default": false,
-								"sidebar": "adminSidebar",
-								"widgets": [],
-								"permissions": [
-									"Admin"
-								]
-							},
-							{
-								"name": "category-settings",
-								"title": "Team Category Settings",
-								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
-										"id": "w-category-view-header",
+										"id": "w-register-form",
+										"type": "CustomForm",
+										"wrapper": "None",
+										"config": {
+											"command": "Main_RegisterCommand",
+											"data": null,
+											"ui": {
+												"messages": {
+													"success": null,
+													"error": null
+												},
+												"submitText": "Register",
+												"cancelText": "Cancel",
+												"title": "Create Account",
+												"description": "Register to start...",
+												"fields": {
+													"adminConsent": {
+														"widget": "BizGrantAdminConsentInput"
+													}
+												}
+											},
+											"popup": false,
+											"postAction": null
+										}
+									}
+								],
+								"permissions": [
+									"Anonymous"
+								]
+							},
+							{
+								"name": "settings",
+								"title": "Settings",
+								"default": false,
+								"sidebar": null,
+								"widgets": [
+									{
+										"id": "w-settings-view-header",
 										"type": "ViewHeader",
 										"wrapper": "None",
 										"config": {
-											"title": "Team Category",
-											"description": "A category consists of settings...",
+											"title": "Settings",
+											"description": "all settings",
 											"styles": null,
-											"actions": null
+											"actions": null,
+											"backIcon": false
 										}
 									},
 									{
@@ -133,8 +149,8 @@
 										"type": "Block",
 										"wrapper": "None",
 										"config": {
-											"title": null,
-											"description": null,
+											"title": "Category",
+											"description": "A category consists of settings...",
 											"styles": null,
 											"actions": null,
 											"widgets": [
@@ -221,7 +237,7 @@
 								"name": "create-category",
 								"title": "Create Category",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "w-category-create-form",
@@ -281,7 +297,7 @@
 								"name": "update-category",
 								"title": "Update Category",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "w-category-update-form",
@@ -368,91 +384,10 @@
 								]
 							},
 							{
-								"name": "self-service-settings",
-								"title": "Self-Services",
-								"default": false,
-								"sidebar": "adminSidebar",
-								"widgets": [
-									{
-										"id": "w-self-service-view-header",
-										"type": "ViewHeader",
-										"wrapper": "None",
-										"config": {
-											"title": "Self-Services",
-											"description": "Define your approval processes for each self-service.",
-											"styles": null,
-											"actions": null
-										}
-									},
-									{
-										"id": "w-self-service-view-block",
-										"type": "Block",
-										"wrapper": "None",
-										"config": {
-											"title": null,
-											"description": null,
-											"styles": null,
-											"actions": null,
-											"widgets": [
-												{
-													"id": "w-self-service-table",
-													"type": "Table",
-													"wrapper": "None",
-													"config": {
-														"actions": [],
-														"fields": [
-															{
-																"key": "name",
-																"displayName": "Name",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "description",
-																"displayName": "Description",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "needEscalation",
-																"displayName": "Escalation",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "#",
-																"displayName": "Actions",
-																"dataType": "Menu",
-																"action": [
-																	{
-																		"id": "menu-edit",
-																		"name": "Settings",
-																		"icon": "cog",
-																		"type": "Link",
-																		"action": "$view(update-self-service, {id: '$id'})",
-																		"styles": null,
-																		"permissions": null,
-																		"children": null
-																	}
-																]
-															}
-														],
-														"command": "Main_GetSelfServicesCommand"
-													}
-												}
-											]
-										}
-									}
-								],
-								"permissions": [
-									"Admin"
-								]
-							},
-							{
 								"name": "update-self-service",
 								"title": "Self Service Settings",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "w-self-service-update-form",
@@ -507,7 +442,7 @@
 								"name": "admin-teams",
 								"title": "Teams",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "widget_1567488130739",
@@ -550,7 +485,7 @@
 															{
 																"id": "admin-team-assign-category-menu",
 																"name": "Assign Category",
-																"icon": "folder",
+																"icon": "category",
 																"type": "Group",
 																"action": null,
 																"styles": null,
@@ -595,7 +530,7 @@
 															{
 																"id": "admin-team-attest-team-menu",
 																"name": "Attest",
-																"icon": "check",
+																"icon": "attestation-certificate",
 																"type": "Group",
 																"action": null,
 																"styles": null,
@@ -825,7 +760,7 @@
 								"name": "admin-create-team-request",
 								"title": "Create Team",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "w-create-team-form",
@@ -974,7 +909,7 @@
 								"name": "admin-requests",
 								"title": "Requests - Activities",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "widget_1568967519649",
@@ -1067,9 +1002,7 @@
 																				"icon": "check",
 																				"type": "Link",
 																				"action": "$popup(approve-request, {ok: 'reload'})",
-																				"styles": {
-																					"color": "#51B053"
-																				},
+																				"styles": null,
 																				"permissions": null,
 																				"disabled": null,
 																				"children": null
@@ -1080,9 +1013,7 @@
 																				"icon": "close",
 																				"type": "Link",
 																				"action": "$popup(reject-request, {ok: 'reload'})",
-																				"styles": {
-																					"color": "#CF2B34"
-																				},
+																				"styles": null,
 																				"permissions": null,
 																				"disabled": null,
 																				"children": null
@@ -1224,7 +1155,7 @@
 								"name": "admin-attestations",
 								"title": "Attestations - Activities",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "admin-attestations-header",
@@ -1338,7 +1269,7 @@
 																],
 																"filters": [
 																	{
-																		"key": "requestName",
+																		"key": "requestType",
 																		"operator": "~",
 																		"displayName": "Request",
 																		"widget": "Text",
@@ -1432,7 +1363,7 @@
 																],
 																"filters": [
 																	{
-																		"key": "requestName",
+																		"key": "requestType",
 																		"operator": "~",
 																		"displayName": "Request",
 																		"widget": "Text",
@@ -1477,7 +1408,7 @@
 								"name": "admin-violations",
 								"title": "Violations",
 								"default": false,
-								"sidebar": "adminSidebar",
+								"sidebar": null,
 								"widgets": [
 									{
 										"id": "admin-violation-header",
@@ -1531,8 +1462,141 @@
 																	{
 																		"key": "state",
 																		"displayName": "State",
-																		"dataType": "Text",
-																		"action": null
+																		"dataType": "Widget",
+																		"action": {
+																			"id": "widget_1569560630112",
+																			"type": "TinyStatus",
+																			"wrapper": "None",
+																			"config": {
+																				"name": "$context(state)",
+																				"defs": [
+																					{
+																						"name": "CorrectionPeriod",
+																						"status": "processing",
+																						"text": "In Progress"
+																					},
+																					{
+																						"name": "Done",
+																						"status": "success",
+																						"text": "Done"
+																					}
+																				],
+																				"actions": null,
+																				"command": "Main_GetViolationItemsCommand",
+																				"selectMode": "None",
+																				"refresh": true,
+																				"idFieldKey": null,
+																				"fields": [
+																					{
+																						"key": "teamDisplayName",
+																						"displayName": "Team",
+																						"dataType": "Text",
+																						"action": null
+																					},
+																					{
+																						"key": "categoryName",
+																						"displayName": "Category",
+																						"dataType": "Text",
+																						"action": null
+																					},
+																					{
+																						"key": "policyName",
+																						"displayName": "Policy",
+																						"dataType": "Text",
+																						"action": null
+																					},
+																					{
+																						"key": "state",
+																						"displayName": "State",
+																						"dataType": "Widget",
+																						"action": {
+																							"id": "widget_1569560630112",
+																							"type": "TinyStatus",
+																							"wrapper": "None",
+																							"config": {
+																								"name": "$context(state)",
+																								"defs": [
+																									{
+																										"name": "CorrectionPeriod",
+																										"status": "processing",
+																										"text": "In Progress"
+																									},
+																									{
+																										"name": "Done",
+																										"status": "success",
+																										"text": "Done"
+																									}
+																								]
+																							}
+																						}
+																					},
+																					{
+																						"key": "#",
+																						"displayName": "Actions",
+																						"dataType": "Menu",
+																						"action": [
+																							{
+																								"id": "action_1568968718233",
+																								"name": "Archive",
+																								"icon": "archive",
+																								"type": "Link",
+																								"action": "$popup(archive-violation, {ok: 'reload'})",
+																								"styles": null,
+																								"permissions": null,
+																								"disabled": null,
+																								"children": null
+																							},
+																							{
+																								"id": "action_1568968750445",
+																								"name": "Acknowledge",
+																								"icon": "bell-x-marked",
+																								"type": "Link",
+																								"action": "$popup(acknowledge-violation, {ok: 'reload'})",
+																								"styles": null,
+																								"permissions": null,
+																								"disabled": null,
+																								"children": null
+																							}
+																						]
+																					}
+																				],
+																				"filters": [
+																					{
+																						"key": "teamDisplayName",
+																						"operator": "~",
+																						"displayName": "Team",
+																						"widget": "Text",
+																						"dataSource": null,
+																						"isDefault": true
+																					},
+																					{
+																						"key": "categoryName",
+																						"operator": "~",
+																						"displayName": "Category",
+																						"widget": "Text",
+																						"dataSource": null,
+																						"isDefault": false
+																					},
+																					{
+																						"key": "policyName",
+																						"operator": "~",
+																						"displayName": "Policy",
+																						"widget": "Text",
+																						"dataSource": null,
+																						"isDefault": false
+																					},
+																					{
+																						"key": "state",
+																						"operator": "=",
+																						"displayName": "State",
+																						"widget": "Text",
+																						"dataSource": null,
+																						"isDefault": false,
+																						"internalValue": "\"CorrectionPeriod\""
+																					}
+																				]
+																			}
+																		}
 																	},
 																	{
 																		"key": "createdTime",
@@ -1652,32 +1716,9 @@
 																		"displayName": "Created",
 																		"dataType": "Date",
 																		"action": null
-																	},
-																	{
-																		"key": "operatorName",
-																		"displayName": "Operator",
-																		"dataType": "Text",
-																		"action": null
 																	}
 																],
-																"filters": [
-																	{
-																		"key": "requestName",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	}
-																],
+																"filters": [],
 																"selectMode": "None",
 																"refresh": true,
 																"idFieldKey": null,
@@ -1941,1103 +1982,6 @@
 								]
 							},
 							{
-								"name": "my-teams",
-								"title": "My Teams",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "my-teams-header",
-										"type": "ViewHeader",
-										"wrapper": "None",
-										"config": {
-											"title": "My Teams",
-											"description": "Teams is designed for groups of all kinds.",
-											"styles": null,
-											"actions": null
-										}
-									},
-									{
-										"id": "my-teams-block",
-										"type": "Block",
-										"wrapper": "None",
-										"config": {
-											"title": null,
-											"description": null,
-											"styles": null,
-											"actions": null,
-											"widgets": [
-												{
-													"id": "my-teams-table",
-													"type": "Table",
-													"wrapper": "None",
-													"config": {
-														"actions": [
-															{
-																"id": "my-team-create-team-request",
-																"name": "Create a Team",
-																"icon": "plus",
-																"type": "Link",
-																"action": "$view(user-create-team-request)",
-																"styles": null,
-																"permissions": null,
-																"disabled": null,
-																"children": null
-															}
-														],
-														"fields": [
-															{
-																"key": "displayName",
-																"displayName": "Display Name\t",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "categoryName",
-																"displayName": "Category",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "privacy",
-																"displayName": "Privacy",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "memberType",
-																"displayName": "Member Type",
-																"dataType": "Text",
-																"action": null
-															}
-														],
-														"selectMode": "None",
-														"refresh": true,
-														"idFieldKey": "id",
-														"command": "Main_GetJoinedTeamsCommand",
-														"filters": [
-															{
-																"key": "displayName",
-																"operator": "~",
-																"displayName": "Display Name",
-																"widget": "Text",
-																"dataSource": null,
-																"isDefault": true
-															},
-															{
-																"key": "categoryName",
-																"operator": "=",
-																"displayName": "Category",
-																"widget": "Select",
-																"dataSource": {
-																	"command": "Main_GetCategoriesCommand",
-																	"payload": {
-																		"filter": "name = \"$value\"",
-																		"skip": null,
-																		"take": null
-																	},
-																	"label": "name",
-																	"value": "name"
-																},
-																"isDefault": false
-															},
-															{
-																"key": "visibility",
-																"operator": "in",
-																"displayName": "Privacy",
-																"widget": "Select",
-																"mode": "multiple",
-																"isDefault": false
-															}
-														]
-													}
-												}
-											]
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "team-gallery",
-								"title": "Gallery",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "team-gallery-header",
-										"type": "ViewHeader",
-										"wrapper": "None",
-										"config": {
-											"title": "Gallery",
-											"description": "Teams is designed for groups of all kinds.",
-											"styles": null,
-											"actions": null
-										}
-									},
-									{
-										"id": "team-gallery-block",
-										"type": "Block",
-										"wrapper": "None",
-										"config": {
-											"title": null,
-											"description": null,
-											"styles": null,
-											"actions": null,
-											"widgets": [
-												{
-													"id": "team-gallery-table",
-													"type": "Table",
-													"wrapper": "None",
-													"config": {
-														"actions": [
-															{
-																"id": "gallery-create-team-request-button",
-																"name": "Create a Team\t",
-																"icon": "plus",
-																"type": "Link",
-																"action": "$view(user-create-team-request)",
-																"styles": null,
-																"permissions": null,
-																"disabled": null,
-																"children": null
-															}
-														],
-														"fields": [
-															{
-																"key": "displayName",
-																"displayName": "Display Name",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "categoryName",
-																"displayName": "Category",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "visibility",
-																"displayName": "Privacy",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "people",
-																"displayName": "People",
-																"dataType": "Text",
-																"action": null
-															},
-															{
-																"key": "#",
-																"displayName": "Actions",
-																"dataType": "Menu",
-																"action": [
-																	{
-																		"id": "team-gallery-join-team-menu-item",
-																		"name": "Join",
-																		"icon": "plus",
-																		"type": "Link",
-																		"action": "$popup(user-join-team-request, {ok: 'reload'})",
-																		"styles": null,
-																		"permissions": null,
-																		"disabled": null,
-																		"children": null
-																	}
-																]
-															}
-														],
-														"selectMode": "None",
-														"refresh": true,
-														"idFieldKey": "id",
-														"command": "Main_GetTeamsCommand",
-														"filters": [
-															{
-																"key": "displayName",
-																"operator": "~",
-																"displayName": "Display Name",
-																"widget": "Text",
-																"dataSource": null,
-																"isDefault": true
-															},
-															{
-																"key": "categoryName",
-																"operator": "=",
-																"displayName": "Category",
-																"widget": "Select",
-																"dataSource": {
-																	"command": "Main_GetCategoriesCommand",
-																	"payload": {
-																		"filter": "name = \"$value\"",
-																		"skip": null,
-																		"take": null
-																	},
-																	"label": "name",
-																	"value": "name"
-																},
-																"isDefault": false
-															},
-															{
-																"key": "visibility",
-																"operator": "in",
-																"displayName": "Privacy",
-																"widget": "Select",
-																"mode": "multiple",
-																"isDefault": false
-															}
-														]
-													}
-												}
-											]
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "my-requests",
-								"title": "Requests - Activities",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "my-requests-header",
-										"type": "ViewHeader",
-										"wrapper": "None",
-										"config": {
-											"title": "Requests",
-											"description": "This is a description for request",
-											"styles": null,
-											"actions": null
-										}
-									},
-									{
-										"id": "my-requests-tab-set",
-										"type": "TabBlock",
-										"wrapper": "None",
-										"config": {
-											"title": null,
-											"description": null,
-											"styles": null,
-											"actions": null,
-											"tabs": [
-												{
-													"name": "In Progress",
-													"widgets": [
-														{
-															"id": "my-requests-in-progress-table",
-															"type": "Table",
-															"wrapper": "None",
-															"config": {
-																"actions": null,
-																"fields": [
-																	{
-																		"key": "requestName",
-																		"displayName": "Request",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"displayName": "Team",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "state",
-																		"displayName": "State",
-																		"dataType": "Widget",
-																		"action": {
-																			"id": "widget_1569560630112",
-																			"type": "TinyStatus",
-																			"wrapper": "None",
-																			"config": {
-																				"name": "$context(state)",
-																				"defs": [
-																					{
-																						"name": "Pending",
-																						"status": "processing",
-																						"text": "In Progress"
-																					},
-																					{
-																						"name": "Done",
-																						"status": "success",
-																						"text": "Done"
-																					}
-																				]
-																			}
-																		}
-																	},
-																	{
-																		"key": "createdTime",
-																		"displayName": "Created",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "#",
-																		"displayName": "Actions",
-																		"dataType": "Menu",
-																		"action": [
-																			{
-																				"id": "my-request-cancel-button",
-																				"name": "Cancel",
-																				"icon": "undo",
-																				"type": "Link",
-																				"action": "$popup(cancel-request, {ok: 'reload'})",
-																				"styles": null,
-																				"permissions": null,
-																				"disabled": null,
-																				"children": null
-																			}
-																		]
-																	}
-																],
-																"filters": [
-																	{
-																		"key": "requestType",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	},
-																	{
-																		"key": "state",
-																		"operator": "=",
-																		"displayName": "State",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false,
-																		"internalValue": "\"Pending\""
-																	}
-																],
-																"selectMode": "None",
-																"refresh": true,
-																"idFieldKey": null,
-																"command": "Main_GetMyRequestsCommand"
-															}
-														}
-													]
-												},
-												{
-													"name": "Done",
-													"widgets": [
-														{
-															"id": "my-requests-done-table",
-															"type": "Table",
-															"wrapper": "None",
-															"config": {
-																"actions": null,
-																"fields": [
-																	{
-																		"key": "requestName",
-																		"displayName": "Request",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"displayName": "Team",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "state",
-																		"displayName": "State",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "createdTime",
-																		"displayName": "Created",
-																		"dataType": "Date",
-																		"action": null
-																	}
-																],
-																"filters": [
-																	{
-																		"key": "requestType",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	},
-																	{
-																		"key": "state",
-																		"operator": "!=",
-																		"displayName": "State",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false,
-																		"internalValue": "\"Pending\""
-																	}
-																],
-																"selectMode": "None",
-																"refresh": true,
-																"idFieldKey": null,
-																"command": "Main_GetMyRequestsCommand"
-															}
-														}
-													]
-												}
-											]
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "my-approvals",
-								"title": "Approvals- Activities",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "my-approvals-header",
-										"type": "ViewHeader",
-										"wrapper": "None",
-										"config": {
-											"title": "Approvals",
-											"description": "This is a description for request",
-											"styles": null,
-											"actions": null
-										}
-									},
-									{
-										"id": "my-approvals-tab-set",
-										"type": "TabBlock",
-										"wrapper": "None",
-										"config": {
-											"title": null,
-											"description": null,
-											"styles": null,
-											"actions": null,
-											"tabs": [
-												{
-													"name": "In Progress",
-													"widgets": [
-														{
-															"id": "my-approvals-in-progress-table",
-															"type": "Table",
-															"wrapper": "None",
-															"config": {
-																"actions": null,
-																"fields": [
-																	{
-																		"key": "requestName",
-																		"displayName": "Request",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"displayName": "Team",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "requester",
-																		"displayName": "Requester",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "state",
-																		"displayName": "State",
-																		"dataType": "Widget",
-																		"action": {
-																			"id": "widget_1569560630112",
-																			"type": "TinyStatus",
-																			"wrapper": "None",
-																			"config": {
-																				"name": "$context(state)",
-																				"defs": [
-																					{
-																						"name": "Pending",
-																						"status": "processing",
-																						"text": "In Progress"
-																					},
-																					{
-																						"name": "Done",
-																						"status": "success",
-																						"text": "Done"
-																					}
-																				]
-																			}
-																		}
-																	},
-																	{
-																		"key": "recievedTime",
-																		"displayName": "Recieved Time",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "#",
-																		"displayName": "Actions",
-																		"dataType": "Menu",
-																		"action": [
-																			{
-																				"id": "my-approvals-approve-action",
-																				"name": "Approve",
-																				"icon": "checkmark",
-																				"type": "Link",
-																				"action": "$popup(approve-request, {ok: 'reload'})",
-																				"styles": null,
-																				"permissions": null,
-																				"disabled": null,
-																				"children": null
-																			},
-																			{
-																				"id": "my-approvals-reject-action",
-																				"name": "Reject",
-																				"icon": "cross",
-																				"type": "Link",
-																				"action": "$popup(reject-request, {ok: 'reload'})",
-																				"styles": null,
-																				"permissions": null,
-																				"disabled": null,
-																				"children": null
-																			}
-																		]
-																	}
-																],
-																"filters": [
-																	{
-																		"key": "requestType",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	},
-																	{
-																		"key": "state",
-																		"operator": "=",
-																		"displayName": "State",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false,
-																		"internalValue": "\"Pending\""
-																	}
-																],
-																"selectMode": "None",
-																"refresh": true,
-																"idFieldKey": null,
-																"command": "Main_GetMyApprovalsCommand"
-															}
-														}
-													]
-												},
-												{
-													"name": "Done",
-													"widgets": [
-														{
-															"id": "my-approvals-done-table",
-															"type": "Table",
-															"wrapper": "None",
-															"config": {
-																"actions": null,
-																"fields": [
-																	{
-																		"key": "requestName",
-																		"displayName": "Request",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"displayName": "Team",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "requester",
-																		"displayName": "Requester",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "state",
-																		"displayName": "State",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "recievedTime",
-																		"displayName": "Recieved Time",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "approverState",
-																		"displayName": "Result",
-																		"dataType": "Text",
-																		"action": null
-																	}
-																],
-																"filters": [
-																	{
-																		"key": "requestType",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	},
-																	{
-																		"key": "state",
-																		"operator": "!=",
-																		"displayName": "State",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false,
-																		"internalValue": "\"Pending\""
-																	}
-																],
-																"selectMode": "None",
-																"refresh": true,
-																"idFieldKey": null,
-																"command": "Main_GetMyApprovalsCommand"
-															}
-														}
-													]
-												}
-											]
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "my-attestations",
-								"title": "Attestations - Activities",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "my-attestations-header",
-										"type": "ViewHeader",
-										"wrapper": "None",
-										"config": {
-											"title": "Attestations",
-											"description": "This is a description for request",
-											"styles": null,
-											"actions": []
-										}
-									},
-									{
-										"id": "my-attestations-tab-set",
-										"type": "TabBlock",
-										"wrapper": "None",
-										"config": {
-											"title": null,
-											"description": null,
-											"styles": null,
-											"actions": null,
-											"tabs": [
-												{
-													"name": "In Progress",
-													"widgets": [
-														{
-															"id": "my-attestations-in-progress-table",
-															"type": "Table",
-															"wrapper": "None",
-															"config": {
-																"actions": null,
-																"fields": [
-																	{
-																		"key": "requestName",
-																		"displayName": "Request",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"displayName": "Team",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "requester",
-																		"displayName": "Requester",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "state",
-																		"displayName": "State",
-																		"dataType": "Widget",
-																		"action": {
-																			"id": "widget_1569560630112",
-																			"type": "TinyStatus",
-																			"wrapper": "None",
-																			"config": {
-																				"name": "$context(state)",
-																				"defs": [
-																					{
-																						"name": "Pending",
-																						"status": "processing",
-																						"text": "In Progress"
-																					},
-																					{
-																						"name": "Done",
-																						"status": "success",
-																						"text": "Done"
-																					}
-																				]
-																			}
-																		}
-																	},
-																	{
-																		"key": "recievedTime",
-																		"displayName": "Recieved Time",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "dueDate",
-																		"displayName": "Due Date",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "#",
-																		"displayName": "Actions",
-																		"dataType": "Menu",
-																		"action": [
-																			{
-																				"id": "my-attestations-yes-action",
-																				"name": "Yes",
-																				"icon": "checkmark",
-																				"type": "Link",
-																				"action": "$popup(approve-request, {ok: 'reload'})",
-																				"styles": null,
-																				"permissions": null,
-																				"disabled": null,
-																				"children": null
-																			},
-																			{
-																				"id": "my-attestations-no-action",
-																				"name": "No",
-																				"icon": "cross",
-																				"type": "Link",
-																				"action": "$popup(reject-request, {ok: 'reload'})",
-																				"styles": null,
-																				"permissions": null,
-																				"disabled": null,
-																				"children": null
-																			}
-																		]
-																	}
-																],
-																"filters": [
-																	{
-																		"key": "requestType",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	},
-																	{
-																		"key": "state",
-																		"operator": "!=",
-																		"displayName": "State",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false,
-																		"internalValue": "\"Pending\""
-																	}
-																],
-																"selectMode": "None",
-																"refresh": true,
-																"idFieldKey": null,
-																"command": "Main_GetMyAttestationsCommand"
-															}
-														}
-													]
-												},
-												{
-													"name": "Done",
-													"widgets": [
-														{
-															"id": "my-attestations-done-table",
-															"type": "Table",
-															"wrapper": "None",
-															"config": {
-																"actions": null,
-																"fields": [
-																	{
-																		"key": "requestName",
-																		"displayName": "Request",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"displayName": "Team",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "requester",
-																		"displayName": "Requester",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "state",
-																		"displayName": "State",
-																		"dataType": "Text",
-																		"action": null
-																	},
-																	{
-																		"key": "recievedTime",
-																		"displayName": "Recieved Time",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "dueDate",
-																		"displayName": "Due Date",
-																		"dataType": "Date",
-																		"action": null
-																	},
-																	{
-																		"key": "attestState",
-																		"displayName": "Result",
-																		"dataType": "Text",
-																		"action": null
-																	}
-																],
-																"filters": [
-																	{
-																		"key": "requestType",
-																		"operator": "~",
-																		"displayName": "Request",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": true
-																	},
-																	{
-																		"key": "teamDisplayName",
-																		"operator": "~",
-																		"displayName": "Team",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false
-																	},
-																	{
-																		"key": "state",
-																		"operator": "!=",
-																		"displayName": "State",
-																		"widget": "Text",
-																		"dataSource": null,
-																		"isDefault": false,
-																		"internalValue": "\"Pending\""
-																	}
-																],
-																"selectMode": "None",
-																"refresh": true,
-																"idFieldKey": null,
-																"command": "Main_GetMyAttestationsCommand"
-															}
-														}
-													]
-												}
-											]
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "user-create-team-request",
-								"title": "Create Team Request",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "user-create-team-request-form",
-										"type": "CustomForm",
-										"wrapper": "None",
-										"config": {
-											"command": "Main_CreateTeamByUserCommand",
-											"data": null,
-											"ui": {
-												"messages": {
-													"success": null,
-													"error": null
-												},
-												"submitText": null,
-												"cancelText": null,
-												"title": "Create Team",
-												"description": null,
-												"fields": {
-													"categoryId": {
-														"widget": "Select",
-														"mode": "default",
-														"dataSource": {
-															"command": "Main_GetCategoriesCommand",
-															"payload": {
-																"filter": "name = \"$value\"",
-																"skip": null,
-																"take": null
-															},
-															"label": "name",
-															"value": "id"
-														}
-													},
-													"name": {
-														"widget": "NamingRuleInput",
-														"dataSource": {
-															"command": "Main_GetNamingRuleByCategoryCommand",
-															"payload": {
-																"categoryId": "$form(categoryId)"
-															},
-															"label": "name",
-															"value": "value"
-														},
-														"validator": {
-															"command": "Main_CheckTeamNameExistsCommand",
-															"payload": {
-																"name": "$value"
-															}
-														},
-														"errors": {
-															"Main_CheckTeamNameExistsCommand": "Team already exists",
-															"namingRuleInput": "Name format not correct"
-														}
-													},
-													"description": {
-														"widget": "Textarea"
-													},
-													"privacy": {
-														"widget": "Select",
-														"mode": "default",
-														"dataSource": {
-															"command": "Main_GetPrivacyByCategoryCommand",
-															"payload": {
-																"categoryId": "$form(categoryId)"
-															},
-															"label": "label",
-															"value": "value"
-														}
-													},
-													"reason": {
-														"widget": "Textarea"
-													}
-												}
-											},
-											"popup": false,
-											"postAction": null
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
-								"name": "user-join-team-request",
-								"title": "Join Team",
-								"default": false,
-								"sidebar": "userSidebar",
-								"widgets": [
-									{
-										"id": "user-join-team-request-form",
-										"type": "CustomForm",
-										"wrapper": "None",
-										"config": {
-											"command": "Main_JoinTeamByUserCommand",
-											"data": null,
-											"ui": {
-												"messages": {
-													"success": null,
-													"error": null
-												},
-												"submitText": "",
-												"cancelText": null,
-												"title": "Join Team",
-												"description": null,
-												"fields": {
-													"teamId": {
-														"widget": "Text",
-														"visible": false,
-														"value": "$context(id)"
-													},
-													"memberType": {
-														"widget": "Select",
-														"mode": "default"
-													},
-													"reason": {
-														"widget": "Textarea"
-													}
-												}
-											},
-											"popup": true,
-											"postAction": ""
-										}
-									}
-								],
-								"permissions": [
-									"GeneralUser"
-								]
-							},
-							{
 								"name": "admin-attest-by-category",
 								"title": "Attest Category",
 								"default": false,
@@ -3194,6 +2138,400 @@
 								"permissions": [
 									"Admin"
 								]
+							},
+							{
+								"name": "admin-tools",
+								"title": "Tools",
+								"default": false,
+								"sidebar": null,
+								"widgets": [
+									{
+										"id": "widget_1571026665154",
+										"type": "ViewHeader",
+										"wrapper": "None",
+										"config": {
+											"title": "Home",
+											"description": "This is Tools center which is a collection of management tools to help manage your Microsoft Teams. Tools Center makes managing your teams less complicated, more productive and cost-effective.",
+											"styles": null,
+											"actions": null,
+											"backIcon": false
+										}
+									},
+									{
+										"id": "widget_1571026720991",
+										"type": "RowBlock",
+										"wrapper": "None",
+										"config": {
+											"gutter": "16",
+											"columns": [
+												{
+													"width": 8,
+													"widgets": [
+														{
+															"id": "row-column-create-team",
+															"type": "SimpleCardAction",
+															"wrapper": "None",
+															"config": {
+																"title": "Create Team",
+																"description": "Create a new team",
+																"avatarIcon": "plus",
+																"avatarBackground": "#5D9AC7",
+																"action": "$view(admin-create-team-request)"
+															}
+														}
+													]
+												},
+												{
+													"width": 8,
+													"widgets": [
+														{
+															"id": "row-column-classify-team",
+															"type": "SimpleCardAction",
+															"wrapper": "None",
+															"config": {
+																"title": "Classify Team",
+																"description": "Classify teams",
+																"avatarIcon": "folder",
+																"avatarBackground": "#B2CE70",
+																"action": "$view(admin-classify-teams)"
+															}
+														}
+													]
+												},
+												{
+													"width": 8,
+													"widgets": [
+														{
+															"id": "row-column-attest-team",
+															"type": "SimpleCardAction",
+															"wrapper": "None",
+															"config": {
+																"title": "Attestation",
+																"description": "Attest teams",
+																"avatarIcon": "tags",
+																"avatarBackground": "#7DBEA4",
+																"action": "$view(admin-attest-team)"
+															}
+														}
+													]
+												}
+											]
+										}
+									}
+								],
+								"permissions": [
+									"GeneralUser"
+								]
+							},
+							{
+								"name": "admin-classify-teams",
+								"title": "Teams",
+								"default": false,
+								"sidebar": null,
+								"widgets": [
+									{
+										"id": "widget_1567488130739",
+										"type": "ViewHeader",
+										"wrapper": "None",
+										"config": {
+											"title": "Team Classification",
+											"description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\t",
+											"styles": null,
+											"actions": null,
+											"backIcon": true
+										}
+									},
+									{
+										"id": "widget_1567488142056",
+										"type": "Block",
+										"wrapper": "None",
+										"config": {
+											"title": null,
+											"description": null,
+											"styles": null,
+											"actions": null,
+											"widgets": [
+												{
+													"id": "widget_1567488146629",
+													"type": "Table",
+													"wrapper": "None",
+													"config": {
+														"actions": [
+															{
+																"id": "admin-team-assign-category-menu",
+																"name": "Assign Category",
+																"icon": "category",
+																"type": "Group",
+																"action": null,
+																"styles": null,
+																"permissions": null,
+																"disabled": null,
+																"children": [
+																	{
+																		"id": "admin-team-assign-category-to-filter",
+																		"name": "To Filter Result",
+																		"icon": null,
+																		"type": "Link",
+																		"action": "$popup(admin-assign-category-by-filter, {ok: 'reload'})",
+																		"styles": null,
+																		"permissions": null,
+																		"disabled": "$context($filter) IS EMPTY",
+																		"children": null
+																	},
+																	{
+																		"id": "admin-team-assign-category-to-selected-items",
+																		"name": "To Selected Items",
+																		"icon": null,
+																		"type": "Link",
+																		"action": "$popup(admin-assign-category-by-ids, {ok: 'reload'})",
+																		"styles": null,
+																		"permissions": null,
+																		"disabled": "$context($selectedIds) IS EMPTY",
+																		"children": null
+																	},
+																	{
+																		"id": "admin-team-assign-category-to-all",
+																		"name": "To All Teams",
+																		"icon": null,
+																		"type": "Link",
+																		"action": "$popup(admin-assign-category-to-all, {ok: 'reload'})",
+																		"styles": null,
+																		"permissions": null,
+																		"disabled": null,
+																		"children": null
+																	}
+																]
+															}
+														],
+														"fields": [
+															{
+																"key": "displayName",
+																"displayName": "Display Name",
+																"dataType": "Text",
+																"action": null
+															},
+															{
+																"key": "categoryName",
+																"displayName": "Category",
+																"dataType": "Text",
+																"action": null
+															},
+															{
+																"key": "visibility",
+																"displayName": "Privacy",
+																"dataType": "Text",
+																"action": null
+															},
+															{
+																"key": "people",
+																"displayName": "People",
+																"dataType": "Text",
+																"action": null
+															}
+														],
+														"selectMode": "Multiple",
+														"refresh": true,
+														"idFieldKey": "id",
+														"command": "Main_GetTeamsCommand",
+														"filters": [
+															{
+																"key": "displayName",
+																"operator": "~",
+																"displayName": "Display Name",
+																"widget": "Text",
+																"dataSource": null,
+																"isDefault": true
+															},
+															{
+																"key": "categoryName",
+																"operator": "=",
+																"displayName": "Category",
+																"widget": "Select",
+																"dataSource": {
+																	"command": "Main_GetCategoriesCommand",
+																	"payload": {
+																		"filter": "name = \"$value\"",
+																		"skip": null,
+																		"take": null
+																	},
+																	"label": "name",
+																	"value": "name"
+																},
+																"isDefault": false
+															},
+															{
+																"key": "visibility",
+																"operator": "in",
+																"displayName": "Privacy",
+																"widget": "Select",
+																"mode": "multiple",
+																"isDefault": false
+															}
+														]
+													}
+												}
+											]
+										}
+									}
+								],
+								"permissions": [
+									"Admin"
+								]
+							},
+							{
+								"name": "admin-attest-team",
+								"title": "Team Attestation",
+								"default": false,
+								"sidebar": null,
+								"widgets": [
+									{
+										"id": "widget_1567488130739",
+										"type": "ViewHeader",
+										"wrapper": "None",
+										"config": {
+											"title": "Team Attestation",
+											"description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\t",
+											"styles": null,
+											"actions": null,
+											"backIcon": true
+										}
+									},
+									{
+										"id": "widget_1567488142056",
+										"type": "Block",
+										"wrapper": "None",
+										"config": {
+											"title": null,
+											"description": null,
+											"styles": null,
+											"actions": null,
+											"widgets": [
+												{
+													"id": "widget_1567488146629",
+													"type": "Table",
+													"wrapper": "None",
+													"config": {
+														"actions": [
+															{
+																"id": "admin-team-attest-team-menu",
+																"name": "Attest",
+																"icon": "attestation-certificate",
+																"type": "Group",
+																"action": null,
+																"styles": null,
+																"permissions": null,
+																"disabled": null,
+																"children": [
+																	{
+																		"id": "admin-team-attest-by-filter-menu",
+																		"name": "By Category",
+																		"icon": null,
+																		"type": "Link",
+																		"action": "$popup(admin-attest-by-category, {ok: 'reload'})",
+																		"styles": null,
+																		"permissions": null,
+																		"disabled": "",
+																		"children": null
+																	},
+																	{
+																		"id": "admin-team-attest-by-selected-items-menu",
+																		"name": "Selected Items",
+																		"icon": null,
+																		"type": "Link",
+																		"action": "$popup(admin-attest-by-ids, {ok: 'reload'})",
+																		"styles": null,
+																		"permissions": null,
+																		"disabled": "$context($selectedIds) IS EMPTY",
+																		"children": null
+																	},
+																	{
+																		"id": "admin-team-attest-all-menu",
+																		"name": "All Teams",
+																		"icon": null,
+																		"type": "Link",
+																		"action": "$popup(admin-attest-all-teams, {ok: 'reload'})",
+																		"styles": null,
+																		"permissions": null,
+																		"disabled": null,
+																		"children": null
+																	}
+																]
+															}
+														],
+														"fields": [
+															{
+																"key": "displayName",
+																"displayName": "Display Name",
+																"dataType": "Text",
+																"action": null
+															},
+															{
+																"key": "categoryName",
+																"displayName": "Category",
+																"dataType": "Text",
+																"action": null
+															},
+															{
+																"key": "visibility",
+																"displayName": "Privacy",
+																"dataType": "Text",
+																"action": null
+															},
+															{
+																"key": "people",
+																"displayName": "People",
+																"dataType": "Text",
+																"action": null
+															}
+														],
+														"selectMode": "Multiple",
+														"refresh": true,
+														"idFieldKey": "id",
+														"command": "Main_GetTeamsCommand",
+														"filters": [
+															{
+																"key": "displayName",
+																"operator": "~",
+																"displayName": "Display Name",
+																"widget": "Text",
+																"dataSource": null,
+																"isDefault": true
+															},
+															{
+																"key": "categoryName",
+																"operator": "=",
+																"displayName": "Category",
+																"widget": "Select",
+																"dataSource": {
+																	"command": "Main_GetCategoriesCommand",
+																	"payload": {
+																		"filter": "name = \"$value\"",
+																		"skip": null,
+																		"take": null
+																	},
+																	"label": "name",
+																	"value": "name"
+																},
+																"isDefault": false
+															},
+															{
+																"key": "visibility",
+																"operator": "in",
+																"displayName": "Privacy",
+																"widget": "Select",
+																"mode": "multiple",
+																"isDefault": false
+															}
+														]
+													}
+												}
+											]
+										}
+									}
+								],
+								"permissions": [
+									"Admin"
+								]
 							}
 						],
 						"sidebarDefs": [
@@ -3259,7 +2597,7 @@
 									{
 										"id": "user-item-menu-link",
 										"name": "My Teams",
-										"icon": "team",
+										"icon": "teams",
 										"type": "Link",
 										"action": "$view(my-teams)",
 										"styles": null,
@@ -3270,7 +2608,7 @@
 									{
 										"id": "user-gallery-menu",
 										"name": "Gallery",
-										"icon": "block",
+										"icon": "library",
 										"type": "Link",
 										"action": "$view(team-gallery)",
 										"styles": null,
@@ -3318,7 +2656,7 @@
 											{
 												"id": "action_1568967373884",
 												"name": "Attestation",
-												"icon": "security-scan",
+												"icon": "check-list",
 												"type": "Link",
 												"action": "$view(admin-attestations)",
 												"styles": null,
@@ -3331,7 +2669,7 @@
 									{
 										"id": "admin-teams-link",
 										"name": "Teams",
-										"icon": "team",
+										"icon": "teams",
 										"type": "Link",
 										"action": "$view(admin-teams)",
 										"styles": null,
@@ -3342,7 +2680,7 @@
 									{
 										"id": "admin-policy-link",
 										"name": "Violations",
-										"icon": "alert",
+										"icon": "rule",
 										"type": "Link",
 										"action": "$view(admin-violations)",
 										"styles": null,
@@ -3363,12 +2701,21 @@
 											{
 												"id": "admin-category-link",
 												"name": "Team Category",
-												"icon": "folder",
+												"icon": "mail-folder",
 												"type": "Link",
 												"action": "$view(category-settings)",
 												"styles": null,
 												"permissions": null,
-												"disabled": null,
+												"children": null
+											},
+											{
+												"id": "admin-self-service-link",
+												"name": "Self-Services",
+												"icon": "services",
+												"type": "Link",
+												"action": "$view(self-service-settings)",
+												"styles": null,
+												"permissions": null,
 												"children": null
 											}
 										]

@@ -21,23 +21,98 @@
 				"widgets": [
 					{
 						"id": "w-login",
-						"type": "TeamLogin",
+						"type": "TeamSlientLogin",
 						"wrapper": "None",
 						"config": {
-							"region": {
-								"command": "Main_GetRegionsCommand",
+							"doLoginUrl": "$location(display/do-login)",
+							"token": {
+								"command": "Main_GenerateAccessTokenCommand",
 								"payload": {
 									"aadToken": "$context(token)"
 								}
 							},
-							"token": {
-								"command": "Main_GenerateAccessTokenCommand",
+							"tokenPropName": "accessToken"
+						}
+					}
+				],
+				"permissions": [
+					"Anonymous"
+				]
+			},
+			{
+				"name": "do-login",
+				"title": "Sign In",
+				"default": false,
+				"sidebar": null,
+				"widgets": [
+					{
+						"id": "w-do-login",
+						"type": "TeamLogin",
+						"wrapper": "None",
+						"config": {
+							"redirectUrl": "$href"
+						}
+					}
+				],
+				"permissions": [
+					"Anonymous"
+				]
+			},
+			{
+				"name": "do-admin-consent",
+				"title": "Grant admin consent",
+				"default": false,
+				"sidebar": null,
+				"widgets": [
+					{
+						"id": "w-do-grant-admin-consent",
+						"type": "TeamGrantAdminConsent",
+						"wrapper": "None",
+						"config": {
+							"authorize": {
+								"command": "Main_GetAdminConsentUrlCommand",
 								"payload": {
-									"aadToken": "$context(token)",
-									"region": "$context(region)"
+									"redirectUrl": "$href"
 								}
 							},
-							"tokenPropName": "accessToken"
+							"redirectUrlPropName": "consentUrl"
+						}
+					}
+				],
+				"permissions": [
+					"Anonymous"
+				]
+			},
+			{
+				"name": "register",
+				"title": "Register",
+				"default": false,
+				"sidebar": null,
+				"widgets": [
+					{
+						"id": "w-register-form",
+						"type": "CustomForm",
+						"wrapper": "None",
+						"config": {
+							"command": "Main_RegisterCommand",
+							"data": null,
+							"ui": {
+								"messages": {
+									"success": null,
+									"error": null
+								},
+								"submitText": "Register",
+								"cancelText": "Cancel",
+								"title": "Create Account",
+								"description": "Register to start...",
+								"fields": {
+									"adminConsent": {
+										"widget": "BizGrantAdminConsentInput"
+									}
+								}
+							},
+							"popup": false,
+							"postAction": null
 						}
 					}
 				],
@@ -59,7 +134,8 @@
 							"title": "Settings",
 							"description": "all settings",
 							"styles": null,
-							"actions": null
+							"actions": null,
+							"backIcon": false
 						}
 					},
 					{
@@ -917,7 +993,7 @@
 															{
 																"id": "action_1568967673335",
 																"name": "Approve",
-																"icon": "checkmark",
+																"icon": "check",
 																"type": "Link",
 																"action": "$popup(approve-request, {ok: 'reload'})",
 																"styles": null,
@@ -928,7 +1004,7 @@
 															{
 																"id": "action_1568967714864",
 																"name": "Reject",
-																"icon": "cross",
+																"icon": "close",
 																"type": "Link",
 																"action": "$popup(reject-request, {ok: 'reload'})",
 																"styles": null,
@@ -2068,10 +2144,11 @@
 						"type": "ViewHeader",
 						"wrapper": "None",
 						"config": {
-							"title": "Tools Center",
-							"description": "ToolsCenter is a collection of management tools to help manage your Microsoft Teams. Tools Center makes managing your teams less complicated, more productive and cost-effective.",
+							"title": "Home",
+							"description": "This is Tools center which is a collection of management tools to help manage your Microsoft Teams. Tools Center makes managing your teams less complicated, more productive and cost-effective.",
 							"styles": null,
-							"actions": null
+							"actions": null,
+							"backIcon": false
 						}
 					},
 					{
@@ -2108,7 +2185,7 @@
 											"config": {
 												"title": "Classify Team",
 												"description": "Classify teams",
-												"avatarIcon": "category",
+												"avatarIcon": "folder",
 												"avatarBackground": "#B2CE70",
 												"action": "$view(admin-classify-teams)"
 											}
@@ -2125,7 +2202,7 @@
 											"config": {
 												"title": "Attestation",
 												"description": "Attest teams",
-												"avatarIcon": "attestation-certificate",
+												"avatarIcon": "tags",
 												"avatarBackground": "#7DBEA4",
 												"action": "$view(admin-attest-team)"
 											}

@@ -37,6 +37,8 @@ import { DirectorySettingsWidget } from './biz/directory-settings/directory-sett
 import { CredentialSettingsWidget } from './biz/credential-settings/credential-settings.widget';
 import { OrgChartWidget } from './biz/org-chart/org-chart.widget';
 import { OrgChartDetailComponent } from './biz/org-chart/org-chart-detail/org-chart-detail.component';
+import { TeamSlientLoginWidget } from './team-slient-login/team-slient-login.widget';
+import { TeamGrantAdminConsentWidget } from './team-grant-admin-consent/team-grant-admin-consent.widget';
 
 const WIDGETS = [
     SampleWidget,
@@ -53,6 +55,8 @@ const WIDGETS = [
     RowBlockWidget,
     ConfirmActionWidget,
     TeamLoginWidget,
+    TeamSlientLoginWidget,
+    TeamGrantAdminConsentWidget,
     StateCheckerWidget,
     TinyStatusWidget,
     SimpleCardActionWidget,

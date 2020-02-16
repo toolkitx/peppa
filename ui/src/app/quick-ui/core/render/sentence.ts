@@ -61,6 +61,8 @@ export class Sentence {
         // This is a sample $value
         if (this.stringTemplateRegexp.exec(this.input)) {
             this.translateStringTemplate();
+        } else if (this.locationHrefTemplateRegexp.exec(this.input)) {
+            this.translateHrefTemplate();
         } else if (this.sentenceRegexp.test(this.input)) {
             this.translate();
         }
@@ -102,6 +104,11 @@ export class Sentence {
         }
     }
 
+    private translateHrefTemplate() {
+        this._value = window.location.href;
+        this._valid = true;
+    }
+
     private replaceTemplate(templateStr: string, matchSection: string, optionalParams: string) {
         if (!this.params) {
             return '';
@@ -121,6 +128,11 @@ export class Sentence {
         // return new RegExp(/\$value[^\(\)](\[\d+\])?/, 'g');
         // TODO handle $value[0];
         return new RegExp(/\$value/, 'g');
+    }
+
+    private get locationHrefTemplateRegexp() {
+        // return location.href;
+        return new RegExp(/\$href$/, 'g');
     }
 
     private replaceItem(inStr: string, targetOrigin: string, targetType: string, targetParam: string) {

@@ -1,6 +1,7 @@
 <div class="content">
     <div class="loading" *ngIf="registerState !== 'unregistered'">
         <qui-spinner id="spinner"></qui-spinner>
+        <p>Loading...it may take some time.</p>
     </div>
     <div class="not-register" *ngIf="registerState === 'unregistered'">
         <h2>Account not found</h2>

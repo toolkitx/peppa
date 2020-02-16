@@ -1,0 +1,31 @@
+{
+	"name": "Main_RegisterCommand",
+	"type": "Public",
+	"securityRole": "Anonymous",
+	"feature": "common",
+	"inputSchema": {
+		"type": "object",
+		"properties": {
+			"adminConsent": {
+				"type": "string",
+				"title": "Admin Consent",
+				"description": "To create your account, please grant admin consent."
+			},
+			"timeout": {
+				"type": "number",
+				"default": "7",
+				"title": "Timeout",
+				"description": "This is timeout description"
+			},
+			"adminGroup": {
+				"type": "string",
+				"title": "Admin Group"
+			}
+		},
+		"required": [
+			"adminConsent",
+			"timeout"
+		]
+	},
+	"outputSchema": null
+}

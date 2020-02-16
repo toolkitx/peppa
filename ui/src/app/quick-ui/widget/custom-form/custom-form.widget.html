@@ -112,6 +112,11 @@
                                                       [ui]="ui" [attr.id]="'custom-form-control-' + key"
                                                       [formControlName]="key"></qui-team-template-input>
 
+                                <qui-grant-admin-consent-input *ngSwitchCase="'BizGrantAdminConsentInput'"
+                                                         [schema]="raw"
+                                                         [form]="formGroup"
+                                                         [ui]="ui" [attr.id]="'custom-form-control-' + key"
+                                                         [formControlName]="key"></qui-grant-admin-consent-input>
                                 <!--End biz controls-->
                                 <!--Unknown-->
                                 <!--Default-->
