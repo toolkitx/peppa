@@ -1,10 +1,20 @@
 Peppa Studio
+=============
+![Peppa](/docs/imgs/launch.jpg)
 
-1. configuration/Main - Configuration files
-2. mock/data - mock data
-3. tools/Peppa - Peppa Studio client
-   ```bash
-   npm run ng:start // start ui
-   npm run electron:start:serve // start client with developer tools
-   ```
-4. ui - Peppa web app (Angular 8 + ngZorro)
+Cross platform configuration driven UI development suite, Peppa includes two parts:
+1. Command Definition Tool
+2. Visual UI Design Tool.
+
+### Screenshots
+![Peppa](/docs/imgs/cmt.jpg)
+![Peppa](/docs/imgs/udt.jpg)
+#### Tech Stacks
+
+1. Electron
+2. Angular 8
+
+
+### Documentation
+1. [Get Started](docs/get-started.md)
+1. [Intergration](docs/intergration.md)
