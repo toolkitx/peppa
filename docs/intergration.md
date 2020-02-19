@@ -93,5 +93,23 @@ and expect response
 }
 ```
 
+### Error Handling
+
+Please return this object to front-end if you got any exceptons or errors.
+
+```json
+
+{
+    "state": "Fail",
+    "output": {
+		"errorMessageId": "message-id-for-i18n|message text"
+    }
+}
+
+```
+
+> There is one special error case is `401 UNAUTHORIZED`, should return `HTTP Status 401` instead of output, because the message body will be ignore.
+
+
 
 
