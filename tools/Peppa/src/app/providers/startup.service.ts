@@ -19,7 +19,7 @@ export class StartupService {
     }
 
     private loadConfigs() {
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             this.jsonLoader.get('https://odgmpeppastudio.blob.core.windows.net/peppa-studio-config/peppa-settings.json')
                 .subscribe((data: PeppaSettings) => {
                     console.log(data);
