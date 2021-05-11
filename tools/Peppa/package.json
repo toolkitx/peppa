@@ -67,7 +67,7 @@
         "electron-squirrel-startup": "^1.0.0",
         "electron-updater": "^4.0.14",
         "highlight.js": "^9.15.8",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "ng-zorro-antd": "^8.0.3",
         "ngx-highlightjs": "^3.0.3",
         "rxjs": "~6.4.0",
